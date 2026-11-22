@@ -1,0 +1,10 @@
+fastapi==0.165.0
+uvicorn==0.54.0
+sqlalchemy==2.1.9
+pydantic==2.13.4
+httpx==0.28.1
+EbookLib==0.20
+beautifulsoup4==4.14.2
+edge-tts==7.3.1
+PyJWT==2.15.1
+cryptography==50.0.0

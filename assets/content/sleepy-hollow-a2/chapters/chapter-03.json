@@ -1,0 +1,2134 @@
+{
+  "schemaVersion": 2,
+  "id": "chapter-03",
+  "bookId": "sleepy-hollow",
+  "number": 3,
+  "title": "The Morning After",
+  "level": "a2",
+  "paragraphs": [
+    {
+      "id": "p-01",
+      "segments": [
+        {
+          "text": "The next morning, the village woke to strange "
+        },
+        {
+          "text": "news",
+          "vocabId": "news"
+        },
+        {
+          "text": ". Gunpowder, Ichabod’s old horse, came home alone. His saddle was gone, and he was still wearing his reins. The "
+        },
+        {
+          "text": "owner",
+          "vocabId": "owner"
+        },
+        {
+          "text": " of the horse looked everywhere, but the teacher did not answer. Soon the whole village began to "
+        },
+        {
+          "text": "search",
+          "vocabId": "search"
+        },
+        {
+          "text": " for him. Men took sticks and lamps and walked into the cold woods. The children stayed at home and watched from the windows."
+        }
+      ]
+    },
+    {
+      "id": "p-02",
+      "segments": [
+        {
+          "text": "Near the bridge, they found a path into the woods. A "
+        },
+        {
+          "text": "hat",
+          "vocabId": "hat"
+        },
+        {
+          "text": " lay in the stream, and a little further, a "
+        },
+        {
+          "text": "broken ",
+          "vocabId": "broken"
+        },
+        {
+          "text": "pumpkin",
+          "vocabId": "pumpkin"
+        },
+        {
+          "text": " sat on the ground. There were "
+        },
+        {
+          "text": "footprints",
+          "vocabId": "footprints"
+        },
+        {
+          "text": " in the "
+        },
+        {
+          "text": "mud",
+          "vocabId": "mud"
+        },
+        {
+          "text": ", but they "
+        },
+        {
+          "text": "disappear",
+          "vocabId": "disappear"
+        },
+        {
+          "text": " near the water. The men called Ichabod’s name again and again. Only the echo answered. They looked under the old bridge and behind every tree, but they found no body and no clothes."
+        }
+      ]
+    },
+    {
+      "id": "p-03",
+      "segments": [
+        {
+          "text": "People had many "
+        },
+        {
+          "text": "theories",
+          "vocabId": "theories"
+        },
+        {
+          "text": ". Some said the headless rider took the teacher away. Others said Ichabod ran to another town because he was "
+        },
+        {
+          "text": "afraid",
+          "vocabId": "afraid"
+        },
+        {
+          "text": ". Brom Bones "
+        },
+        {
+          "text": "laugh",
+          "vocabId": "laugh"
+        },
+        {
+          "text": " at every story. He said he knew nothing, but he looked at Katrina and "
+        },
+        {
+          "text": "smile",
+          "vocabId": "smile"
+        },
+        {
+          "text": ". Katrina did not cry for long. Soon the village stopped talking about the missing teacher, and the children returned to school."
+        }
+      ]
+    },
+    {
+      "id": "p-04",
+      "segments": [
+        {
+          "text": "In the "
+        },
+        {
+          "text": "spring",
+          "vocabId": "spring"
+        },
+        {
+          "text": ", Katrina married Brom. The village found a new teacher, a quiet young man who did not "
+        },
+        {
+          "text": "believe",
+          "vocabId": "believe"
+        },
+        {
+          "text": " in ghosts. But the old farmers still told the "
+        },
+        {
+          "text": "tale",
+          "vocabId": "tale"
+        },
+        {
+          "text": " of Ichabod Crane. One of them said he had seen him in a far town, "
+        },
+        {
+          "text": "alive",
+          "vocabId": "alive"
+        },
+        {
+          "text": " and happy, with a wife and children. Another said he had become a judge and had forgotten Sleepy Hollow. The old farmers smiled when they said it."
+        }
+      ]
+    },
+    {
+      "id": "p-05",
+      "segments": [
+        {
+          "text": "Nobody knew the "
+        },
+        {
+          "text": "truth",
+          "vocabId": "truth"
+        },
+        {
+          "text": ". The bridge stayed in its place, and the stream moved under it. On dark nights, when the wind blew through the trees, people still walked home a little faster. And if you listen closely, they say, you can hear a horse on the road — slow, "
+        },
+        {
+          "text": "heavy",
+          "vocabId": "heavy"
+        },
+        {
+          "text": ", and never alone. Some stories, the old people say, are stronger than the truth. The valley keeps its secrets. Nobody forgot the name of Ichabod Crane."
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "news",
+      "cefr": "a2",
+      "word": "news",
+      "partOfSpeech": "noun",
+      "phonetic": "/njuːz/",
+      "definitionEn": "information about something that happened",
+      "translationFr": "les nouvelles",
+      "example": "The village woke to strange news."
+    },
+    {
+      "id": "owner",
+      "cefr": "b1",
+      "word": "owner",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈəʊnə/",
+      "definitionEn": "the person who has something",
+      "translationFr": "le propriétaire",
+      "example": "The owner of the horse looked everywhere."
+    },
+    {
+      "id": "search",
+      "cefr": "a2",
+      "word": "search",
+      "partOfSpeech": "verb",
+      "phonetic": "/sɜːtʃ/",
+      "definitionEn": "to look for something or someone",
+      "translationFr": "chercher",
+      "example": "The whole village began to search for him."
+    },
+    {
+      "id": "hat",
+      "cefr": "a2",
+      "word": "hat",
+      "partOfSpeech": "noun",
+      "phonetic": "/hæt/",
+      "definitionEn": "a thing you wear on your head",
+      "translationFr": "le chapeau",
+      "example": "His hat lay in the stream."
+    },
+    {
+      "id": "broken",
+      "cefr": "a2",
+      "word": "broken",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈbrəʊkən/",
+      "definitionEn": "damaged and in pieces",
+      "translationFr": "cassé",
+      "example": "A broken pumpkin sat on the ground."
+    },
+    {
+      "id": "pumpkin",
+      "cefr": "b1",
+      "word": "pumpkin",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈpʌmpkɪn/",
+      "definitionEn": "a large, round orange vegetable",
+      "translationFr": "la citrouille",
+      "example": "They found a broken pumpkin near the bridge."
+    },
+    {
+      "id": "footprints",
+      "cefr": "b1",
+      "word": "footprints",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈfʊtprɪnts/",
+      "definitionEn": "marks made by feet on the ground",
+      "translationFr": "les empreintes de pas",
+      "example": "There were footprints in the mud."
+    },
+    {
+      "id": "mud",
+      "cefr": "a2",
+      "word": "mud",
+      "partOfSpeech": "noun",
+      "phonetic": "/mʌd/",
+      "definitionEn": "soft, wet earth",
+      "translationFr": "la boue",
+      "example": "The footprints disappeared in the mud."
+    },
+    {
+      "id": "disappear",
+      "cefr": "b1",
+      "word": "disappear",
+      "partOfSpeech": "verb",
+      "phonetic": "/ˌdɪsəˈpɪə/",
+      "definitionEn": "to go away and not be seen",
+      "translationFr": "disparaître",
+      "example": "The footprints disappeared near the water."
+    },
+    {
+      "id": "theories",
+      "cefr": "b2",
+      "word": "theories",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈθɪəriz/",
+      "definitionEn": "ideas that try to explain something",
+      "translationFr": "les théories",
+      "example": "People had many theories about the teacher."
+    },
+    {
+      "id": "afraid",
+      "cefr": "a2",
+      "word": "afraid",
+      "partOfSpeech": "adjective",
+      "phonetic": "/əˈfreɪd/",
+      "definitionEn": "feeling fear",
+      "translationFr": "effrayé",
+      "example": "He ran away because he was afraid."
+    },
+    {
+      "id": "laugh",
+      "cefr": "b1",
+      "word": "laugh",
+      "partOfSpeech": "verb",
+      "phonetic": "/lɑːf/",
+      "definitionEn": "to make sounds that show you are happy",
+      "translationFr": "rire",
+      "example": "Brom laughed at every story."
+    },
+    {
+      "id": "smile",
+      "cefr": "a2",
+      "word": "smile",
+      "partOfSpeech": "verb",
+      "phonetic": "/smaɪl/",
+      "definitionEn": "to make a happy face",
+      "translationFr": "sourire",
+      "example": "He looked at Katrina and smiled."
+    },
+    {
+      "id": "spring",
+      "cefr": "a2",
+      "word": "spring",
+      "partOfSpeech": "noun",
+      "phonetic": "/sprɪŋ/",
+      "definitionEn": "the season after winter",
+      "translationFr": "le printemps",
+      "example": "In the spring, Katrina married Brom."
+    },
+    {
+      "id": "believe",
+      "cefr": "a2",
+      "word": "believe",
+      "partOfSpeech": "verb",
+      "phonetic": "/bɪˈliːv/",
+      "definitionEn": "to think that something is true",
+      "translationFr": "croire",
+      "example": "He did not believe in ghosts."
+    },
+    {
+      "id": "tale",
+      "cefr": "b1",
+      "word": "tale",
+      "partOfSpeech": "noun",
+      "phonetic": "/teɪl/",
+      "definitionEn": "a story",
+      "translationFr": "le conte",
+      "example": "The farmers still told the tale of Ichabod Crane."
+    },
+    {
+      "id": "alive",
+      "cefr": "a2",
+      "word": "alive",
+      "partOfSpeech": "adjective",
+      "phonetic": "/əˈlaɪv/",
+      "definitionEn": "living, not dead",
+      "translationFr": "vivant",
+      "example": "They said he was alive in another town."
+    },
+    {
+      "id": "truth",
+      "cefr": "b1",
+      "word": "truth",
+      "partOfSpeech": "noun",
+      "phonetic": "/truːθ/",
+      "definitionEn": "the real facts",
+      "translationFr": "la vérité",
+      "example": "Nobody knew the truth."
+    },
+    {
+      "id": "heavy",
+      "cefr": "a2",
+      "word": "heavy",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈhevi/",
+      "definitionEn": "weighing a lot",
+      "translationFr": "lourd",
+      "example": "They heard a slow, heavy sound."
+    }
+  ],
+  "audio": {
+    "asset": "assets/content/sleepy-hollow-a2/audio/chapter-03.mp3",
+    "durationMs": 131328,
+    "voice": "en-US-AriaNeural",
+    "words": [
+      {
+        "text": "The",
+        "startMs": 100,
+        "endMs": 250
+      },
+      {
+        "text": "next",
+        "startMs": 262,
+        "endMs": 588
+      },
+      {
+        "text": "morning",
+        "startMs": 600,
+        "endMs": 988
+      },
+      {
+        "text": "the",
+        "startMs": 1238,
+        "endMs": 1350
+      },
+      {
+        "text": "village",
+        "startMs": 1362,
+        "endMs": 1712
+      },
+      {
+        "text": "woke",
+        "startMs": 1725,
+        "endMs": 1975
+      },
+      {
+        "text": "to",
+        "startMs": 1988,
+        "endMs": 2075
+      },
+      {
+        "text": "strange",
+        "startMs": 2088,
+        "endMs": 2500
+      },
+      {
+        "text": "news",
+        "startMs": 2512,
+        "endMs": 3050
+      },
+      {
+        "text": "Gunpowder",
+        "startMs": 3925,
+        "endMs": 4588
+      },
+      {
+        "text": "Ichabod’s",
+        "startMs": 4750,
+        "endMs": 5212
+      },
+      {
+        "text": "old",
+        "startMs": 5225,
+        "endMs": 5425
+      },
+      {
+        "text": "horse",
+        "startMs": 5438,
+        "endMs": 5875
+      },
+      {
+        "text": "came",
+        "startMs": 6038,
+        "endMs": 6288
+      },
+      {
+        "text": "home",
+        "startMs": 6300,
+        "endMs": 6500
+      },
+      {
+        "text": "alone",
+        "startMs": 6512,
+        "endMs": 6988
+      },
+      {
+        "text": "His",
+        "startMs": 7850,
+        "endMs": 8088
+      },
+      {
+        "text": "saddle",
+        "startMs": 8100,
+        "endMs": 8438
+      },
+      {
+        "text": "was",
+        "startMs": 8450,
+        "endMs": 8600
+      },
+      {
+        "text": "gone",
+        "startMs": 8612,
+        "endMs": 8975
+      },
+      {
+        "text": "and",
+        "startMs": 9212,
+        "endMs": 9312
+      },
+      {
+        "text": "he",
+        "startMs": 9325,
+        "endMs": 9438
+      },
+      {
+        "text": "was",
+        "startMs": 9450,
+        "endMs": 9600
+      },
+      {
+        "text": "still",
+        "startMs": 9612,
+        "endMs": 9900
+      },
+      {
+        "text": "wearing",
+        "startMs": 9912,
+        "endMs": 10238
+      },
+      {
+        "text": "his",
+        "startMs": 10250,
+        "endMs": 10412
+      },
+      {
+        "text": "reins",
+        "startMs": 10425,
+        "endMs": 11025
+      },
+      {
+        "text": "The",
+        "startMs": 11888,
+        "endMs": 12088
+      },
+      {
+        "text": "owner",
+        "startMs": 12100,
+        "endMs": 12425
+      },
+      {
+        "text": "of",
+        "startMs": 12438,
+        "endMs": 12525
+      },
+      {
+        "text": "the",
+        "startMs": 12538,
+        "endMs": 12612
+      },
+      {
+        "text": "horse",
+        "startMs": 12625,
+        "endMs": 12950
+      },
+      {
+        "text": "looked",
+        "startMs": 12962,
+        "endMs": 13262
+      },
+      {
+        "text": "everywhere",
+        "startMs": 13275,
+        "endMs": 13812
+      },
+      {
+        "text": "but",
+        "startMs": 14075,
+        "endMs": 14200
+      },
+      {
+        "text": "the",
+        "startMs": 14212,
+        "endMs": 14312
+      },
+      {
+        "text": "teacher",
+        "startMs": 14325,
+        "endMs": 14712
+      },
+      {
+        "text": "did",
+        "startMs": 14725,
+        "endMs": 14862
+      },
+      {
+        "text": "not",
+        "startMs": 14875,
+        "endMs": 15100
+      },
+      {
+        "text": "answer",
+        "startMs": 15112,
+        "endMs": 15638
+      },
+      {
+        "text": "Soon",
+        "startMs": 16500,
+        "endMs": 16862
+      },
+      {
+        "text": "the",
+        "startMs": 16875,
+        "endMs": 16950
+      },
+      {
+        "text": "whole",
+        "startMs": 16962,
+        "endMs": 17175
+      },
+      {
+        "text": "village",
+        "startMs": 17188,
+        "endMs": 17562
+      },
+      {
+        "text": "began",
+        "startMs": 17575,
+        "endMs": 17912
+      },
+      {
+        "text": "to",
+        "startMs": 17925,
+        "endMs": 17988
+      },
+      {
+        "text": "search",
+        "startMs": 18000,
+        "endMs": 18312
+      },
+      {
+        "text": "for",
+        "startMs": 18325,
+        "endMs": 18475
+      },
+      {
+        "text": "him",
+        "startMs": 18488,
+        "endMs": 18788
+      },
+      {
+        "text": "Men",
+        "startMs": 19662,
+        "endMs": 19975
+      },
+      {
+        "text": "took",
+        "startMs": 19988,
+        "endMs": 20200
+      },
+      {
+        "text": "sticks",
+        "startMs": 20212,
+        "endMs": 20562
+      },
+      {
+        "text": "and",
+        "startMs": 20575,
+        "endMs": 20675
+      },
+      {
+        "text": "lamps",
+        "startMs": 20688,
+        "endMs": 21062
+      },
+      {
+        "text": "and",
+        "startMs": 21075,
+        "endMs": 21262
+      },
+      {
+        "text": "walked",
+        "startMs": 21275,
+        "endMs": 21562
+      },
+      {
+        "text": "into",
+        "startMs": 21575,
+        "endMs": 21738
+      },
+      {
+        "text": "the",
+        "startMs": 21750,
+        "endMs": 21850
+      },
+      {
+        "text": "cold",
+        "startMs": 21862,
+        "endMs": 22138
+      },
+      {
+        "text": "woods",
+        "startMs": 22150,
+        "endMs": 22650
+      },
+      {
+        "text": "The",
+        "startMs": 23512,
+        "endMs": 23662
+      },
+      {
+        "text": "children",
+        "startMs": 23675,
+        "endMs": 24150
+      },
+      {
+        "text": "stayed",
+        "startMs": 24162,
+        "endMs": 24450
+      },
+      {
+        "text": "at",
+        "startMs": 24462,
+        "endMs": 24538
+      },
+      {
+        "text": "home",
+        "startMs": 24550,
+        "endMs": 24850
+      },
+      {
+        "text": "and",
+        "startMs": 24862,
+        "endMs": 24975
+      },
+      {
+        "text": "watched",
+        "startMs": 24988,
+        "endMs": 25412
+      },
+      {
+        "text": "from",
+        "startMs": 25425,
+        "endMs": 25562
+      },
+      {
+        "text": "the",
+        "startMs": 25575,
+        "endMs": 25662
+      },
+      {
+        "text": "windows",
+        "startMs": 25675,
+        "endMs": 26325
+      },
+      {
+        "text": "Near",
+        "startMs": 27200,
+        "endMs": 27512
+      },
+      {
+        "text": "the",
+        "startMs": 27525,
+        "endMs": 27625
+      },
+      {
+        "text": "bridge",
+        "startMs": 27638,
+        "endMs": 28088
+      },
+      {
+        "text": "they",
+        "startMs": 28250,
+        "endMs": 28388
+      },
+      {
+        "text": "found",
+        "startMs": 28400,
+        "endMs": 28662
+      },
+      {
+        "text": "a",
+        "startMs": 28675,
+        "endMs": 28725
+      },
+      {
+        "text": "path",
+        "startMs": 28738,
+        "endMs": 29112
+      },
+      {
+        "text": "into",
+        "startMs": 29125,
+        "endMs": 29288
+      },
+      {
+        "text": "the",
+        "startMs": 29300,
+        "endMs": 29400
+      },
+      {
+        "text": "woods",
+        "startMs": 29412,
+        "endMs": 29912
+      },
+      {
+        "text": "A",
+        "startMs": 30775,
+        "endMs": 30900
+      },
+      {
+        "text": "hat",
+        "startMs": 30912,
+        "endMs": 31212
+      },
+      {
+        "text": "lay",
+        "startMs": 31225,
+        "endMs": 31375
+      },
+      {
+        "text": "in",
+        "startMs": 31388,
+        "endMs": 31475
+      },
+      {
+        "text": "the",
+        "startMs": 31488,
+        "endMs": 31562
+      },
+      {
+        "text": "stream",
+        "startMs": 31575,
+        "endMs": 32025
+      },
+      {
+        "text": "and",
+        "startMs": 32262,
+        "endMs": 32350
+      },
+      {
+        "text": "a",
+        "startMs": 32362,
+        "endMs": 32425
+      },
+      {
+        "text": "little",
+        "startMs": 32438,
+        "endMs": 32675
+      },
+      {
+        "text": "further",
+        "startMs": 32688,
+        "endMs": 33150
+      },
+      {
+        "text": "a",
+        "startMs": 33325,
+        "endMs": 33375
+      },
+      {
+        "text": "broken",
+        "startMs": 33388,
+        "endMs": 33750
+      },
+      {
+        "text": "pumpkin",
+        "startMs": 33762,
+        "endMs": 34238
+      },
+      {
+        "text": "sat",
+        "startMs": 34250,
+        "endMs": 34475
+      },
+      {
+        "text": "on",
+        "startMs": 34488,
+        "endMs": 34588
+      },
+      {
+        "text": "the",
+        "startMs": 34600,
+        "endMs": 34662
+      },
+      {
+        "text": "ground",
+        "startMs": 34675,
+        "endMs": 35212
+      },
+      {
+        "text": "There",
+        "startMs": 36088,
+        "endMs": 36325
+      },
+      {
+        "text": "were",
+        "startMs": 36338,
+        "endMs": 36462
+      },
+      {
+        "text": "footprints",
+        "startMs": 36475,
+        "endMs": 37012
+      },
+      {
+        "text": "in",
+        "startMs": 37025,
+        "endMs": 37112
+      },
+      {
+        "text": "the",
+        "startMs": 37125,
+        "endMs": 37188
+      },
+      {
+        "text": "mud",
+        "startMs": 37200,
+        "endMs": 37538
+      },
+      {
+        "text": "but",
+        "startMs": 37775,
+        "endMs": 37912
+      },
+      {
+        "text": "they",
+        "startMs": 37925,
+        "endMs": 38050
+      },
+      {
+        "text": "disappear",
+        "startMs": 38062,
+        "endMs": 38600
+      },
+      {
+        "text": "near",
+        "startMs": 38612,
+        "endMs": 38812
+      },
+      {
+        "text": "the",
+        "startMs": 38825,
+        "endMs": 38912
+      },
+      {
+        "text": "water",
+        "startMs": 38925,
+        "endMs": 39400
+      },
+      {
+        "text": "The",
+        "startMs": 40262,
+        "endMs": 40438
+      },
+      {
+        "text": "men",
+        "startMs": 40450,
+        "endMs": 40712
+      },
+      {
+        "text": "called",
+        "startMs": 40725,
+        "endMs": 41012
+      },
+      {
+        "text": "Ichabod’s",
+        "startMs": 41025,
+        "endMs": 41525
+      },
+      {
+        "text": "name",
+        "startMs": 41538,
+        "endMs": 41812
+      },
+      {
+        "text": "again",
+        "startMs": 41825,
+        "endMs": 42125
+      },
+      {
+        "text": "and",
+        "startMs": 42138,
+        "endMs": 42225
+      },
+      {
+        "text": "again",
+        "startMs": 42238,
+        "endMs": 42700
+      },
+      {
+        "text": "Only",
+        "startMs": 43562,
+        "endMs": 43900
+      },
+      {
+        "text": "the",
+        "startMs": 43912,
+        "endMs": 44012
+      },
+      {
+        "text": "echo",
+        "startMs": 44025,
+        "endMs": 44362
+      },
+      {
+        "text": "answered",
+        "startMs": 44375,
+        "endMs": 44950
+      },
+      {
+        "text": "They",
+        "startMs": 45812,
+        "endMs": 46000
+      },
+      {
+        "text": "looked",
+        "startMs": 46012,
+        "endMs": 46275
+      },
+      {
+        "text": "under",
+        "startMs": 46288,
+        "endMs": 46488
+      },
+      {
+        "text": "the",
+        "startMs": 46500,
+        "endMs": 46600
+      },
+      {
+        "text": "old",
+        "startMs": 46612,
+        "endMs": 46838
+      },
+      {
+        "text": "bridge",
+        "startMs": 46850,
+        "endMs": 47225
+      },
+      {
+        "text": "and",
+        "startMs": 47238,
+        "endMs": 47325
+      },
+      {
+        "text": "behind",
+        "startMs": 47338,
+        "endMs": 47700
+      },
+      {
+        "text": "every",
+        "startMs": 47712,
+        "endMs": 47925
+      },
+      {
+        "text": "tree",
+        "startMs": 47938,
+        "endMs": 48325
+      },
+      {
+        "text": "but",
+        "startMs": 48588,
+        "endMs": 48725
+      },
+      {
+        "text": "they",
+        "startMs": 48738,
+        "endMs": 48862
+      },
+      {
+        "text": "found",
+        "startMs": 48875,
+        "endMs": 49175
+      },
+      {
+        "text": "no",
+        "startMs": 49188,
+        "endMs": 49375
+      },
+      {
+        "text": "body",
+        "startMs": 49388,
+        "endMs": 49775
+      },
+      {
+        "text": "and",
+        "startMs": 49788,
+        "endMs": 49912
+      },
+      {
+        "text": "no",
+        "startMs": 49925,
+        "endMs": 50112
+      },
+      {
+        "text": "clothes",
+        "startMs": 50125,
+        "endMs": 50750
+      },
+      {
+        "text": "People",
+        "startMs": 51612,
+        "endMs": 51962
+      },
+      {
+        "text": "had",
+        "startMs": 51975,
+        "endMs": 52200
+      },
+      {
+        "text": "many",
+        "startMs": 52212,
+        "endMs": 52462
+      },
+      {
+        "text": "theories",
+        "startMs": 52475,
+        "endMs": 53162
+      },
+      {
+        "text": "Some",
+        "startMs": 54025,
+        "endMs": 54375
+      },
+      {
+        "text": "said",
+        "startMs": 54388,
+        "endMs": 54638
+      },
+      {
+        "text": "the",
+        "startMs": 54650,
+        "endMs": 54725
+      },
+      {
+        "text": "headless",
+        "startMs": 54738,
+        "endMs": 55175
+      },
+      {
+        "text": "rider",
+        "startMs": 55188,
+        "endMs": 55538
+      },
+      {
+        "text": "took",
+        "startMs": 55550,
+        "endMs": 55788
+      },
+      {
+        "text": "the",
+        "startMs": 55800,
+        "endMs": 55900
+      },
+      {
+        "text": "teacher",
+        "startMs": 55912,
+        "endMs": 56288
+      },
+      {
+        "text": "away",
+        "startMs": 56300,
+        "endMs": 56775
+      },
+      {
+        "text": "Others",
+        "startMs": 57650,
+        "endMs": 58025
+      },
+      {
+        "text": "said",
+        "startMs": 58038,
+        "endMs": 58262
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 58275,
+        "endMs": 58788
+      },
+      {
+        "text": "ran",
+        "startMs": 58800,
+        "endMs": 59062
+      },
+      {
+        "text": "to",
+        "startMs": 59075,
+        "endMs": 59188
+      },
+      {
+        "text": "another",
+        "startMs": 59200,
+        "endMs": 59538
+      },
+      {
+        "text": "town",
+        "startMs": 59550,
+        "endMs": 59912
+      },
+      {
+        "text": "because",
+        "startMs": 59925,
+        "endMs": 60250
+      },
+      {
+        "text": "he",
+        "startMs": 60262,
+        "endMs": 60362
+      },
+      {
+        "text": "was",
+        "startMs": 60375,
+        "endMs": 60500
+      },
+      {
+        "text": "afraid",
+        "startMs": 60512,
+        "endMs": 61075
+      },
+      {
+        "text": "Brom",
+        "startMs": 61938,
+        "endMs": 62250
+      },
+      {
+        "text": "Bones",
+        "startMs": 62262,
+        "endMs": 62612
+      },
+      {
+        "text": "laugh",
+        "startMs": 62625,
+        "endMs": 62962
+      },
+      {
+        "text": "at",
+        "startMs": 62975,
+        "endMs": 63100
+      },
+      {
+        "text": "every",
+        "startMs": 63112,
+        "endMs": 63350
+      },
+      {
+        "text": "story",
+        "startMs": 63362,
+        "endMs": 63912
+      },
+      {
+        "text": "He",
+        "startMs": 64775,
+        "endMs": 64938
+      },
+      {
+        "text": "said",
+        "startMs": 64950,
+        "endMs": 65162
+      },
+      {
+        "text": "he",
+        "startMs": 65175,
+        "endMs": 65288
+      },
+      {
+        "text": "knew",
+        "startMs": 65300,
+        "endMs": 65488
+      },
+      {
+        "text": "nothing",
+        "startMs": 65500,
+        "endMs": 65925
+      },
+      {
+        "text": "but",
+        "startMs": 66150,
+        "endMs": 66275
+      },
+      {
+        "text": "he",
+        "startMs": 66288,
+        "endMs": 66400
+      },
+      {
+        "text": "looked",
+        "startMs": 66412,
+        "endMs": 66662
+      },
+      {
+        "text": "at",
+        "startMs": 66675,
+        "endMs": 66762
+      },
+      {
+        "text": "Katrina",
+        "startMs": 66775,
+        "endMs": 67225
+      },
+      {
+        "text": "and",
+        "startMs": 67238,
+        "endMs": 67400
+      },
+      {
+        "text": "smile",
+        "startMs": 67412,
+        "endMs": 67925
+      },
+      {
+        "text": "Katrina",
+        "startMs": 68788,
+        "endMs": 69312
+      },
+      {
+        "text": "did",
+        "startMs": 69325,
+        "endMs": 69462
+      },
+      {
+        "text": "not",
+        "startMs": 69475,
+        "endMs": 69712
+      },
+      {
+        "text": "cry",
+        "startMs": 69725,
+        "endMs": 70000
+      },
+      {
+        "text": "for",
+        "startMs": 70012,
+        "endMs": 70188
+      },
+      {
+        "text": "long",
+        "startMs": 70200,
+        "endMs": 70612
+      },
+      {
+        "text": "Soon",
+        "startMs": 71488,
+        "endMs": 71838
+      },
+      {
+        "text": "the",
+        "startMs": 71850,
+        "endMs": 71925
+      },
+      {
+        "text": "village",
+        "startMs": 71938,
+        "endMs": 72325
+      },
+      {
+        "text": "stopped",
+        "startMs": 72338,
+        "endMs": 72675
+      },
+      {
+        "text": "talking",
+        "startMs": 72688,
+        "endMs": 73062
+      },
+      {
+        "text": "about",
+        "startMs": 73075,
+        "endMs": 73300
+      },
+      {
+        "text": "the",
+        "startMs": 73312,
+        "endMs": 73375
+      },
+      {
+        "text": "missing",
+        "startMs": 73388,
+        "endMs": 73700
+      },
+      {
+        "text": "teacher",
+        "startMs": 73712,
+        "endMs": 74162
+      },
+      {
+        "text": "and",
+        "startMs": 74462,
+        "endMs": 74550
+      },
+      {
+        "text": "the",
+        "startMs": 74562,
+        "endMs": 74638
+      },
+      {
+        "text": "children",
+        "startMs": 74650,
+        "endMs": 75062
+      },
+      {
+        "text": "returned",
+        "startMs": 75075,
+        "endMs": 75450
+      },
+      {
+        "text": "to",
+        "startMs": 75462,
+        "endMs": 75525
+      },
+      {
+        "text": "school",
+        "startMs": 75538,
+        "endMs": 76012
+      },
+      {
+        "text": "In",
+        "startMs": 76875,
+        "endMs": 77062
+      },
+      {
+        "text": "the",
+        "startMs": 77075,
+        "endMs": 77162
+      },
+      {
+        "text": "spring",
+        "startMs": 77175,
+        "endMs": 77600
+      },
+      {
+        "text": "Katrina",
+        "startMs": 77750,
+        "endMs": 78212
+      },
+      {
+        "text": "married",
+        "startMs": 78225,
+        "endMs": 78575
+      },
+      {
+        "text": "Brom",
+        "startMs": 78588,
+        "endMs": 79038
+      },
+      {
+        "text": "The",
+        "startMs": 79912,
+        "endMs": 80100
+      },
+      {
+        "text": "village",
+        "startMs": 80112,
+        "endMs": 80500
+      },
+      {
+        "text": "found",
+        "startMs": 80512,
+        "endMs": 80762
+      },
+      {
+        "text": "a",
+        "startMs": 80775,
+        "endMs": 80800
+      },
+      {
+        "text": "new",
+        "startMs": 80812,
+        "endMs": 81012
+      },
+      {
+        "text": "teacher",
+        "startMs": 81025,
+        "endMs": 81512
+      },
+      {
+        "text": "a",
+        "startMs": 81750,
+        "endMs": 81800
+      },
+      {
+        "text": "quiet",
+        "startMs": 81812,
+        "endMs": 82212
+      },
+      {
+        "text": "young",
+        "startMs": 82225,
+        "endMs": 82462
+      },
+      {
+        "text": "man",
+        "startMs": 82475,
+        "endMs": 82750
+      },
+      {
+        "text": "who",
+        "startMs": 82762,
+        "endMs": 82875
+      },
+      {
+        "text": "did",
+        "startMs": 82888,
+        "endMs": 83025
+      },
+      {
+        "text": "not",
+        "startMs": 83038,
+        "endMs": 83250
+      },
+      {
+        "text": "believe",
+        "startMs": 83262,
+        "endMs": 83588
+      },
+      {
+        "text": "in",
+        "startMs": 83600,
+        "endMs": 83688
+      },
+      {
+        "text": "ghosts",
+        "startMs": 83700,
+        "endMs": 84300
+      },
+      {
+        "text": "But",
+        "startMs": 85162,
+        "endMs": 85350
+      },
+      {
+        "text": "the",
+        "startMs": 85362,
+        "endMs": 85475
+      },
+      {
+        "text": "old",
+        "startMs": 85488,
+        "endMs": 85738
+      },
+      {
+        "text": "farmers",
+        "startMs": 85750,
+        "endMs": 86175
+      },
+      {
+        "text": "still",
+        "startMs": 86188,
+        "endMs": 86475
+      },
+      {
+        "text": "told",
+        "startMs": 86488,
+        "endMs": 86725
+      },
+      {
+        "text": "the",
+        "startMs": 86738,
+        "endMs": 86812
+      },
+      {
+        "text": "tale",
+        "startMs": 86825,
+        "endMs": 87150
+      },
+      {
+        "text": "of",
+        "startMs": 87162,
+        "endMs": 87250
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 87262,
+        "endMs": 87738
+      },
+      {
+        "text": "Crane",
+        "startMs": 87750,
+        "endMs": 88225
+      },
+      {
+        "text": "One",
+        "startMs": 89088,
+        "endMs": 89362
+      },
+      {
+        "text": "of",
+        "startMs": 89375,
+        "endMs": 89475
+      },
+      {
+        "text": "them",
+        "startMs": 89488,
+        "endMs": 89662
+      },
+      {
+        "text": "said",
+        "startMs": 89675,
+        "endMs": 89925
+      },
+      {
+        "text": "he",
+        "startMs": 89938,
+        "endMs": 90038
+      },
+      {
+        "text": "had",
+        "startMs": 90050,
+        "endMs": 90212
+      },
+      {
+        "text": "seen",
+        "startMs": 90225,
+        "endMs": 90462
+      },
+      {
+        "text": "him",
+        "startMs": 90475,
+        "endMs": 90650
+      },
+      {
+        "text": "in",
+        "startMs": 90662,
+        "endMs": 90738
+      },
+      {
+        "text": "a",
+        "startMs": 90750,
+        "endMs": 90812
+      },
+      {
+        "text": "far",
+        "startMs": 90825,
+        "endMs": 91100
+      },
+      {
+        "text": "town",
+        "startMs": 91112,
+        "endMs": 91500
+      },
+      {
+        "text": "alive",
+        "startMs": 91688,
+        "endMs": 92025
+      },
+      {
+        "text": "and",
+        "startMs": 92038,
+        "endMs": 92125
+      },
+      {
+        "text": "happy",
+        "startMs": 92138,
+        "endMs": 92550
+      },
+      {
+        "text": "with",
+        "startMs": 92788,
+        "endMs": 92938
+      },
+      {
+        "text": "a",
+        "startMs": 92950,
+        "endMs": 93025
+      },
+      {
+        "text": "wife",
+        "startMs": 93038,
+        "endMs": 93338
+      },
+      {
+        "text": "and",
+        "startMs": 93350,
+        "endMs": 93450
+      },
+      {
+        "text": "children",
+        "startMs": 93462,
+        "endMs": 93988
+      },
+      {
+        "text": "Another",
+        "startMs": 94850,
+        "endMs": 95312
+      },
+      {
+        "text": "said",
+        "startMs": 95325,
+        "endMs": 95562
+      },
+      {
+        "text": "he",
+        "startMs": 95575,
+        "endMs": 95688
+      },
+      {
+        "text": "had",
+        "startMs": 95700,
+        "endMs": 95825
+      },
+      {
+        "text": "become",
+        "startMs": 95838,
+        "endMs": 96162
+      },
+      {
+        "text": "a",
+        "startMs": 96175,
+        "endMs": 96238
+      },
+      {
+        "text": "judge",
+        "startMs": 96250,
+        "endMs": 96675
+      },
+      {
+        "text": "and",
+        "startMs": 96688,
+        "endMs": 96788
+      },
+      {
+        "text": "had",
+        "startMs": 96800,
+        "endMs": 96975
+      },
+      {
+        "text": "forgotten",
+        "startMs": 96988,
+        "endMs": 97475
+      },
+      {
+        "text": "Sleepy",
+        "startMs": 97488,
+        "endMs": 97862
+      },
+      {
+        "text": "Hollow",
+        "startMs": 97875,
+        "endMs": 98375
+      },
+      {
+        "text": "The",
+        "startMs": 99250,
+        "endMs": 99425
+      },
+      {
+        "text": "old",
+        "startMs": 99438,
+        "endMs": 99700
+      },
+      {
+        "text": "farmers",
+        "startMs": 99712,
+        "endMs": 100125
+      },
+      {
+        "text": "smiled",
+        "startMs": 100138,
+        "endMs": 100575
+      },
+      {
+        "text": "when",
+        "startMs": 100588,
+        "endMs": 100700
+      },
+      {
+        "text": "they",
+        "startMs": 100712,
+        "endMs": 100825
+      },
+      {
+        "text": "said",
+        "startMs": 100838,
+        "endMs": 101075
+      },
+      {
+        "text": "it",
+        "startMs": 101088,
+        "endMs": 101388
+      },
+      {
+        "text": "Nobody",
+        "startMs": 102250,
+        "endMs": 102738
+      },
+      {
+        "text": "knew",
+        "startMs": 102750,
+        "endMs": 102938
+      },
+      {
+        "text": "the",
+        "startMs": 102950,
+        "endMs": 103062
+      },
+      {
+        "text": "truth",
+        "startMs": 103075,
+        "endMs": 103600
+      },
+      {
+        "text": "The",
+        "startMs": 104475,
+        "endMs": 104638
+      },
+      {
+        "text": "bridge",
+        "startMs": 104650,
+        "endMs": 104975
+      },
+      {
+        "text": "stayed",
+        "startMs": 104988,
+        "endMs": 105275
+      },
+      {
+        "text": "in",
+        "startMs": 105288,
+        "endMs": 105375
+      },
+      {
+        "text": "its",
+        "startMs": 105388,
+        "endMs": 105538
+      },
+      {
+        "text": "place",
+        "startMs": 105550,
+        "endMs": 106000
+      },
+      {
+        "text": "and",
+        "startMs": 106262,
+        "endMs": 106388
+      },
+      {
+        "text": "the",
+        "startMs": 106400,
+        "endMs": 106488
+      },
+      {
+        "text": "stream",
+        "startMs": 106500,
+        "endMs": 106862
+      },
+      {
+        "text": "moved",
+        "startMs": 106875,
+        "endMs": 107162
+      },
+      {
+        "text": "under",
+        "startMs": 107175,
+        "endMs": 107438
+      },
+      {
+        "text": "it",
+        "startMs": 107450,
+        "endMs": 107738
+      },
+      {
+        "text": "On",
+        "startMs": 108612,
+        "endMs": 108812
+      },
+      {
+        "text": "dark",
+        "startMs": 108825,
+        "endMs": 109100
+      },
+      {
+        "text": "nights",
+        "startMs": 109112,
+        "endMs": 109562
+      },
+      {
+        "text": "when",
+        "startMs": 109738,
+        "endMs": 109888
+      },
+      {
+        "text": "the",
+        "startMs": 109900,
+        "endMs": 109988
+      },
+      {
+        "text": "wind",
+        "startMs": 110000,
+        "endMs": 110312
+      },
+      {
+        "text": "blew",
+        "startMs": 110325,
+        "endMs": 110550
+      },
+      {
+        "text": "through",
+        "startMs": 110562,
+        "endMs": 110712
+      },
+      {
+        "text": "the",
+        "startMs": 110725,
+        "endMs": 110812
+      },
+      {
+        "text": "trees",
+        "startMs": 110825,
+        "endMs": 111275
+      },
+      {
+        "text": "people",
+        "startMs": 111500,
+        "endMs": 111825
+      },
+      {
+        "text": "still",
+        "startMs": 111838,
+        "endMs": 112138
+      },
+      {
+        "text": "walked",
+        "startMs": 112150,
+        "endMs": 112412
+      },
+      {
+        "text": "home",
+        "startMs": 112425,
+        "endMs": 112662
+      },
+      {
+        "text": "a",
+        "startMs": 112675,
+        "endMs": 112712
+      },
+      {
+        "text": "little",
+        "startMs": 112725,
+        "endMs": 112975
+      },
+      {
+        "text": "faster",
+        "startMs": 112988,
+        "endMs": 113588
+      },
+      {
+        "text": "And",
+        "startMs": 114450,
+        "endMs": 114650
+      },
+      {
+        "text": "if",
+        "startMs": 114662,
+        "endMs": 114775
+      },
+      {
+        "text": "you",
+        "startMs": 114788,
+        "endMs": 114900
+      },
+      {
+        "text": "listen",
+        "startMs": 114912,
+        "endMs": 115250
+      },
+      {
+        "text": "closely",
+        "startMs": 115262,
+        "endMs": 115788
+      },
+      {
+        "text": "they",
+        "startMs": 115950,
+        "endMs": 116088
+      },
+      {
+        "text": "say",
+        "startMs": 116100,
+        "endMs": 116450
+      },
+      {
+        "text": "you",
+        "startMs": 116675,
+        "endMs": 116750
+      },
+      {
+        "text": "can",
+        "startMs": 116762,
+        "endMs": 116888
+      },
+      {
+        "text": "hear",
+        "startMs": 116900,
+        "endMs": 117138
+      },
+      {
+        "text": "a",
+        "startMs": 117150,
+        "endMs": 117200
+      },
+      {
+        "text": "horse",
+        "startMs": 117212,
+        "endMs": 117550
+      },
+      {
+        "text": "on",
+        "startMs": 117562,
+        "endMs": 117675
+      },
+      {
+        "text": "the",
+        "startMs": 117688,
+        "endMs": 117775
+      },
+      {
+        "text": "road",
+        "startMs": 117788,
+        "endMs": 118100
+      },
+      {
+        "text": "slow",
+        "startMs": 118262,
+        "endMs": 118638
+      },
+      {
+        "text": "heavy",
+        "startMs": 118850,
+        "endMs": 119238
+      },
+      {
+        "text": "and",
+        "startMs": 119388,
+        "endMs": 119550
+      },
+      {
+        "text": "never",
+        "startMs": 119562,
+        "endMs": 119800
+      },
+      {
+        "text": "alone",
+        "startMs": 119812,
+        "endMs": 120325
+      },
+      {
+        "text": "Some",
+        "startMs": 121188,
+        "endMs": 121525
+      },
+      {
+        "text": "stories",
+        "startMs": 121538,
+        "endMs": 122075
+      },
+      {
+        "text": "the",
+        "startMs": 122200,
+        "endMs": 122300
+      },
+      {
+        "text": "old",
+        "startMs": 122312,
+        "endMs": 122538
+      },
+      {
+        "text": "people",
+        "startMs": 122550,
+        "endMs": 122862
+      },
+      {
+        "text": "say",
+        "startMs": 122875,
+        "endMs": 123225
+      },
+      {
+        "text": "are",
+        "startMs": 123400,
+        "endMs": 123550
+      },
+      {
+        "text": "stronger",
+        "startMs": 123562,
+        "endMs": 124000
+      },
+      {
+        "text": "than",
+        "startMs": 124012,
+        "endMs": 124125
+      },
+      {
+        "text": "the",
+        "startMs": 124138,
+        "endMs": 124200
+      },
+      {
+        "text": "truth",
+        "startMs": 124212,
+        "endMs": 124712
+      },
+      {
+        "text": "The",
+        "startMs": 125588,
+        "endMs": 125762
+      },
+      {
+        "text": "valley",
+        "startMs": 125775,
+        "endMs": 126138
+      },
+      {
+        "text": "keeps",
+        "startMs": 126150,
+        "endMs": 126438
+      },
+      {
+        "text": "its",
+        "startMs": 126450,
+        "endMs": 126650
+      },
+      {
+        "text": "secrets",
+        "startMs": 126662,
+        "endMs": 127275
+      },
+      {
+        "text": "Nobody",
+        "startMs": 128138,
+        "endMs": 128612
+      },
+      {
+        "text": "forgot",
+        "startMs": 128625,
+        "endMs": 129025
+      },
+      {
+        "text": "the",
+        "startMs": 129038,
+        "endMs": 129112
+      },
+      {
+        "text": "name",
+        "startMs": 129125,
+        "endMs": 129388
+      },
+      {
+        "text": "of",
+        "startMs": 129400,
+        "endMs": 129500
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 129512,
+        "endMs": 129962
+      },
+      {
+        "text": "Crane",
+        "startMs": 129975,
+        "endMs": 130462
+      }
+    ]
+  }
+}

@@ -1,0 +1,501 @@
+{
+  "version": "2026.11.22",
+  "description": "Lexique deterministe A2/B1 derive du pack pilote Sleepy Hollow. Les cles sont normalisees (minuscules, sans ponctuation finale).",
+  "words": {
+    "afraid": {
+      "word": "afraid",
+      "partOfSpeech": "adjective",
+      "phonetic": "/əˈfreɪd/",
+      "definitionEn": "feeling fear",
+      "translationFr": "effrayé",
+      "example": "He ran away because he was afraid.",
+      "cefr": "A2"
+    },
+    "alive": {
+      "word": "alive",
+      "partOfSpeech": "adjective",
+      "phonetic": "/əˈlaɪv/",
+      "definitionEn": "living, not dead",
+      "translationFr": "vivant",
+      "example": "They said he was alive in another town.",
+      "cefr": "A2"
+    },
+    "applauded": {
+      "word": "applauded",
+      "partOfSpeech": "verb",
+      "phonetic": "/əˈplɔːdɪd/",
+      "definitionEn": "clapped to show approval",
+      "translationFr": "a applaudi",
+      "example": "The guests laughed and applauded.",
+      "cefr": "B1"
+    },
+    "arithmetic": {
+      "word": "arithmetic",
+      "partOfSpeech": "noun",
+      "phonetic": "/əˈrɪθmətɪk/",
+      "definitionEn": "the study of numbers and calculations",
+      "translationFr": "l’arithmétique",
+      "example": "He taught the children reading and arithmetic.",
+      "cefr": "B1"
+    },
+    "believe": {
+      "word": "believe",
+      "partOfSpeech": "verb",
+      "phonetic": "/bɪˈliːv/",
+      "definitionEn": "to think that something is true",
+      "translationFr": "croire",
+      "example": "He did not believe in ghosts.",
+      "cefr": "A2"
+    },
+    "bend": {
+      "word": "bend",
+      "partOfSpeech": "noun",
+      "phonetic": "/bend/",
+      "definitionEn": "a place where a road turns",
+      "translationFr": "le virage",
+      "example": "At the last bend, he looked back.",
+      "cefr": "B1"
+    },
+    "branches": {
+      "word": "branches",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈbrɑːntʃɪz/",
+      "definitionEn": "the parts of a tree that grow from the trunk",
+      "translationFr": "les branches",
+      "example": "Branches moved in the wind.",
+      "cefr": "A2"
+    },
+    "bridge": {
+      "word": "bridge",
+      "partOfSpeech": "noun",
+      "phonetic": "/brɪdʒ/",
+      "definitionEn": "a structure built over a river or road",
+      "translationFr": "le pont",
+      "example": "They rode towards the wooden bridge.",
+      "cefr": "A2"
+    },
+    "broken": {
+      "word": "broken",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈbrəʊkən/",
+      "definitionEn": "damaged and in pieces",
+      "translationFr": "cassé",
+      "example": "A broken pumpkin sat on the ground.",
+      "cefr": "A2"
+    },
+    "cloak": {
+      "word": "cloak",
+      "partOfSpeech": "noun",
+      "phonetic": "/kləʊk/",
+      "definitionEn": "a long, loose coat without sleeves",
+      "translationFr": "la cape",
+      "example": "The rider wore a long black cloak.",
+      "cefr": "B1"
+    },
+    "confident": {
+      "word": "confident",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈkɒnfɪdənt/",
+      "definitionEn": "sure of yourself",
+      "translationFr": "sûr de soi",
+      "example": "Brom was a big, confident man.",
+      "cefr": "B1"
+    },
+    "curious": {
+      "word": "curious",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈkjʊəriəs/",
+      "definitionEn": "wanting to know or learn something",
+      "translationFr": "curieux",
+      "example": "The curious teacher asked many questions.",
+      "cefr": "A2"
+    },
+    "disappear": {
+      "word": "disappear",
+      "partOfSpeech": "verb",
+      "phonetic": "/ˌdɪsəˈpɪə/",
+      "definitionEn": "to go away and not be seen",
+      "translationFr": "disparaître",
+      "example": "The footprints disappeared near the water.",
+      "cefr": "B1"
+    },
+    "echo": {
+      "word": "echo",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈekəʊ/",
+      "definitionEn": "a sound that comes back to you",
+      "translationFr": "l’écho",
+      "example": "Only an echo answered.",
+      "cefr": "B1"
+    },
+    "footprints": {
+      "word": "footprints",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈfʊtprɪnts/",
+      "definitionEn": "marks made by feet on the ground",
+      "translationFr": "les empreintes de pas",
+      "example": "There were footprints in the mud.",
+      "cefr": "B1"
+    },
+    "gallop": {
+      "word": "gallop",
+      "partOfSpeech": "verb",
+      "phonetic": "/ˈɡæləp/",
+      "definitionEn": "to run very fast, like a horse",
+      "translationFr": "galoper",
+      "example": "The black horse began to gallop.",
+      "cefr": "B1"
+    },
+    "ghost": {
+      "word": "ghost",
+      "partOfSpeech": "noun",
+      "phonetic": "/ɡəʊst/",
+      "definitionEn": "the spirit of a dead person",
+      "translationFr": "un fantôme",
+      "example": "Ichabod loved ghost stories.",
+      "cefr": "A2"
+    },
+    "handsome": {
+      "word": "handsome",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈhænsəm/",
+      "definitionEn": "good-looking",
+      "translationFr": "beau",
+      "example": "The horse was old and not very handsome.",
+      "cefr": "A2"
+    },
+    "hat": {
+      "word": "hat",
+      "partOfSpeech": "noun",
+      "phonetic": "/hæt/",
+      "definitionEn": "a thing you wear on your head",
+      "translationFr": "le chapeau",
+      "example": "His hat lay in the stream.",
+      "cefr": "A2"
+    },
+    "haunted": {
+      "word": "haunted",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈhɔːntɪd/",
+      "definitionEn": "visited by ghosts",
+      "translationFr": "hanté",
+      "example": "People said the old house was haunted.",
+      "cefr": "B1"
+    },
+    "headless": {
+      "word": "headless",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈhedləs/",
+      "definitionEn": "without a head",
+      "translationFr": "sans tête",
+      "example": "They told stories about a headless rider.",
+      "cefr": "B1"
+    },
+    "heavy": {
+      "word": "heavy",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈhevi/",
+      "definitionEn": "weighing a lot",
+      "translationFr": "lourd",
+      "example": "They heard a slow, heavy sound.",
+      "cefr": "A2"
+    },
+    "hooves": {
+      "word": "hooves",
+      "partOfSpeech": "noun",
+      "phonetic": "/huːvz/",
+      "definitionEn": "the hard feet of a horse",
+      "translationFr": "les sabots",
+      "example": "He could hear the hooves on the road.",
+      "cefr": "B1"
+    },
+    "hum": {
+      "word": "hum",
+      "partOfSpeech": "verb",
+      "phonetic": "/hʌm/",
+      "definitionEn": "to make a low, steady sound with your mouth closed",
+      "translationFr": "fredonner",
+      "example": "He tried to hum a song in the dark.",
+      "cefr": "B1"
+    },
+    "laugh": {
+      "word": "laugh",
+      "partOfSpeech": "verb",
+      "phonetic": "/lɑːf/",
+      "definitionEn": "to make sounds that show you are happy",
+      "translationFr": "rire",
+      "example": "Brom laughed at every story.",
+      "cefr": "B1"
+    },
+    "marry": {
+      "word": "marry",
+      "partOfSpeech": "verb",
+      "phonetic": "/ˈmæri/",
+      "definitionEn": "to become the husband or wife of someone",
+      "translationFr": "épouser",
+      "example": "Many young men wanted to marry Katrina.",
+      "cefr": "A2"
+    },
+    "midnight": {
+      "word": "midnight",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈmɪdnaɪt/",
+      "definitionEn": "twelve o’clock at night",
+      "translationFr": "minuit",
+      "example": "Nobody walked alone after midnight.",
+      "cefr": "A2"
+    },
+    "mist": {
+      "word": "mist",
+      "partOfSpeech": "noun",
+      "phonetic": "/mɪst/",
+      "definitionEn": "thin fog close to the ground",
+      "translationFr": "la brume",
+      "example": "A cold mist covered the fields at dawn.",
+      "cefr": "A2"
+    },
+    "mud": {
+      "word": "mud",
+      "partOfSpeech": "noun",
+      "phonetic": "/mʌd/",
+      "definitionEn": "soft, wet earth",
+      "translationFr": "la boue",
+      "example": "The footprints disappeared in the mud.",
+      "cefr": "A2"
+    },
+    "neighbor": {
+      "word": "neighbor",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈneɪbə/",
+      "definitionEn": "a person who lives near you",
+      "translationFr": "un voisin",
+      "example": "Ichabod borrowed a horse from a neighbor.",
+      "cefr": "A2"
+    },
+    "news": {
+      "word": "news",
+      "partOfSpeech": "noun",
+      "phonetic": "/njuːz/",
+      "definitionEn": "information about something that happened",
+      "translationFr": "les nouvelles",
+      "example": "The village woke to strange news.",
+      "cefr": "A2"
+    },
+    "owner": {
+      "word": "owner",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈəʊnə/",
+      "definitionEn": "the person who has something",
+      "translationFr": "le propriétaire",
+      "example": "The owner of the horse looked everywhere.",
+      "cefr": "B1"
+    },
+    "path": {
+      "word": "path",
+      "partOfSpeech": "noun",
+      "phonetic": "/pɑːθ/",
+      "definitionEn": "a narrow way for walking",
+      "translationFr": "le chemin",
+      "example": "The path went through the trees.",
+      "cefr": "A2"
+    },
+    "porch": {
+      "word": "porch",
+      "partOfSpeech": "noun",
+      "phonetic": "/pɔːtʃ/",
+      "definitionEn": "a covered area at the entrance of a house",
+      "translationFr": "le porche",
+      "example": "The old men sat on the porch and talked.",
+      "cefr": "A2"
+    },
+    "pumpkin": {
+      "word": "pumpkin",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈpʌmpkɪn/",
+      "definitionEn": "a large, round orange vegetable",
+      "translationFr": "la citrouille",
+      "example": "They found a broken pumpkin near the bridge.",
+      "cefr": "B1"
+    },
+    "race": {
+      "word": "race",
+      "partOfSpeech": "verb",
+      "phonetic": "/reɪs/",
+      "definitionEn": "to run or ride very fast against someone",
+      "translationFr": "faire la course avec",
+      "example": "Ichabod tried to race the stranger.",
+      "cefr": "A2"
+    },
+    "reins": {
+      "word": "reins",
+      "partOfSpeech": "noun",
+      "phonetic": "/reɪnz/",
+      "definitionEn": "the straps used to control a horse",
+      "translationFr": "les rênes",
+      "example": "He held the reins tight.",
+      "cefr": "B1"
+    },
+    "reputation": {
+      "word": "reputation",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˌrepjuˈteɪʃn/",
+      "definitionEn": "the opinion people have about a place or a person",
+      "translationFr": "la réputation",
+      "example": "The valley had a strange reputation.",
+      "cefr": "B2"
+    },
+    "saddle": {
+      "word": "saddle",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈsædl/",
+      "definitionEn": "the seat on a horse",
+      "translationFr": "la selle",
+      "example": "He turned in the saddle to look back.",
+      "cefr": "B1"
+    },
+    "search": {
+      "word": "search",
+      "partOfSpeech": "verb",
+      "phonetic": "/sɜːtʃ/",
+      "definitionEn": "to look for something or someone",
+      "translationFr": "chercher",
+      "example": "The whole village began to search for him.",
+      "cefr": "A2"
+    },
+    "shadow": {
+      "word": "shadow",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈʃædəʊ/",
+      "definitionEn": "a dark shape made when something blocks the light",
+      "translationFr": "l’ombre",
+      "example": "The rider’s shadow grew longer.",
+      "cefr": "B1"
+    },
+    "silence": {
+      "word": "silence",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈsaɪləns/",
+      "definitionEn": "a complete lack of sound",
+      "translationFr": "le silence",
+      "example": "Brom watched from a corner in silence.",
+      "cefr": "B1"
+    },
+    "smile": {
+      "word": "smile",
+      "partOfSpeech": "verb",
+      "phonetic": "/smaɪl/",
+      "definitionEn": "to make a happy face",
+      "translationFr": "sourire",
+      "example": "He looked at Katrina and smiled.",
+      "cefr": "A2"
+    },
+    "spring": {
+      "word": "spring",
+      "partOfSpeech": "noun",
+      "phonetic": "/sprɪŋ/",
+      "definitionEn": "the season after winter",
+      "translationFr": "le printemps",
+      "example": "In the spring, Katrina married Brom.",
+      "cefr": "A2"
+    },
+    "stranger": {
+      "word": "stranger",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈstreɪndʒə/",
+      "definitionEn": "a person you do not know",
+      "translationFr": "l’étranger",
+      "example": "The stranger did not speak.",
+      "cefr": "B1"
+    },
+    "stream": {
+      "word": "stream",
+      "partOfSpeech": "noun",
+      "phonetic": "/striːm/",
+      "definitionEn": "a small river",
+      "translationFr": "le ruisseau",
+      "example": "The water in the stream was dark.",
+      "cefr": "A2"
+    },
+    "tale": {
+      "word": "tale",
+      "partOfSpeech": "noun",
+      "phonetic": "/teɪl/",
+      "definitionEn": "a story",
+      "translationFr": "le conte",
+      "example": "The farmers still told the tale of Ichabod Crane.",
+      "cefr": "B1"
+    },
+    "temper": {
+      "word": "temper",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈtempə/",
+      "definitionEn": "a tendency to become angry quickly",
+      "translationFr": "un tempérament vif",
+      "example": "He had a quick temper and little patience.",
+      "cefr": "B2"
+    },
+    "terrified": {
+      "word": "terrified",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈterɪfaɪd/",
+      "definitionEn": "extremely afraid",
+      "translationFr": "terrifié",
+      "example": "He was terrified by the rider.",
+      "cefr": "B1"
+    },
+    "theories": {
+      "word": "theories",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈθɪəriz/",
+      "definitionEn": "ideas that try to explain something",
+      "translationFr": "les théories",
+      "example": "People had many theories about the teacher.",
+      "cefr": "B2"
+    },
+    "throw": {
+      "word": "throw",
+      "partOfSpeech": "verb",
+      "phonetic": "/θrəʊ/",
+      "definitionEn": "to send something through the air with your hand",
+      "translationFr": "lancer",
+      "example": "The rider threw something at Ichabod.",
+      "cefr": "B1"
+    },
+    "tired": {
+      "word": "tired",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈtaɪəd/",
+      "definitionEn": "needing rest",
+      "translationFr": "fatigué",
+      "example": "His old horse was tired.",
+      "cefr": "A2"
+    },
+    "truth": {
+      "word": "truth",
+      "partOfSpeech": "noun",
+      "phonetic": "/truːθ/",
+      "definitionEn": "the real facts",
+      "translationFr": "la vérité",
+      "example": "Nobody knew the truth.",
+      "cefr": "B1"
+    },
+    "whisper": {
+      "word": "whisper",
+      "partOfSpeech": "verb",
+      "phonetic": "/ˈwɪspə/",
+      "definitionEn": "to speak very quietly",
+      "translationFr": "murmurer",
+      "example": "The wind made the trees whisper.",
+      "cefr": "B1"
+    },
+    "woods": {
+      "word": "woods",
+      "partOfSpeech": "noun",
+      "phonetic": "/wʊdz/",
+      "definitionEn": "a small forest",
+      "translationFr": "les bois",
+      "example": "The rider disappeared into the woods.",
+      "cefr": "A2"
+    }
+  }
+}

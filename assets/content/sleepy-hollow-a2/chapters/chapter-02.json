@@ -1,0 +1,2137 @@
+{
+  "schemaVersion": 2,
+  "id": "chapter-02",
+  "bookId": "sleepy-hollow",
+  "number": 2,
+  "title": "The Midnight Rider",
+  "level": "a2",
+  "paragraphs": [
+    {
+      "id": "p-01",
+      "segments": [
+        {
+          "text": "Ichabod’s heart beat fast. He turned in the "
+        },
+        {
+          "text": "saddle",
+          "vocabId": "saddle"
+        },
+        {
+          "text": " and looked behind him. A tall man in a black "
+        },
+        {
+          "text": "cloak",
+          "vocabId": "cloak"
+        },
+        {
+          "text": " rode a big black horse. The "
+        },
+        {
+          "text": "stranger",
+          "vocabId": "stranger"
+        },
+        {
+          "text": " did not speak. His hat was low, and under it there was nothing — no face, no eyes. Ichabod felt cold, although the night was warm. A few minutes before, he had been laughing at the party. Now he remembered the old story: the headless rider of Sleepy Hollow."
+        }
+      ]
+    },
+    {
+      "id": "p-02",
+      "segments": [
+        {
+          "text": "“Go, Gunpowder, go!” he said. The old horse began to "
+        },
+        {
+          "text": "gallop",
+          "vocabId": "gallop"
+        },
+        {
+          "text": ", but the black horse stayed close. Ichabod could hear its "
+        },
+        {
+          "text": "hooves",
+          "vocabId": "hooves"
+        },
+        {
+          "text": " on the road, slow and heavy, like a drum. He held the "
+        },
+        {
+          "text": "reins",
+          "vocabId": "reins"
+        },
+        {
+          "text": " tight and looked for the "
+        },
+        {
+          "text": "bridge",
+          "vocabId": "bridge"
+        },
+        {
+          "text": ". The story said the rider could not cross the "
+        },
+        {
+          "text": "stream",
+          "vocabId": "stream"
+        },
+        {
+          "text": ". If he reached the bridge, he would be safe. The black horse came closer, and Ichabod hit the old horse with his heels."
+        }
+      ]
+    },
+    {
+      "id": "p-03",
+      "segments": [
+        {
+          "text": "The road went through the dark trees. "
+        },
+        {
+          "text": "branches",
+          "vocabId": "branches"
+        },
+        {
+          "text": " moved in the wind, and the rider’s "
+        },
+        {
+          "text": "shadow",
+          "vocabId": "shadow"
+        },
+        {
+          "text": " grew longer on the ground. The "
+        },
+        {
+          "text": "hooves",
+          "vocabId": "hooves"
+        },
+        {
+          "text": " sounded like an "
+        },
+        {
+          "text": "echo",
+          "vocabId": "echo"
+        },
+        {
+          "text": " behind him. Ichabod tried to "
+        },
+        {
+          "text": "race",
+          "vocabId": "race"
+        },
+        {
+          "text": " the stranger, but his horse was old and "
+        },
+        {
+          "text": "tired",
+          "vocabId": "tired"
+        },
+        {
+          "text": ". The bridge was near. He could see the white mist over the water and the black shape of the rider beside him. His hands were wet on the reins."
+        }
+      ]
+    },
+    {
+      "id": "p-04",
+      "segments": [
+        {
+          "text": "At the last "
+        },
+        {
+          "text": "bend",
+          "vocabId": "bend"
+        },
+        {
+          "text": ", Ichabod looked back. The rider was closer than before. He was so "
+        },
+        {
+          "text": "terrified",
+          "vocabId": "terrified"
+        },
+        {
+          "text": " that he did not see the low branch above the "
+        },
+        {
+          "text": "path",
+          "vocabId": "path"
+        },
+        {
+          "text": ". It hit his head, and his hat fell into the stream. He did not stop. The bridge was only a few steps away. Behind him, the black horse made no sound at all. It was as silent as a ghost."
+        }
+      ]
+    },
+    {
+      "id": "p-05",
+      "segments": [
+        {
+          "text": "On the bridge, Ichabod turned his horse. The stranger stopped too. For a second, nobody moved. Then the rider stood up in his "
+        },
+        {
+          "text": "saddle",
+          "vocabId": "saddle"
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "throw",
+          "vocabId": "throw"
+        },
+        {
+          "text": " something dark and round. It flew through the air, and Ichabod raised his arms. He tried to run, but the thing hit him with a heavy sound. Everything went black. The last thing he heard was the stream under the bridge."
+        }
+      ]
+    }
+  ],
+  "vocabulary": [
+    {
+      "id": "saddle",
+      "cefr": "b1",
+      "word": "saddle",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈsædl/",
+      "definitionEn": "the seat on a horse",
+      "translationFr": "la selle",
+      "example": "He turned in the saddle to look back."
+    },
+    {
+      "id": "cloak",
+      "cefr": "b1",
+      "word": "cloak",
+      "partOfSpeech": "noun",
+      "phonetic": "/kləʊk/",
+      "definitionEn": "a long, loose coat without sleeves",
+      "translationFr": "la cape",
+      "example": "The rider wore a long black cloak."
+    },
+    {
+      "id": "stranger",
+      "cefr": "b1",
+      "word": "stranger",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈstreɪndʒə/",
+      "definitionEn": "a person you do not know",
+      "translationFr": "l’étranger",
+      "example": "The stranger did not speak."
+    },
+    {
+      "id": "gallop",
+      "cefr": "b1",
+      "word": "gallop",
+      "partOfSpeech": "verb",
+      "phonetic": "/ˈɡæləp/",
+      "definitionEn": "to run very fast, like a horse",
+      "translationFr": "galoper",
+      "example": "The black horse began to gallop."
+    },
+    {
+      "id": "hooves",
+      "cefr": "b1",
+      "word": "hooves",
+      "partOfSpeech": "noun",
+      "phonetic": "/huːvz/",
+      "definitionEn": "the hard feet of a horse",
+      "translationFr": "les sabots",
+      "example": "He could hear the hooves on the road."
+    },
+    {
+      "id": "reins",
+      "cefr": "b1",
+      "word": "reins",
+      "partOfSpeech": "noun",
+      "phonetic": "/reɪnz/",
+      "definitionEn": "the straps used to control a horse",
+      "translationFr": "les rênes",
+      "example": "He held the reins tight."
+    },
+    {
+      "id": "bridge",
+      "cefr": "a2",
+      "word": "bridge",
+      "partOfSpeech": "noun",
+      "phonetic": "/brɪdʒ/",
+      "definitionEn": "a structure built over a river or road",
+      "translationFr": "le pont",
+      "example": "They rode towards the wooden bridge."
+    },
+    {
+      "id": "stream",
+      "cefr": "a2",
+      "word": "stream",
+      "partOfSpeech": "noun",
+      "phonetic": "/striːm/",
+      "definitionEn": "a small river",
+      "translationFr": "le ruisseau",
+      "example": "The water in the stream was dark."
+    },
+    {
+      "id": "branches",
+      "cefr": "a2",
+      "word": "branches",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈbrɑːntʃɪz/",
+      "definitionEn": "the parts of a tree that grow from the trunk",
+      "translationFr": "les branches",
+      "example": "Branches moved in the wind."
+    },
+    {
+      "id": "shadow",
+      "cefr": "b1",
+      "word": "shadow",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈʃædəʊ/",
+      "definitionEn": "a dark shape made when something blocks the light",
+      "translationFr": "l’ombre",
+      "example": "The rider’s shadow grew longer."
+    },
+    {
+      "id": "echo",
+      "cefr": "b1",
+      "word": "echo",
+      "partOfSpeech": "noun",
+      "phonetic": "/ˈekəʊ/",
+      "definitionEn": "a sound that comes back to you",
+      "translationFr": "l’écho",
+      "example": "Only an echo answered."
+    },
+    {
+      "id": "race",
+      "cefr": "a2",
+      "word": "race",
+      "partOfSpeech": "verb",
+      "phonetic": "/reɪs/",
+      "definitionEn": "to run or ride very fast against someone",
+      "translationFr": "faire la course avec",
+      "example": "Ichabod tried to race the stranger."
+    },
+    {
+      "id": "tired",
+      "cefr": "a2",
+      "word": "tired",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈtaɪəd/",
+      "definitionEn": "needing rest",
+      "translationFr": "fatigué",
+      "example": "His old horse was tired."
+    },
+    {
+      "id": "bend",
+      "cefr": "b1",
+      "word": "bend",
+      "partOfSpeech": "noun",
+      "phonetic": "/bend/",
+      "definitionEn": "a place where a road turns",
+      "translationFr": "le virage",
+      "example": "At the last bend, he looked back."
+    },
+    {
+      "id": "terrified",
+      "cefr": "b1",
+      "word": "terrified",
+      "partOfSpeech": "adjective",
+      "phonetic": "/ˈterɪfaɪd/",
+      "definitionEn": "extremely afraid",
+      "translationFr": "terrifié",
+      "example": "He was terrified by the rider."
+    },
+    {
+      "id": "path",
+      "cefr": "a2",
+      "word": "path",
+      "partOfSpeech": "noun",
+      "phonetic": "/pɑːθ/",
+      "definitionEn": "a narrow way for walking",
+      "translationFr": "le chemin",
+      "example": "The path went through the trees."
+    },
+    {
+      "id": "throw",
+      "cefr": "b1",
+      "word": "throw",
+      "partOfSpeech": "verb",
+      "phonetic": "/θrəʊ/",
+      "definitionEn": "to send something through the air with your hand",
+      "translationFr": "lancer",
+      "example": "The rider threw something at Ichabod."
+    }
+  ],
+  "audio": {
+    "asset": "assets/content/sleepy-hollow-a2/audio/chapter-02.mp3",
+    "durationMs": 133176,
+    "voice": "en-US-AriaNeural",
+    "words": [
+      {
+        "text": "Ichabod’s",
+        "startMs": 100,
+        "endMs": 650
+      },
+      {
+        "text": "heart",
+        "startMs": 662,
+        "endMs": 962
+      },
+      {
+        "text": "beat",
+        "startMs": 975,
+        "endMs": 1188
+      },
+      {
+        "text": "fast",
+        "startMs": 1200,
+        "endMs": 1800
+      },
+      {
+        "text": "He",
+        "startMs": 2675,
+        "endMs": 2838
+      },
+      {
+        "text": "turned",
+        "startMs": 2850,
+        "endMs": 3162
+      },
+      {
+        "text": "in",
+        "startMs": 3175,
+        "endMs": 3250
+      },
+      {
+        "text": "the",
+        "startMs": 3262,
+        "endMs": 3362
+      },
+      {
+        "text": "saddle",
+        "startMs": 3375,
+        "endMs": 3850
+      },
+      {
+        "text": "and",
+        "startMs": 3862,
+        "endMs": 3988
+      },
+      {
+        "text": "looked",
+        "startMs": 4000,
+        "endMs": 4250
+      },
+      {
+        "text": "behind",
+        "startMs": 4262,
+        "endMs": 4600
+      },
+      {
+        "text": "him",
+        "startMs": 4612,
+        "endMs": 4900
+      },
+      {
+        "text": "A",
+        "startMs": 5775,
+        "endMs": 5912
+      },
+      {
+        "text": "tall",
+        "startMs": 5925,
+        "endMs": 6212
+      },
+      {
+        "text": "man",
+        "startMs": 6225,
+        "endMs": 6488
+      },
+      {
+        "text": "in",
+        "startMs": 6500,
+        "endMs": 6588
+      },
+      {
+        "text": "a",
+        "startMs": 6600,
+        "endMs": 6662
+      },
+      {
+        "text": "black",
+        "startMs": 6675,
+        "endMs": 6988
+      },
+      {
+        "text": "cloak",
+        "startMs": 7000,
+        "endMs": 7325
+      },
+      {
+        "text": "rode",
+        "startMs": 7338,
+        "endMs": 7562
+      },
+      {
+        "text": "a",
+        "startMs": 7575,
+        "endMs": 7638
+      },
+      {
+        "text": "big",
+        "startMs": 7650,
+        "endMs": 7875
+      },
+      {
+        "text": "black",
+        "startMs": 7888,
+        "endMs": 8162
+      },
+      {
+        "text": "horse",
+        "startMs": 8175,
+        "endMs": 8675
+      },
+      {
+        "text": "The",
+        "startMs": 9538,
+        "endMs": 9725
+      },
+      {
+        "text": "stranger",
+        "startMs": 9738,
+        "endMs": 10238
+      },
+      {
+        "text": "did",
+        "startMs": 10250,
+        "endMs": 10412
+      },
+      {
+        "text": "not",
+        "startMs": 10425,
+        "endMs": 10662
+      },
+      {
+        "text": "speak",
+        "startMs": 10675,
+        "endMs": 11200
+      },
+      {
+        "text": "His",
+        "startMs": 12062,
+        "endMs": 12275
+      },
+      {
+        "text": "hat",
+        "startMs": 12288,
+        "endMs": 12500
+      },
+      {
+        "text": "was",
+        "startMs": 12512,
+        "endMs": 12662
+      },
+      {
+        "text": "low",
+        "startMs": 12675,
+        "endMs": 12975
+      },
+      {
+        "text": "and",
+        "startMs": 13238,
+        "endMs": 13412
+      },
+      {
+        "text": "under",
+        "startMs": 13425,
+        "endMs": 13688
+      },
+      {
+        "text": "it",
+        "startMs": 13700,
+        "endMs": 13812
+      },
+      {
+        "text": "there",
+        "startMs": 13825,
+        "endMs": 13950
+      },
+      {
+        "text": "was",
+        "startMs": 13962,
+        "endMs": 14100
+      },
+      {
+        "text": "nothing",
+        "startMs": 14112,
+        "endMs": 14525
+      },
+      {
+        "text": "no",
+        "startMs": 14700,
+        "endMs": 14912
+      },
+      {
+        "text": "face",
+        "startMs": 14925,
+        "endMs": 15350
+      },
+      {
+        "text": "no",
+        "startMs": 15525,
+        "endMs": 15788
+      },
+      {
+        "text": "eyes",
+        "startMs": 15800,
+        "endMs": 16288
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 17162,
+        "endMs": 17688
+      },
+      {
+        "text": "felt",
+        "startMs": 17700,
+        "endMs": 17975
+      },
+      {
+        "text": "cold",
+        "startMs": 17988,
+        "endMs": 18350
+      },
+      {
+        "text": "although",
+        "startMs": 18588,
+        "endMs": 18875
+      },
+      {
+        "text": "the",
+        "startMs": 18888,
+        "endMs": 18988
+      },
+      {
+        "text": "night",
+        "startMs": 19000,
+        "endMs": 19250
+      },
+      {
+        "text": "was",
+        "startMs": 19262,
+        "endMs": 19400
+      },
+      {
+        "text": "warm",
+        "startMs": 19412,
+        "endMs": 19850
+      },
+      {
+        "text": "A",
+        "startMs": 20712,
+        "endMs": 20850
+      },
+      {
+        "text": "few",
+        "startMs": 20862,
+        "endMs": 21062
+      },
+      {
+        "text": "minutes",
+        "startMs": 21075,
+        "endMs": 21400
+      },
+      {
+        "text": "before",
+        "startMs": 21412,
+        "endMs": 21912
+      },
+      {
+        "text": "he",
+        "startMs": 22112,
+        "endMs": 22212
+      },
+      {
+        "text": "had",
+        "startMs": 22225,
+        "endMs": 22362
+      },
+      {
+        "text": "been",
+        "startMs": 22375,
+        "endMs": 22525
+      },
+      {
+        "text": "laughing",
+        "startMs": 22538,
+        "endMs": 22938
+      },
+      {
+        "text": "at",
+        "startMs": 22950,
+        "endMs": 23038
+      },
+      {
+        "text": "the",
+        "startMs": 23050,
+        "endMs": 23138
+      },
+      {
+        "text": "party",
+        "startMs": 23150,
+        "endMs": 23625
+      },
+      {
+        "text": "Now",
+        "startMs": 24488,
+        "endMs": 24800
+      },
+      {
+        "text": "he",
+        "startMs": 24812,
+        "endMs": 24975
+      },
+      {
+        "text": "remembered",
+        "startMs": 24988,
+        "endMs": 25425
+      },
+      {
+        "text": "the",
+        "startMs": 25438,
+        "endMs": 25525
+      },
+      {
+        "text": "old",
+        "startMs": 25538,
+        "endMs": 25750
+      },
+      {
+        "text": "story",
+        "startMs": 25762,
+        "endMs": 26188
+      },
+      {
+        "text": "the",
+        "startMs": 26500,
+        "endMs": 26600
+      },
+      {
+        "text": "headless",
+        "startMs": 26612,
+        "endMs": 27050
+      },
+      {
+        "text": "rider",
+        "startMs": 27062,
+        "endMs": 27412
+      },
+      {
+        "text": "of",
+        "startMs": 27425,
+        "endMs": 27512
+      },
+      {
+        "text": "Sleepy",
+        "startMs": 27525,
+        "endMs": 27900
+      },
+      {
+        "text": "Hollow",
+        "startMs": 27912,
+        "endMs": 28400
+      },
+      {
+        "text": "Go",
+        "startMs": 29262,
+        "endMs": 29538
+      },
+      {
+        "text": "Gunpowder",
+        "startMs": 29750,
+        "endMs": 30375
+      },
+      {
+        "text": "go",
+        "startMs": 30562,
+        "endMs": 30800
+      },
+      {
+        "text": "he",
+        "startMs": 30975,
+        "endMs": 31088
+      },
+      {
+        "text": "said",
+        "startMs": 31100,
+        "endMs": 31525
+      },
+      {
+        "text": "The",
+        "startMs": 32400,
+        "endMs": 32575
+      },
+      {
+        "text": "old",
+        "startMs": 32588,
+        "endMs": 32812
+      },
+      {
+        "text": "horse",
+        "startMs": 32825,
+        "endMs": 33150
+      },
+      {
+        "text": "began",
+        "startMs": 33162,
+        "endMs": 33500
+      },
+      {
+        "text": "to",
+        "startMs": 33512,
+        "endMs": 33600
+      },
+      {
+        "text": "gallop",
+        "startMs": 33612,
+        "endMs": 34038
+      },
+      {
+        "text": "but",
+        "startMs": 34225,
+        "endMs": 34350
+      },
+      {
+        "text": "the",
+        "startMs": 34362,
+        "endMs": 34450
+      },
+      {
+        "text": "black",
+        "startMs": 34462,
+        "endMs": 34762
+      },
+      {
+        "text": "horse",
+        "startMs": 34775,
+        "endMs": 35050
+      },
+      {
+        "text": "stayed",
+        "startMs": 35062,
+        "endMs": 35375
+      },
+      {
+        "text": "close",
+        "startMs": 35388,
+        "endMs": 35925
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 36800,
+        "endMs": 37362
+      },
+      {
+        "text": "could",
+        "startMs": 37375,
+        "endMs": 37500
+      },
+      {
+        "text": "hear",
+        "startMs": 37512,
+        "endMs": 37712
+      },
+      {
+        "text": "its",
+        "startMs": 37725,
+        "endMs": 37850
+      },
+      {
+        "text": "hooves",
+        "startMs": 37862,
+        "endMs": 38175
+      },
+      {
+        "text": "on",
+        "startMs": 38188,
+        "endMs": 38300
+      },
+      {
+        "text": "the",
+        "startMs": 38312,
+        "endMs": 38400
+      },
+      {
+        "text": "road",
+        "startMs": 38412,
+        "endMs": 38738
+      },
+      {
+        "text": "slow",
+        "startMs": 38938,
+        "endMs": 39275
+      },
+      {
+        "text": "and",
+        "startMs": 39288,
+        "endMs": 39362
+      },
+      {
+        "text": "heavy",
+        "startMs": 39375,
+        "endMs": 39725
+      },
+      {
+        "text": "like",
+        "startMs": 39950,
+        "endMs": 40125
+      },
+      {
+        "text": "a",
+        "startMs": 40138,
+        "endMs": 40212
+      },
+      {
+        "text": "drum",
+        "startMs": 40225,
+        "endMs": 40675
+      },
+      {
+        "text": "He",
+        "startMs": 41538,
+        "endMs": 41712
+      },
+      {
+        "text": "held",
+        "startMs": 41725,
+        "endMs": 41950
+      },
+      {
+        "text": "the",
+        "startMs": 41962,
+        "endMs": 42062
+      },
+      {
+        "text": "reins",
+        "startMs": 42075,
+        "endMs": 42412
+      },
+      {
+        "text": "tight",
+        "startMs": 42425,
+        "endMs": 42800
+      },
+      {
+        "text": "and",
+        "startMs": 42812,
+        "endMs": 42975
+      },
+      {
+        "text": "looked",
+        "startMs": 42988,
+        "endMs": 43225
+      },
+      {
+        "text": "for",
+        "startMs": 43238,
+        "endMs": 43350
+      },
+      {
+        "text": "the",
+        "startMs": 43362,
+        "endMs": 43462
+      },
+      {
+        "text": "bridge",
+        "startMs": 43475,
+        "endMs": 44000
+      },
+      {
+        "text": "The",
+        "startMs": 44862,
+        "endMs": 45038
+      },
+      {
+        "text": "story",
+        "startMs": 45050,
+        "endMs": 45450
+      },
+      {
+        "text": "said",
+        "startMs": 45462,
+        "endMs": 45712
+      },
+      {
+        "text": "the",
+        "startMs": 45725,
+        "endMs": 45812
+      },
+      {
+        "text": "rider",
+        "startMs": 45825,
+        "endMs": 46200
+      },
+      {
+        "text": "could",
+        "startMs": 46212,
+        "endMs": 46362
+      },
+      {
+        "text": "not",
+        "startMs": 46375,
+        "endMs": 46612
+      },
+      {
+        "text": "cross",
+        "startMs": 46625,
+        "endMs": 46938
+      },
+      {
+        "text": "the",
+        "startMs": 46950,
+        "endMs": 47062
+      },
+      {
+        "text": "stream",
+        "startMs": 47075,
+        "endMs": 47600
+      },
+      {
+        "text": "If",
+        "startMs": 48462,
+        "endMs": 48650
+      },
+      {
+        "text": "he",
+        "startMs": 48662,
+        "endMs": 48775
+      },
+      {
+        "text": "reached",
+        "startMs": 48788,
+        "endMs": 49125
+      },
+      {
+        "text": "the",
+        "startMs": 49138,
+        "endMs": 49225
+      },
+      {
+        "text": "bridge",
+        "startMs": 49238,
+        "endMs": 49675
+      },
+      {
+        "text": "he",
+        "startMs": 49850,
+        "endMs": 49962
+      },
+      {
+        "text": "would",
+        "startMs": 49975,
+        "endMs": 50100
+      },
+      {
+        "text": "be",
+        "startMs": 50112,
+        "endMs": 50238
+      },
+      {
+        "text": "safe",
+        "startMs": 50250,
+        "endMs": 50775
+      },
+      {
+        "text": "The",
+        "startMs": 51650,
+        "endMs": 51812
+      },
+      {
+        "text": "black",
+        "startMs": 51825,
+        "endMs": 52125
+      },
+      {
+        "text": "horse",
+        "startMs": 52138,
+        "endMs": 52425
+      },
+      {
+        "text": "came",
+        "startMs": 52438,
+        "endMs": 52662
+      },
+      {
+        "text": "closer",
+        "startMs": 52675,
+        "endMs": 53162
+      },
+      {
+        "text": "and",
+        "startMs": 53475,
+        "endMs": 53612
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 53625,
+        "endMs": 54138
+      },
+      {
+        "text": "hit",
+        "startMs": 54150,
+        "endMs": 54350
+      },
+      {
+        "text": "the",
+        "startMs": 54362,
+        "endMs": 54450
+      },
+      {
+        "text": "old",
+        "startMs": 54462,
+        "endMs": 54662
+      },
+      {
+        "text": "horse",
+        "startMs": 54675,
+        "endMs": 55025
+      },
+      {
+        "text": "with",
+        "startMs": 55038,
+        "endMs": 55150
+      },
+      {
+        "text": "his",
+        "startMs": 55162,
+        "endMs": 55300
+      },
+      {
+        "text": "heels",
+        "startMs": 55312,
+        "endMs": 55838
+      },
+      {
+        "text": "The",
+        "startMs": 56700,
+        "endMs": 56909
+      },
+      {
+        "text": "road",
+        "startMs": 56909,
+        "endMs": 57188
+      },
+      {
+        "text": "went",
+        "startMs": 57200,
+        "endMs": 57388
+      },
+      {
+        "text": "through",
+        "startMs": 57400,
+        "endMs": 57538
+      },
+      {
+        "text": "the",
+        "startMs": 57550,
+        "endMs": 57650
+      },
+      {
+        "text": "dark",
+        "startMs": 57662,
+        "endMs": 57925
+      },
+      {
+        "text": "trees",
+        "startMs": 57938,
+        "endMs": 58500
+      },
+      {
+        "text": "branches",
+        "startMs": 59362,
+        "endMs": 59875
+      },
+      {
+        "text": "moved",
+        "startMs": 59888,
+        "endMs": 60188
+      },
+      {
+        "text": "in",
+        "startMs": 60200,
+        "endMs": 60262
+      },
+      {
+        "text": "the",
+        "startMs": 60275,
+        "endMs": 60362
+      },
+      {
+        "text": "wind",
+        "startMs": 60375,
+        "endMs": 60725
+      },
+      {
+        "text": "and",
+        "startMs": 60975,
+        "endMs": 61100
+      },
+      {
+        "text": "the",
+        "startMs": 61112,
+        "endMs": 61200
+      },
+      {
+        "text": "rider’s",
+        "startMs": 61212,
+        "endMs": 61612
+      },
+      {
+        "text": "shadow",
+        "startMs": 61625,
+        "endMs": 62012
+      },
+      {
+        "text": "grew",
+        "startMs": 62025,
+        "endMs": 62262
+      },
+      {
+        "text": "longer",
+        "startMs": 62275,
+        "endMs": 62662
+      },
+      {
+        "text": "on",
+        "startMs": 62675,
+        "endMs": 62775
+      },
+      {
+        "text": "the",
+        "startMs": 62788,
+        "endMs": 62850
+      },
+      {
+        "text": "ground",
+        "startMs": 62862,
+        "endMs": 63400
+      },
+      {
+        "text": "The",
+        "startMs": 64275,
+        "endMs": 64438
+      },
+      {
+        "text": "hooves",
+        "startMs": 64450,
+        "endMs": 64825
+      },
+      {
+        "text": "sounded",
+        "startMs": 64838,
+        "endMs": 65200
+      },
+      {
+        "text": "like",
+        "startMs": 65212,
+        "endMs": 65388
+      },
+      {
+        "text": "an",
+        "startMs": 65400,
+        "endMs": 65538
+      },
+      {
+        "text": "echo",
+        "startMs": 65550,
+        "endMs": 65812
+      },
+      {
+        "text": "behind",
+        "startMs": 65825,
+        "endMs": 66162
+      },
+      {
+        "text": "him",
+        "startMs": 66175,
+        "endMs": 66462
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 67338,
+        "endMs": 67875
+      },
+      {
+        "text": "tried",
+        "startMs": 67888,
+        "endMs": 68175
+      },
+      {
+        "text": "to",
+        "startMs": 68188,
+        "endMs": 68275
+      },
+      {
+        "text": "race",
+        "startMs": 68288,
+        "endMs": 68550
+      },
+      {
+        "text": "the",
+        "startMs": 68562,
+        "endMs": 68662
+      },
+      {
+        "text": "stranger",
+        "startMs": 68675,
+        "endMs": 69238
+      },
+      {
+        "text": "but",
+        "startMs": 69512,
+        "endMs": 69638
+      },
+      {
+        "text": "his",
+        "startMs": 69650,
+        "endMs": 69788
+      },
+      {
+        "text": "horse",
+        "startMs": 69800,
+        "endMs": 70125
+      },
+      {
+        "text": "was",
+        "startMs": 70138,
+        "endMs": 70300
+      },
+      {
+        "text": "old",
+        "startMs": 70312,
+        "endMs": 70575
+      },
+      {
+        "text": "and",
+        "startMs": 70588,
+        "endMs": 70675
+      },
+      {
+        "text": "tired",
+        "startMs": 70688,
+        "endMs": 71212
+      },
+      {
+        "text": "The",
+        "startMs": 72075,
+        "endMs": 72250
+      },
+      {
+        "text": "bridge",
+        "startMs": 72262,
+        "endMs": 72588
+      },
+      {
+        "text": "was",
+        "startMs": 72600,
+        "endMs": 72762
+      },
+      {
+        "text": "near",
+        "startMs": 72775,
+        "endMs": 73212
+      },
+      {
+        "text": "He",
+        "startMs": 74075,
+        "endMs": 74238
+      },
+      {
+        "text": "could",
+        "startMs": 74250,
+        "endMs": 74425
+      },
+      {
+        "text": "see",
+        "startMs": 74438,
+        "endMs": 74625
+      },
+      {
+        "text": "the",
+        "startMs": 74638,
+        "endMs": 74750
+      },
+      {
+        "text": "white",
+        "startMs": 74762,
+        "endMs": 75012
+      },
+      {
+        "text": "mist",
+        "startMs": 75025,
+        "endMs": 75325
+      },
+      {
+        "text": "over",
+        "startMs": 75338,
+        "endMs": 75538
+      },
+      {
+        "text": "the",
+        "startMs": 75550,
+        "endMs": 75650
+      },
+      {
+        "text": "water",
+        "startMs": 75662,
+        "endMs": 76112
+      },
+      {
+        "text": "and",
+        "startMs": 76125,
+        "endMs": 76212
+      },
+      {
+        "text": "the",
+        "startMs": 76225,
+        "endMs": 76325
+      },
+      {
+        "text": "black",
+        "startMs": 76338,
+        "endMs": 76638
+      },
+      {
+        "text": "shape",
+        "startMs": 76650,
+        "endMs": 76938
+      },
+      {
+        "text": "of",
+        "startMs": 76950,
+        "endMs": 77038
+      },
+      {
+        "text": "the",
+        "startMs": 77050,
+        "endMs": 77138
+      },
+      {
+        "text": "rider",
+        "startMs": 77150,
+        "endMs": 77475
+      },
+      {
+        "text": "beside",
+        "startMs": 77488,
+        "endMs": 77850
+      },
+      {
+        "text": "him",
+        "startMs": 77862,
+        "endMs": 78162
+      },
+      {
+        "text": "His",
+        "startMs": 79038,
+        "endMs": 79250
+      },
+      {
+        "text": "hands",
+        "startMs": 79262,
+        "endMs": 79638
+      },
+      {
+        "text": "were",
+        "startMs": 79650,
+        "endMs": 79788
+      },
+      {
+        "text": "wet",
+        "startMs": 79800,
+        "endMs": 79988
+      },
+      {
+        "text": "on",
+        "startMs": 80000,
+        "endMs": 80125
+      },
+      {
+        "text": "the",
+        "startMs": 80138,
+        "endMs": 80225
+      },
+      {
+        "text": "reins",
+        "startMs": 80238,
+        "endMs": 80812
+      },
+      {
+        "text": "At",
+        "startMs": 81675,
+        "endMs": 81850
+      },
+      {
+        "text": "the",
+        "startMs": 81862,
+        "endMs": 81962
+      },
+      {
+        "text": "last",
+        "startMs": 81975,
+        "endMs": 82338
+      },
+      {
+        "text": "bend",
+        "startMs": 82350,
+        "endMs": 82675
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 82812,
+        "endMs": 83262
+      },
+      {
+        "text": "looked",
+        "startMs": 83275,
+        "endMs": 83512
+      },
+      {
+        "text": "back",
+        "startMs": 83525,
+        "endMs": 83975
+      },
+      {
+        "text": "The",
+        "startMs": 84838,
+        "endMs": 85012
+      },
+      {
+        "text": "rider",
+        "startMs": 85025,
+        "endMs": 85388
+      },
+      {
+        "text": "was",
+        "startMs": 85400,
+        "endMs": 85550
+      },
+      {
+        "text": "closer",
+        "startMs": 85562,
+        "endMs": 85988
+      },
+      {
+        "text": "than",
+        "startMs": 86000,
+        "endMs": 86138
+      },
+      {
+        "text": "before",
+        "startMs": 86150,
+        "endMs": 86700
+      },
+      {
+        "text": "He",
+        "startMs": 87575,
+        "endMs": 87738
+      },
+      {
+        "text": "was",
+        "startMs": 87750,
+        "endMs": 87912
+      },
+      {
+        "text": "so",
+        "startMs": 87925,
+        "endMs": 88100
+      },
+      {
+        "text": "terrified",
+        "startMs": 88112,
+        "endMs": 88800
+      },
+      {
+        "text": "that",
+        "startMs": 88812,
+        "endMs": 88912
+      },
+      {
+        "text": "he",
+        "startMs": 88925,
+        "endMs": 89025
+      },
+      {
+        "text": "did",
+        "startMs": 89038,
+        "endMs": 89188
+      },
+      {
+        "text": "not",
+        "startMs": 89200,
+        "endMs": 89450
+      },
+      {
+        "text": "see",
+        "startMs": 89462,
+        "endMs": 89638
+      },
+      {
+        "text": "the",
+        "startMs": 89650,
+        "endMs": 89762
+      },
+      {
+        "text": "low",
+        "startMs": 89775,
+        "endMs": 89975
+      },
+      {
+        "text": "branch",
+        "startMs": 89988,
+        "endMs": 90362
+      },
+      {
+        "text": "above",
+        "startMs": 90375,
+        "endMs": 90638
+      },
+      {
+        "text": "the",
+        "startMs": 90650,
+        "endMs": 90725
+      },
+      {
+        "text": "path",
+        "startMs": 90738,
+        "endMs": 91225
+      },
+      {
+        "text": "It",
+        "startMs": 92100,
+        "endMs": 92262
+      },
+      {
+        "text": "hit",
+        "startMs": 92275,
+        "endMs": 92450
+      },
+      {
+        "text": "his",
+        "startMs": 92462,
+        "endMs": 92612
+      },
+      {
+        "text": "head",
+        "startMs": 92625,
+        "endMs": 92975
+      },
+      {
+        "text": "and",
+        "startMs": 93188,
+        "endMs": 93312
+      },
+      {
+        "text": "his",
+        "startMs": 93325,
+        "endMs": 93475
+      },
+      {
+        "text": "hat",
+        "startMs": 93488,
+        "endMs": 93800
+      },
+      {
+        "text": "fell",
+        "startMs": 93812,
+        "endMs": 94038
+      },
+      {
+        "text": "into",
+        "startMs": 94050,
+        "endMs": 94225
+      },
+      {
+        "text": "the",
+        "startMs": 94238,
+        "endMs": 94350
+      },
+      {
+        "text": "stream",
+        "startMs": 94362,
+        "endMs": 94888
+      },
+      {
+        "text": "He",
+        "startMs": 95750,
+        "endMs": 95912
+      },
+      {
+        "text": "did",
+        "startMs": 95925,
+        "endMs": 96112
+      },
+      {
+        "text": "not",
+        "startMs": 96125,
+        "endMs": 96375
+      },
+      {
+        "text": "stop",
+        "startMs": 96388,
+        "endMs": 96900
+      },
+      {
+        "text": "The",
+        "startMs": 97775,
+        "endMs": 97950
+      },
+      {
+        "text": "bridge",
+        "startMs": 97962,
+        "endMs": 98325
+      },
+      {
+        "text": "was",
+        "startMs": 98338,
+        "endMs": 98500
+      },
+      {
+        "text": "only",
+        "startMs": 98512,
+        "endMs": 98750
+      },
+      {
+        "text": "a",
+        "startMs": 98762,
+        "endMs": 98838
+      },
+      {
+        "text": "few",
+        "startMs": 98850,
+        "endMs": 99075
+      },
+      {
+        "text": "steps",
+        "startMs": 99088,
+        "endMs": 99425
+      },
+      {
+        "text": "away",
+        "startMs": 99438,
+        "endMs": 99912
+      },
+      {
+        "text": "Behind",
+        "startMs": 100788,
+        "endMs": 101200
+      },
+      {
+        "text": "him",
+        "startMs": 101212,
+        "endMs": 101462
+      },
+      {
+        "text": "the",
+        "startMs": 101688,
+        "endMs": 101800
+      },
+      {
+        "text": "black",
+        "startMs": 101812,
+        "endMs": 102112
+      },
+      {
+        "text": "horse",
+        "startMs": 102125,
+        "endMs": 102425
+      },
+      {
+        "text": "made",
+        "startMs": 102438,
+        "endMs": 102662
+      },
+      {
+        "text": "no",
+        "startMs": 102675,
+        "endMs": 102850
+      },
+      {
+        "text": "sound",
+        "startMs": 102862,
+        "endMs": 103200
+      },
+      {
+        "text": "at",
+        "startMs": 103212,
+        "endMs": 103275
+      },
+      {
+        "text": "all",
+        "startMs": 103288,
+        "endMs": 103612
+      },
+      {
+        "text": "It",
+        "startMs": 104488,
+        "endMs": 104650
+      },
+      {
+        "text": "was",
+        "startMs": 104662,
+        "endMs": 104800
+      },
+      {
+        "text": "as",
+        "startMs": 104812,
+        "endMs": 104950
+      },
+      {
+        "text": "silent",
+        "startMs": 104962,
+        "endMs": 105388
+      },
+      {
+        "text": "as",
+        "startMs": 105400,
+        "endMs": 105488
+      },
+      {
+        "text": "a",
+        "startMs": 105500,
+        "endMs": 105562
+      },
+      {
+        "text": "ghost",
+        "startMs": 105575,
+        "endMs": 106100
+      },
+      {
+        "text": "On",
+        "startMs": 106962,
+        "endMs": 107162
+      },
+      {
+        "text": "the",
+        "startMs": 107175,
+        "endMs": 107250
+      },
+      {
+        "text": "bridge",
+        "startMs": 107262,
+        "endMs": 107662
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 107825,
+        "endMs": 108288
+      },
+      {
+        "text": "turned",
+        "startMs": 108300,
+        "endMs": 108575
+      },
+      {
+        "text": "his",
+        "startMs": 108588,
+        "endMs": 108725
+      },
+      {
+        "text": "horse",
+        "startMs": 108738,
+        "endMs": 109262
+      },
+      {
+        "text": "The",
+        "startMs": 110125,
+        "endMs": 110300
+      },
+      {
+        "text": "stranger",
+        "startMs": 110312,
+        "endMs": 110800
+      },
+      {
+        "text": "stopped",
+        "startMs": 110812,
+        "endMs": 111225
+      },
+      {
+        "text": "too",
+        "startMs": 111238,
+        "endMs": 111675
+      },
+      {
+        "text": "For",
+        "startMs": 112538,
+        "endMs": 112775
+      },
+      {
+        "text": "a",
+        "startMs": 112788,
+        "endMs": 112850
+      },
+      {
+        "text": "second",
+        "startMs": 112862,
+        "endMs": 113300
+      },
+      {
+        "text": "nobody",
+        "startMs": 113462,
+        "endMs": 113850
+      },
+      {
+        "text": "moved",
+        "startMs": 113862,
+        "endMs": 114375
+      },
+      {
+        "text": "Then",
+        "startMs": 115238,
+        "endMs": 115475
+      },
+      {
+        "text": "the",
+        "startMs": 115488,
+        "endMs": 115575
+      },
+      {
+        "text": "rider",
+        "startMs": 115588,
+        "endMs": 115950
+      },
+      {
+        "text": "stood",
+        "startMs": 115962,
+        "endMs": 116225
+      },
+      {
+        "text": "up",
+        "startMs": 116238,
+        "endMs": 116400
+      },
+      {
+        "text": "in",
+        "startMs": 116412,
+        "endMs": 116500
+      },
+      {
+        "text": "his",
+        "startMs": 116512,
+        "endMs": 116662
+      },
+      {
+        "text": "saddle",
+        "startMs": 116675,
+        "endMs": 117150
+      },
+      {
+        "text": "and",
+        "startMs": 117162,
+        "endMs": 117262
+      },
+      {
+        "text": "throw",
+        "startMs": 117275,
+        "endMs": 117500
+      },
+      {
+        "text": "something",
+        "startMs": 117512,
+        "endMs": 117938
+      },
+      {
+        "text": "dark",
+        "startMs": 117950,
+        "endMs": 118250
+      },
+      {
+        "text": "and",
+        "startMs": 118262,
+        "endMs": 118375
+      },
+      {
+        "text": "round",
+        "startMs": 118388,
+        "endMs": 118875
+      },
+      {
+        "text": "It",
+        "startMs": 119738,
+        "endMs": 119938
+      },
+      {
+        "text": "flew",
+        "startMs": 119950,
+        "endMs": 120200
+      },
+      {
+        "text": "through",
+        "startMs": 120212,
+        "endMs": 120362
+      },
+      {
+        "text": "the",
+        "startMs": 120375,
+        "endMs": 120488
+      },
+      {
+        "text": "air",
+        "startMs": 120500,
+        "endMs": 120812
+      },
+      {
+        "text": "and",
+        "startMs": 120975,
+        "endMs": 121112
+      },
+      {
+        "text": "Ichabod",
+        "startMs": 121125,
+        "endMs": 121575
+      },
+      {
+        "text": "raised",
+        "startMs": 121588,
+        "endMs": 121912
+      },
+      {
+        "text": "his",
+        "startMs": 121925,
+        "endMs": 122050
+      },
+      {
+        "text": "arms",
+        "startMs": 122062,
+        "endMs": 122600
+      },
+      {
+        "text": "He",
+        "startMs": 123462,
+        "endMs": 123625
+      },
+      {
+        "text": "tried",
+        "startMs": 123638,
+        "endMs": 123938
+      },
+      {
+        "text": "to",
+        "startMs": 123950,
+        "endMs": 124062
+      },
+      {
+        "text": "run",
+        "startMs": 124075,
+        "endMs": 124400
+      },
+      {
+        "text": "but",
+        "startMs": 124638,
+        "endMs": 124762
+      },
+      {
+        "text": "the",
+        "startMs": 124775,
+        "endMs": 124862
+      },
+      {
+        "text": "thing",
+        "startMs": 124875,
+        "endMs": 125112
+      },
+      {
+        "text": "hit",
+        "startMs": 125125,
+        "endMs": 125275
+      },
+      {
+        "text": "him",
+        "startMs": 125288,
+        "endMs": 125450
+      },
+      {
+        "text": "with",
+        "startMs": 125462,
+        "endMs": 125588
+      },
+      {
+        "text": "a",
+        "startMs": 125600,
+        "endMs": 125638
+      },
+      {
+        "text": "heavy",
+        "startMs": 125650,
+        "endMs": 125962
+      },
+      {
+        "text": "sound",
+        "startMs": 125975,
+        "endMs": 126538
+      },
+      {
+        "text": "Everything",
+        "startMs": 127412,
+        "endMs": 127962
+      },
+      {
+        "text": "went",
+        "startMs": 127975,
+        "endMs": 128188
+      },
+      {
+        "text": "black",
+        "startMs": 128200,
+        "endMs": 128700
+      },
+      {
+        "text": "The",
+        "startMs": 129562,
+        "endMs": 129738
+      },
+      {
+        "text": "last",
+        "startMs": 129750,
+        "endMs": 130100
+      },
+      {
+        "text": "thing",
+        "startMs": 130112,
+        "endMs": 130312
+      },
+      {
+        "text": "he",
+        "startMs": 130325,
+        "endMs": 130450
+      },
+      {
+        "text": "heard",
+        "startMs": 130462,
+        "endMs": 130750
+      },
+      {
+        "text": "was",
+        "startMs": 130762,
+        "endMs": 130900
+      },
+      {
+        "text": "the",
+        "startMs": 130912,
+        "endMs": 131012
+      },
+      {
+        "text": "stream",
+        "startMs": 131025,
+        "endMs": 131425
+      },
+      {
+        "text": "under",
+        "startMs": 131438,
+        "endMs": 131638
+      },
+      {
+        "text": "the",
+        "startMs": 131650,
+        "endMs": 131750
+      },
+      {
+        "text": "bridge",
+        "startMs": 131762,
+        "endMs": 132300
+      }
+    ]
+  }
+}

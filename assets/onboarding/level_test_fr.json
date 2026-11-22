@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "instructions": "Complétez chaque phrase avec la réponse qui vous semble la plus naturelle. Une seule réponse est correcte.",
+  "questions": [
+    {
+      "id": "q01",
+      "level": "a2",
+      "prompt": "Yesterday, Anna ___ to the library.",
+      "options": ["went", "go", "goes", "going"],
+      "answerIndex": 0,
+      "explanation_fr": "Après « yesterday », le passé simple « went » est attendu."
+    },
+    {
+      "id": "q02",
+      "level": "a2",
+      "prompt": "There ___ a strange light in the old house last night.",
+      "options": ["is", "are", "was", "were"],
+      "answerIndex": 2,
+      "explanation_fr": "« A strange light » est singulier et l'action est passée : on emploie « was »."
+    },
+    {
+      "id": "q03",
+      "level": "a2",
+      "prompt": "She usually ___ up at seven o'clock.",
+      "options": ["get", "gets", "getting", "got"],
+      "answerIndex": 1,
+      "explanation_fr": "Avec « she » au présent simple, le verbe prend un -s : « gets »."
+    },
+    {
+      "id": "q04",
+      "level": "a2",
+      "prompt": "Ichabod was afraid ___ the dark.",
+      "options": ["of", "from", "at", "to"],
+      "answerIndex": 0,
+      "explanation_fr": "L'expression est « to be afraid of »."
+    },
+    {
+      "id": "q05",
+      "level": "b1",
+      "prompt": "By the time we arrived, the train ___.",
+      "options": ["left", "had left", "leaves", "has left"],
+      "answerIndex": 1,
+      "explanation_fr": "« By the time » + passé simple appelle le past perfect « had left »."
+    },
+    {
+      "id": "q06",
+      "level": "b1",
+      "prompt": "If I ___ more time, I would read every night.",
+      "options": ["had", "have", "would have", "will have"],
+      "answerIndex": 0,
+      "explanation_fr": "Condition irréelle au présent : « If I had… I would… »."
+    },
+    {
+      "id": "q07",
+      "level": "b1",
+      "prompt": "The letter, ___ was written in 1890, disappeared.",
+      "options": ["who", "which", "whose", "where"],
+      "answerIndex": 1,
+      "explanation_fr": "« Which » reprend une chose (the letter) dans une relative non définissante."
+    },
+    {
+      "id": "q08",
+      "level": "b2",
+      "prompt": "Hardly ___ the door when the bell rang.",
+      "options": ["I had closed", "had I closed", "I closed", "have I closed"],
+      "answerIndex": 1,
+      "explanation_fr": "Après « hardly » en tête de phrase, on inverse sujet et auxiliaire : « had I closed »."
+    },
+    {
+      "id": "q09",
+      "level": "b2",
+      "prompt": "The manuscript is said ___ over a century ago.",
+      "options": ["to write", "to be written", "to have been written", "writing"],
+      "answerIndex": 2,
+      "explanation_fr": "Construction passive au passé : « is said to have been written »."
+    },
+    {
+      "id": "q10",
+      "level": "b2",
+      "prompt": "___ the storm, the villagers continued their journey.",
+      "options": ["Although", "Despite of", "Notwithstanding", "Even"],
+      "answerIndex": 2,
+      "explanation_fr": "« Notwithstanding » est une préposition signifiant « malgré » ; « despite of » est incorrect."
+    }
+  ]
+}

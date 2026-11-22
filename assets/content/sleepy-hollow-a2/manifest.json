@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "packVersion": "1.3.0",
+  "id": "sleepy-hollow",
+  "title": "The Legend of Sleepy Hollow",
+  "titleFr": "La Légende de Sleepy Hollow",
+  "author": "Washington Irving",
+  "level": "a2",
+  "descriptionFr": "Ichabod Crane, un maître d’école curieux, arrive dans une vallée paisible que l’on dit hantée par un cavalier sans tête.",
+  "chapters": [
+    {
+      "id": "chapter-01",
+      "number": 1,
+      "title": "A Quiet Valley",
+      "asset": "assets/content/sleepy-hollow-a2/chapters/chapter-01.json",
+      "estimatedMinutes": 6,
+      "newWordCount": 20
+    },
+    {
+      "id": "chapter-02",
+      "number": 2,
+      "title": "The Midnight Rider",
+      "asset": "assets/content/sleepy-hollow-a2/chapters/chapter-02.json",
+      "estimatedMinutes": 6,
+      "newWordCount": 17
+    },
+    {
+      "id": "chapter-03",
+      "number": 3,
+      "title": "The Morning After",
+      "asset": "assets/content/sleepy-hollow-a2/chapters/chapter-03.json",
+      "estimatedMinutes": 6,
+      "newWordCount": 19
+    }
+  ]
+}

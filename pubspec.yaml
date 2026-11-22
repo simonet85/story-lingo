@@ -1,0 +1,39 @@
+name: storylingo
+description: "Améliore ton anglais en 28 jours avec des livres adaptés."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.14.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  crypto: 3.0.8
+  flutter_riverpod: 3.5.0
+  flutter_secure_storage: 11.2.0
+  flutter_tts: ^4.2.5
+  fsrs: 2.0.1
+  go_router: 18.1.4
+  http: 1.6.0
+  just_audio: ^0.10.6
+  material_ui: 1.11.1
+  path: 1.9.1
+  path_provider: 2.1.6
+  shared_preferences: 2.5.6
+  purchases_flutter: ^11.0.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/onboarding/level_test_fr.json
+    - assets/content/sleepy-hollow-a2/manifest.json
+    - assets/content/sleepy-hollow-a2/chapters/
+    - assets/content/sleepy-hollow-a2/audio/
