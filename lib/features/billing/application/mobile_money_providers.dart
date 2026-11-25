@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,3 +53,97 @@ final moneyFusionCheckoutLauncherProvider =
         );
       };
     });
+
+enum PendingMobileMoneyPhase { idle, waiting, active, expired }
+
+@immutable
+class PendingMobileMoneyState {
+  const PendingMobileMoneyState({
+    this.phase = PendingMobileMoneyPhase.idle,
+    this.startedAt,
+  });
+
+  final PendingMobileMoneyPhase phase;
+  final DateTime? startedAt;
+
+  bool get isWaiting => phase == PendingMobileMoneyPhase.waiting;
+}
+
+final pendingMobileMoneyProvider =
+    NotifierProvider<PendingMobileMoneyController, PendingMobileMoneyState>(
+      PendingMobileMoneyController.new,
+    );
+
+/// Keeps checking the server after the checkout closes, including when the
+/// Wave confirmation happens outside the app. Without it the entitlement is
+/// only reloaded when a subscription screen is opened again.
+class PendingMobileMoneyController extends Notifier<PendingMobileMoneyState> {
+  static const _interval = Duration(seconds: 5);
+  static const _timeout = Duration(minutes: 15);
+
+  Timer? _timer;
+  DateTime? _deadline;
+  bool _checking = false;
+
+  @override
+  PendingMobileMoneyState build() {
+    ref.onDispose(_cancel);
+    return const PendingMobileMoneyState();
+  }
+
+  void start() {
+    _cancel();
+    final now = DateTime.now();
+    _deadline = now.add(_timeout);
+    state = PendingMobileMoneyState(
+      phase: PendingMobileMoneyPhase.waiting,
+      startedAt: now,
+    );
+    unawaited(_check());
+    _timer = Timer.periodic(_interval, (_) => unawaited(_check()));
+  }
+
+  Future<void> checkNow() async {
+    if (!state.isWaiting) return;
+    await _check();
+  }
+
+  void stop() {
+    _cancel();
+    _deadline = null;
+    state = const PendingMobileMoneyState();
+  }
+
+  void _cancel() {
+    _timer?.cancel();
+    _timer = null;
+  }
+
+  Future<void> _check() async {
+    if (_checking || !state.isWaiting) return;
+    final deadline = _deadline;
+    if (deadline == null || !DateTime.now().isBefore(deadline)) {
+      _cancel();
+      state = const PendingMobileMoneyState(
+        phase: PendingMobileMoneyPhase.expired,
+      );
+      return;
+    }
+    _checking = true;
+    try {
+      final flow = ref.read(mobileMoneyFlowProvider);
+      await flow.refresh();
+      if (!ref.mounted || !state.isWaiting) return;
+      if (flow.isEntitled()) {
+        _cancel();
+        state = const PendingMobileMoneyState(
+          phase: PendingMobileMoneyPhase.active,
+        );
+      }
+    } on Exception {
+      // The webhook may still be in flight; the next tick retries.
+    } finally {
+      _checking = false;
+    }
+  }
+}

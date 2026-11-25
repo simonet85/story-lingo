@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
@@ -19,27 +21,50 @@ class MobileMoneyScreen extends ConsumerStatefulWidget {
   ConsumerState<MobileMoneyScreen> createState() => _MobileMoneyScreenState();
 }
 
-class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen> {
+class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen>
+    with WidgetsBindingObserver {
   final _formKey = GlobalKey<FormState>();
   final _phone = TextEditingController();
   final _name = TextEditingController();
   Future<MobileMoneyProduct?>? _product;
   bool _busy = false;
   bool _confirming = false;
+  bool _done = false;
   String? _error;
   String? _notice;
+  ProviderSubscription<PendingMobileMoneyState>? _pendingSubscription;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    _pendingSubscription = ref.listenManual(pendingMobileMoneyProvider, (
+      previous,
+      next,
+    ) {
+      if (next.phase != PendingMobileMoneyPhase.active) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        if (ModalRoute.of(context)?.isCurrent ?? false) _finish();
+      });
+    });
     _product = ref.read(mobileMoneyFlowProvider).loadProduct(widget.productId);
   }
 
   @override
   void dispose() {
+    _pendingSubscription?.close();
+    WidgetsBinding.instance.removeObserver(this);
     _phone.dispose();
     _name.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(ref.read(pendingMobileMoneyProvider.notifier).checkNow());
+    }
   }
 
   @override
@@ -295,6 +320,11 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen> {
         name: _name.text.trim(),
       );
       if (!mounted) return;
+      final pending = ref.read(pendingMobileMoneyProvider.notifier);
+      pending.stop();
+      if (!flow.isEntitled()) {
+        pending.start();
+      }
       final launcher = ref.read(moneyFusionCheckoutLauncherProvider);
       final result = await launcher(
         context,
@@ -324,21 +354,33 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen> {
     PaymentResult? result,
     MobileMoneyFlow flow,
   ) async {
+    if (ref.read(pendingMobileMoneyProvider).phase ==
+        PendingMobileMoneyPhase.active) {
+      _finish();
+      return;
+    }
     if (result == null) {
       setState(() => _busy = false);
       return;
     }
     if (result is PaymentCancelled) {
+      ref.read(pendingMobileMoneyProvider.notifier).stop();
       setState(() {
         _busy = false;
+        _confirming = false;
         _notice = 'Paiement annulé.';
       });
       return;
     }
     if (result is PaymentError) {
+      ref.read(pendingMobileMoneyProvider.notifier).start();
       setState(() {
         _busy = false;
+        _confirming = false;
         _error = result.error.message;
+        _notice =
+            'La confirmation du paiement continue en arrière-plan. '
+            'L’abonnement s’activera automatiquement dès validation.';
       });
       return;
     }
@@ -346,12 +388,15 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen> {
     switch (result.status) {
       case PaymentStatus.failure:
       case PaymentStatus.noPaid:
+        ref.read(pendingMobileMoneyProvider.notifier).stop();
         setState(() {
           _busy = false;
+          _confirming = false;
           _error = 'Paiement refusé ou annulé.';
         });
       case PaymentStatus.paid:
       case PaymentStatus.pending:
+        ref.read(pendingMobileMoneyProvider.notifier).start();
         setState(() => _confirming = true);
         final active = await flow.confirm();
         if (!mounted) return;
@@ -363,15 +408,21 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen> {
             _confirming = false;
             _notice =
                 'Paiement en attente de confirmation. L’abonnement '
-                's’activera dès validation.';
+                's’activera automatiquement dès validation.';
           });
         }
     }
   }
 
   void _finish() {
+    if (_done || !mounted) return;
+    _done = true;
+    ref.read(pendingMobileMoneyProvider.notifier).stop();
     final messenger = ScaffoldMessenger.of(context);
-    Navigator.of(context).pop();
+    final route = ModalRoute.of(context);
+    if (route == null || route.isCurrent) {
+      Navigator.of(context).pop();
+    }
     messenger.showSnackBar(
       const SnackBar(content: Text('Abonnement actif. Bonne lecture !')),
     );

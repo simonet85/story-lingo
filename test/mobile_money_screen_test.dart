@@ -139,6 +139,8 @@ Future<({Widget app, _Launcher launcher})> _buildApp({
   bool signedIn = true,
   bool entitled = true,
   PaymentResult? Function()? result,
+  Future<void> Function()? refresh,
+  bool Function()? isEntitled,
 }) async {
   SharedPreferences.setMockInitialValues({});
   final preferences = await SharedPreferences.getInstance();
@@ -149,8 +151,8 @@ Future<({Widget app, _Launcher launcher})> _buildApp({
   final api = MobileMoneyApi(baseUrl: _base, client: MockClient(_apiHandler));
   final flow = MobileMoneyFlow(
     api: api,
-    refresh: () async {},
-    isEntitled: () => entitled,
+    refresh: refresh ?? () async {},
+    isEntitled: isEntitled ?? () => entitled,
     interval: const Duration(milliseconds: 1),
     confirmationTimeout: const Duration(milliseconds: 100),
   );
@@ -332,11 +334,44 @@ void main() {
     expect(
       find.text(
         'Paiement en attente de confirmation. '
-        'L’abonnement s’activera dès validation.',
+        'L’abonnement s’activera automatiquement dès validation.',
       ),
       findsOneWidget,
     );
     expect(find.text('Payer 30 000 FCFA'), findsOneWidget);
+  });
+
+  testWidgets('a late Wave confirmation activates without reopening', (
+    tester,
+  ) async {
+    var entitled = false;
+    var refreshes = 0;
+    final harness = await _buildApp(
+      entitled: false,
+      result: () => PaymentError(
+        const MoneyFusionNetworkException('wave app unavailable'),
+      ),
+      refresh: () async {
+        refreshes++;
+        if (refreshes >= 3) entitled = true;
+      },
+      isEntitled: () => entitled,
+    );
+    await tester.pumpWidget(harness.app);
+    await tester.pumpAndSettle();
+    await _openForm(tester);
+
+    await _submitForm(tester);
+
+    expect(find.text('Paiement mobile money'), findsOneWidget);
+    expect(find.text('Payer 30 000 FCFA'), findsOneWidget);
+
+    await tester.pump(const Duration(seconds: 6));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Abonnement actif. Bonne lecture !'), findsOneWidget);
+    expect(find.text('Paiement mobile money'), findsNothing);
+    await tester.pump(const Duration(seconds: 5));
   });
 
   testWidgets('a signed-out visitor cannot pay and is invited to log in', (
