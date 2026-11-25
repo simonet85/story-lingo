@@ -74,9 +74,14 @@ Les phases sont volontairement petites : chacune est une tranche livrable, testa
 ## Phase 14 — Paiement mobile money (backend)
 - Création de paiement MoneyFusion côté serveur (JWT), produits mensuel et annuel en FCFA
 - Webhook vérifié par revérification du statut, entitlement `source = "moneyfusion"`, idempotent
-- Interface d'achat dans l'app hors périmètre (décision produit sur les politiques stores)
+- Interface d'achat dans l'app : phase 15 (flag désactivé par défaut)
 
-## Phase 15 — Analytics, notifications & release
+## Phase 15 — Paiement mobile money (app)
+- Formulaire téléphone + nom, création via le backend, checkout WebView du package `money_fusion` (`v0.3.0`)
+- Attente de l'entitlement serveur (webhook), succès, refus, annulation, erreur réseau
+- Flag `MOBILE_MONEY_ENABLED` désactivé par défaut (politiques stores), faux MoneyFusion local pour la démo Android
+
+## Phase 16 — Analytics, notifications & release
 - Événements Mixpanel : funnel onboarding → J1 → J7 → J28, sessions, conversion
 - Rappel quotidien doux (heure locale, désactivable)
 - Audit accessibilité et performance du lecteur
