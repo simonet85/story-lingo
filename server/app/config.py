@@ -16,7 +16,7 @@ def _env_int(name: str, default: int) -> int:
     if not raw:
         return default
     try:
-        return int(raw)
+        return max(1, int(raw))
     except ValueError:
         return default
 
@@ -37,6 +37,9 @@ class Settings:
     moneyfusion_status_base_url: str = "https://pay.moneyfusion.net"
     moneyfusion_price_monthly_xaf: int = 3500
     moneyfusion_price_yearly_xaf: int = 30000
+    admin_token: str | None = None
+    admin_session_secret: str | None = None
+    admin_max_upload_bytes: int = 200 * 1024 * 1024
 
     @classmethod
     def from_env(cls, root: Path | None = None) -> Settings:
@@ -78,5 +81,12 @@ class Settings:
             ),
             moneyfusion_price_yearly_xaf=_env_int(
                 "STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF", 30000
+            ),
+            admin_token=os.getenv("STORYLINGO_ADMIN_TOKEN") or None,
+            admin_session_secret=(
+                os.getenv("STORYLINGO_ADMIN_SESSION_SECRET") or None
+            ),
+            admin_max_upload_bytes=(
+                _env_int("STORYLINGO_ADMIN_MAX_UPLOAD_MB", 200) * 1024 * 1024
             ),
         )

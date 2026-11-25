@@ -24,7 +24,7 @@ def test_catalogue(client: TestClient) -> None:
     assert book["title"] == "Demo Book"
     assert book["titleFr"] == "Livre de démonstration"
     assert book["author"] == "Storylingo"
-    assert book["level"] == "A2"
+    assert book["level"] == "a2"
     assert book["packVersion"] == "1.0.0"
     assert book["chapterCount"] == 1
     assert book["totalMinutes"] == 2

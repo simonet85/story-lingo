@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}{{ book.title }}{% endblock %}
+{% block content %}
+  <div class="head">
+    <h1>{{ book.title }}</h1>
+    <a class="button" href="/admin/books/{{ book.id }}/edit">Modifier</a>
+  </div>
+  <p class="muted"><a href="/admin/books">Retour aux livres</a></p>
+  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+  {% if not pack_available %}
+  <p class="error" role="alert">Le dossier du pack est introuvable sur le disque.</p>
+  {% endif %}
+
+  <section class="card">
+    <h2>Métadonnées</h2>
+    <table class="compact">
+      <tbody>
+        <tr><th>Identifiant</th><td><code>{{ book.id }}</code></td></tr>
+        <tr><th>Titre</th><td>{{ book.title }}</td></tr>
+        <tr><th>Titre français</th><td>{{ book.title_fr }}</td></tr>
+        <tr><th>Auteur</th><td>{{ book.author }}</td></tr>
+        <tr><th>Niveau</th><td>{{ book.level }}</td></tr>
+        <tr><th>Description</th><td>{{ book.description_fr }}</td></tr>
+        <tr><th>Version du pack</th><td>{{ book.pack_version }}</td></tr>
+        <tr><th>Chapitres</th><td>{{ book.chapter_count }}</td></tr>
+        <tr><th>Durée</th><td>{{ book.total_minutes }} min</td></tr>
+        <tr><th>Mots nouveaux</th><td>{{ book.new_word_count }}</td></tr>
+        <tr>
+          <th>Accès</th>
+          <td>
+            {% if book.is_free %}
+            <span class="badge free">Gratuit</span>
+            {% else %}
+            <span class="badge paid">Payant</span>
+            {% endif %}
+          </td>
+        </tr>
+        <tr><th>Mise à jour</th><td>{{ book.updated_at }}</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>Chapitres</h2>
+    {% if chapters %}
+    <table>
+      <thead>
+        <tr><th>N°</th><th>Identifiant</th><th>Titre</th><th>Minutes</th><th>Mots</th></tr>
+      </thead>
+      <tbody>
+        {% for chapter in chapters %}
+        <tr>
+          <td>{{ chapter.number }}</td>
+          <td><code>{{ chapter.id }}</code></td>
+          <td>{{ chapter.title }}</td>
+          <td>{{ chapter.estimated_minutes }}</td>
+          <td>{{ chapter.new_word_count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="muted">Aucun chapitre lisible.</p>
+    {% endif %}
+  </section>
+
+  <section class="card danger-zone">
+    <h2>Supprimer le livre</h2>
+    <p>
+      Le pack sera déplacé dans <code>.deleted/</code> et le livre retiré du
+      catalogue. L'opération reste réversible sur le serveur.
+    </p>
+    <form method="post" action="/admin/books/{{ book.id }}/delete" class="stack delete">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <div>
+        <label for="confirm">Saisissez <code>{{ book.id }}</code> pour confirmer</label>
+        <input id="confirm" name="confirm" type="text" autocomplete="off" required>
+      </div>
+      <div>
+        <button type="submit" class="danger">Supprimer le livre</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

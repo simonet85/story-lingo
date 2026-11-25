@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Modifier {{ book.title }}{% endblock %}
+{% block content %}
+  <div class="head">
+    <h1>Modifier {{ book.title }}</h1>
+    <a class="button" href="/admin/books/{{ book.id }}">Annuler</a>
+  </div>
+  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+  <form method="post" action="/admin/books/{{ book.id }}/edit" class="card stack edit">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <div>
+      <label for="title">Titre</label>
+      <input id="title" name="title" type="text" maxlength="300" value="{{ form.title }}" required>
+    </div>
+    <div>
+      <label for="title_fr">Titre français</label>
+      <input id="title_fr" name="title_fr" type="text" maxlength="300" value="{{ form.title_fr }}" required>
+    </div>
+    <div>
+      <label for="author">Auteur</label>
+      <input id="author" name="author" type="text" maxlength="200" value="{{ form.author }}" required>
+    </div>
+    <div>
+      <label for="level">Niveau</label>
+      <input id="level" name="level" type="text" maxlength="8" value="{{ form.level }}" placeholder="a2, b1 ou b2" required>
+      <p class="muted">Identifiant CEFR en minuscules : a2, b1 ou b2.</p>
+    </div>
+    <div>
+      <label for="description_fr">Description</label>
+      <textarea id="description_fr" name="description_fr" rows="4" maxlength="1000" required>{{ form.description_fr }}</textarea>
+    </div>
+    <fieldset>
+      <legend>Accès</legend>
+      <label>
+        <input type="radio" name="access" value="free" {% if form.access == 'free' %}checked{% endif %}>
+        Gratuit
+      </label>
+      <label>
+        <input type="radio" name="access" value="paid" {% if form.access == 'paid' %}checked{% endif %}>
+        Payant
+      </label>
+    </fieldset>
+    <div>
+      <button type="submit">Enregistrer</button>
+    </div>
+  </form>
+{% endblock %}

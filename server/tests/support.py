@@ -6,6 +6,8 @@ from typing import Any
 
 AUDIO_BYTES = b"ID3" + bytes(range(256)) * 8
 DEV_SECRET = "storylingo-test-dev-secret-0123456789"
+ADMIN_TOKEN = "storylingo-test-admin-token-0123456789"
+ADMIN_SESSION_SECRET = "storylingo-test-admin-session-secret-0123456789"
 
 
 def build_pack(
@@ -25,7 +27,7 @@ def build_pack(
         "bookId": book_id,
         "number": 1,
         "title": "Un matin",
-        "level": "A2",
+        "level": "a2",
         "paragraphs": [
             {
                 "id": "p-01",
@@ -65,7 +67,7 @@ def build_pack(
         "title": "Demo Book",
         "titleFr": "Livre de démonstration",
         "author": "Storylingo",
-        "level": "A2",
+        "level": "a2",
         "descriptionFr": "Un livre de test.",
         "chapters": [
             {

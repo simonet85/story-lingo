@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>{% block title %}Back-office{% endblock %} — Storylingo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #23201b;
+      --muted: #6f685f;
+      --paper: #f6f4ef;
+      --card: #fffdf8;
+      --line: #ded7cc;
+      --accent: #8a5a2b;
+      --accent-ink: #ffffff;
+      --danger: #a3342c;
+      --ok: #2f6b45;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.5rem;
+      background: #2f2a24;
+      color: #f6f4ef;
+    }
+    header strong { margin-right: auto; }
+    header nav { display: flex; gap: 1rem; }
+    header a { color: #f6f4ef; text-decoration: none; }
+    header a:hover { text-decoration: underline; }
+    main { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    h1 { font-size: 1.5rem; margin: 0 0 1rem; }
+    .head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; }
+    .narrow { max-width: 420px; margin: 3rem auto; }
+    .stack { display: grid; gap: 0.85rem; }
+    label { display: block; font-weight: 500; }
+    input[type="password"], input[type="file"], input[type="text"], textarea {
+      width: 100%;
+      padding: 0.55rem 0.6rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      font: inherit;
+    }
+    textarea { resize: vertical; }
+    fieldset { border: 1px solid var(--line); border-radius: 6px; padding: 0.6rem 0.9rem 0.9rem; }
+    fieldset label { display: flex; gap: 0.5rem; align-items: baseline; font-weight: 400; margin-top: 0.35rem; }
+    legend { padding: 0 0.25rem; font-weight: 600; }
+    button, .button {
+      display: inline-block;
+      padding: 0.55rem 0.95rem;
+      border: 0;
+      border-radius: 6px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button:hover, .button:hover { filter: brightness(1.08); }
+    button.ghost { background: transparent; border: 1px solid #6c655c; color: #f6f4ef; }
+    button.small { padding: 0.35rem 0.6rem; font-size: 0.85rem; }
+    button.danger { background: var(--danger); }
+    form.inline { display: inline; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { background: #efe9df; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:last-child td { border-bottom: 0; }
+    code { font-size: 0.85rem; }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    .badge { display: inline-block; padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .badge.free { background: #e3f0e6; color: var(--ok); }
+    .badge.paid { background: #f3e4e1; color: var(--danger); }
+    .notice { background: #e3f0e6; color: var(--ok); border: 1px solid #b9d8c3; padding: 0.6rem 0.8rem; border-radius: 6px; }
+    .error { background: #f7e5e3; color: var(--danger); border: 1px solid #e3b9b4; padding: 0.6rem 0.8rem; border-radius: 6px; }
+    h2 { font-size: 1.15rem; margin: 0 0 0.75rem; }
+    .card + .card { margin-top: 1rem; }
+    table.compact th {
+      width: 220px;
+      background: #faf7f1;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 600;
+    }
+    .danger-zone { border-color: #e3b9b4; }
+    .actions-cell { white-space: nowrap; }
+    .actions-cell form { display: inline; }
+    .small-link {
+      display: inline-block;
+      margin-right: 0.6rem;
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .small-link:hover { text-decoration: underline; }
+    @media (max-width: 720px) {
+      table { display: block; overflow-x: auto; }
+      header { padding: 0.9rem 1rem; }
+      main { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  {% if csrf %}
+  <header>
+    <strong>Storylingo · Back-office</strong>
+    <nav>
+      <a href="/admin/books">Livres</a>
+      <a href="/admin/import">Importer</a>
+    </nav>
+    <form method="post" action="/admin/logout" class="inline">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <button type="submit" class="ghost">Déconnexion</button>
+    </form>
+  </header>
+  {% endif %}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

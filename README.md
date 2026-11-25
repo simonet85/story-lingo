@@ -38,6 +38,8 @@ Application mobile (iOS + Android) d'apprentissage de l'anglais par lecture et �
 - Feature spec — Freemium & paywall (phase 13) : [plan](specs/2026-11-22-freemium-paywall/plan.md) · [requirements](specs/2026-11-22-freemium-paywall/requirements.md) · [validation](specs/2026-11-22-freemium-paywall/validation.md)
 - Feature spec — Paiement mobile money backend (phase 14) : [plan](specs/2026-11-25-paiement-mobile-money/plan.md) · [requirements](specs/2026-11-25-paiement-mobile-money/requirements.md) · [validation](specs/2026-11-25-paiement-mobile-money/validation.md)
 - Feature spec — Paiement mobile money dans l'app (phase 15) : [plan](specs/2026-11-25-paiement-mobile-money-app/plan.md) · [requirements](specs/2026-11-25-paiement-mobile-money-app/requirements.md) · [validation](specs/2026-11-25-paiement-mobile-money-app/validation.md)
+- Feature spec — Back-office contenu (phase 14a) : [plan](specs/2026-11-23-backoffice-contenu/plan.md) · [requirements](specs/2026-11-23-backoffice-contenu/requirements.md) · [validation](specs/2026-11-23-backoffice-contenu/validation.md)
+- Feature spec — CRUD complet du back-office (phase 14b) : [plan](specs/2026-11-23-backoffice-crud/plan.md) · [requirements](specs/2026-11-23-backoffice-crud/requirements.md) · [validation](specs/2026-11-23-backoffice-crud/validation.md)
 
 ## Paiement mobile money (démo Android)
 

@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from . import auth, billing, payments
+from .admin.auth import AdminAuth
+from .admin.routes import router as admin_router
 from .config import Settings
 from .db import Base, make_engine, make_session_factory
 from .routes import router
@@ -28,6 +30,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         secrets.token_urlsafe(32) if settings.dev_auth else None
     )
     app.state.auth_verifier = auth.JwtVerifier(settings, dev_secret)
+    app.state.admin_auth = None
+    if settings.admin_token:
+        if not settings.admin_session_secret:
+            logger.warning(
+                "STORYLINGO_ADMIN_SESSION_SECRET is unset; admin sessions "
+                "will end when the API restarts."
+            )
+        app.state.admin_auth = AdminAuth(
+            settings.admin_token,
+            settings.admin_session_secret or secrets.token_urlsafe(32),
+        )
+        app.include_router(admin_router)
 
     app.add_middleware(
         CORSMiddleware,

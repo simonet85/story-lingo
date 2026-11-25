@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Connexion{% endblock %}
+{% block content %}
+  <section class="card narrow">
+    <h1>Connexion administrateur</h1>
+    {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+    <form method="post" action="/admin/login" class="stack">
+      <div>
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" required autofocus autocomplete="current-password">
+      </div>
+      <button type="submit">Se connecter</button>
+    </form>
+  </section>
+{% endblock %}

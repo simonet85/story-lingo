@@ -32,6 +32,9 @@ python -m venv .venv-server
 | `STORYLINGO_MONEYFUSION_STATUS_BASE_URL` | `https://pay.moneyfusion.net` | Base URL for `paiementNotif/{token}` status checks. |
 | `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XAF` | `3500` | Monthly product price in FCFA. Development default, confirm before production. |
 | `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF` | `30000` | Yearly product price in FCFA. Development default, confirm before production. |
+| `STORYLINGO_ADMIN_TOKEN` | empty | Enables the `/admin` back-office; empty means every admin route returns 404. |
+| `STORYLINGO_ADMIN_SESSION_SECRET` | random per process | HS256 key for admin session cookies (32+ bytes recommended). |
+| `STORYLINGO_ADMIN_MAX_UPLOAD_MB` | `200` | Maximum size of a pack ZIP uploaded from the back-office. |
 
 Never enable `STORYLINGO_DEV_AUTH` in production. Without
 `STORYLINGO_DEV_AUTH_SECRET` a random secret is generated at startup, so dev
@@ -102,6 +105,15 @@ Endpoints:
 - `POST /v1/entitlements/dev-grant` — grant access for tests (`404` unless dev auth is enabled).
 - `POST /v1/entitlements/dev-revoke` — remove test access.
 - `POST /v1/webhooks/revenuecat` — signed RevenueCat events (503 when unconfigured).
+- `GET /admin/books` — back-office book list (session required).
+- `GET /admin/books/{id}` — metadata and chapter list of a book.
+- `GET /admin/books/{id}/edit` — prefilled metadata form.
+- `POST /admin/books/{id}/edit` — update metadata and free/paid access
+  (session + CSRF required).
+- `POST /admin/books/{id}/delete` — archive the pack and remove the book
+  (session + CSRF, exact id confirmation required).
+- `POST /admin/import` — upload a pack ZIP (session + CSRF required).
+- `POST /admin/books/{id}/access` — switch a book between free and paid.
 
 ## Accounts and sync
 
@@ -170,6 +182,79 @@ Content endpoints stay public: the subscription gate is enforced by the client,
 which is documented as an anti-piracy limitation until signed content URLs are
 introduced.
 
+## Back-office
+
+The admin UI is disabled unless `STORYLINGO_ADMIN_TOKEN` is set:
+
+```bash
+export STORYLINGO_ADMIN_TOKEN=choose-a-long-password
+export STORYLINGO_ADMIN_SESSION_SECRET=another-secret-at-least-32-bytes
+python -m uvicorn server.app.main:create_app --factory --port 8000
+```
+
+Open `http://localhost:8000/admin` and sign in with the token. The session is a
+JWT in an `HttpOnly`/`SameSite=Lax` cookie (12 h); mutations require a
+per-session CSRF token. Without `STORYLINGO_ADMIN_SESSION_SECRET`, sessions end
+when the API restarts.
+
+The UI lists published books, imports a pack ZIP (`manifest.json` at the root or
+inside a single folder) through the same validation and atomic swap as
+`publish_pack.py`, and switches a book between free and paid. Everything happens
+immediately in `/v1/catalogue`, `/v1/books/{id}` and downloaded manifests.
+
+Each row links to a detail page (metadata plus chapter list). The edit form
+updates `title`, `titleFr`, `author`, `level`, `descriptionFr` and the free/paid
+flag: the pack is copied to a temporary folder, its manifest rewritten and
+republished with `publish_pack`, so validation runs again and the
+`.download.json` sidecar (sizes and SHA-256) is rebuilt atomically.
+
+Deletion is reversible: it requires typing the exact book id, moves the pack
+folder to `<STORYLINGO_CONTENT_DIR>/.deleted/<id>-<UTC stamp>-<random suffix>`
+and then removes the `books` row (the folder is restored if the database write
+fails). Nothing under `.deleted/` is purged automatically; restore a pack by
+moving its archive back and publishing it again.
+
+The token and session secret must stay out of the repository and logs. The
+back-office is meant for a trusted local or VPN network: put it behind HTTPS, a
+reverse proxy and network restrictions before exposing it publicly. Uploads are
+extracted in a temporary folder with zip-slip and size checks.
+
+### Visual CRUD scenario
+
+`tools/visual/admin_crud.mjs` drives a running Chrome through the full cycle:
+import `tools/visual/fixtures/visual-crud.zip`, screenshot the list and detail,
+edit the book from the form, check the manifest, catalogue and every download
+descriptor file (size + SHA-256), then delete it from the UI. It fails on any
+browser exception, console error or network error. Start a scratch API and a
+debuggable Chrome first:
+
+```bash
+python -m uvicorn server.app.main:create_app --factory --port 8765   # with admin env vars
+chrome.exe --remote-debugging-port=9223 --user-data-dir=.tmp/chrome-crud http://127.0.0.1:8765/admin/login
+BASE_URL=http://127.0.0.1:8765 CDP_URL=http://127.0.0.1:9223 \
+  ADMIN_TOKEN=<admin-token> node tools/visual/admin_crud.mjs
+```
+
+Screenshots land in `.tmp/visual/` (`01-login.png` … `06-list-after-delete.png`).
+
+### Android visibility scenario
+
+`tools/visual/android_visibility.mjs` proves the same cycle reaches the mobile
+app. It imports the fixture through the back-office, resets the app data
+(minimal onboarding/A2 prefs via `run-as`), then drives the real emulator with
+`uiautomator`: the uploaded book must appear in the library, its chapter must
+open, an admin edit must change the card, and deletion must remove it. An APK
+built with `API_BASE_URL=http://10.0.2.2:8000` can use a scratch API on 8766
+through a local `8000 → 8766` relay, or be rebuilt against 8766.
+
+```bash
+ADB="$ANDROID_HOME/platform-tools/adb" ADMIN_TOKEN=<admin-token> \
+  node tools/visual/android_visibility.mjs
+```
+
+Screenshots: `android-10-library-uploaded.png`, `android-11-reader-uploaded.png`,
+`android-12-library-edited.png`, `android-13-library-after-delete.png`.
+
 ## Publish a pack
 
 ```bash
@@ -192,5 +277,5 @@ optional edge-tts audio). Publish the generated pack with the command above.
 ## Tests
 
 ```bash
-python -m pytest server/tests
+python -m pytest server/tests tools/content/tests
 ```

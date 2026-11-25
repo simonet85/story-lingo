@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Importer un pack{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>Importer un pack</h1>
+    <p class="muted">
+      Archive ZIP contenant <code>manifest.json</code> à la racine ou dans un
+      unique dossier. Publier un identifiant existant remplace intégralement son
+      pack après une sauvegarde temporaire.
+    </p>
+    {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+    <form method="post" action="/admin/import" enctype="multipart/form-data" class="stack">
+      <input type="hidden" name="csrf" value="{{ csrf }}">
+      <div>
+        <label for="file">Fichier ZIP</label>
+        <input id="file" name="file" type="file" accept=".zip,application/zip" required>
+      </div>
+      <fieldset>
+        <legend>Accès</legend>
+        <label>
+          <input type="radio" name="access" value="keep" {% if selected == 'keep' %}checked{% endif %}>
+          Conserver le statut existant (payant pour un nouveau livre)
+        </label>
+        <label>
+          <input type="radio" name="access" value="free" {% if selected == 'free' %}checked{% endif %}>
+          Gratuit
+        </label>
+        <label>
+          <input type="radio" name="access" value="paid" {% if selected == 'paid' %}checked{% endif %}>
+          Payant
+        </label>
+      </fieldset>
+      <div>
+        <button type="submit">Importer et publier</button>
+      </div>
+    </form>
+  </section>
+{% endblock %}

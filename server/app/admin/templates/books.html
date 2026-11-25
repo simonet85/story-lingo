@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Livres{% endblock %}
+{% block content %}
+  <div class="head">
+    <h1>Livres</h1>
+    <a class="button" href="/admin/import">Importer un pack</a>
+  </div>
+  {% if notice %}<p class="notice" role="status">{{ notice }}</p>{% endif %}
+  {% if books %}
+  <table>
+    <thead>
+      <tr>
+        <th>Identifiant</th>
+        <th>Titre</th>
+        <th>Niveau</th>
+        <th>Version</th>
+        <th>Chapitres</th>
+        <th>Accès</th>
+        <th>Mise à jour</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+      <tr>
+        <td><code>{{ book.id }}</code></td>
+        <td>
+          <strong>{{ book.title }}</strong><br>
+          <span class="muted">{{ book.title_fr }}</span>
+        </td>
+        <td>{{ book.level }}</td>
+        <td>{{ book.pack_version }}</td>
+        <td>{{ book.chapter_count }}</td>
+        <td>
+          {% if book.is_free %}
+          <span class="badge free">Gratuit</span>
+          {% else %}
+          <span class="badge paid">Payant</span>
+          {% endif %}
+        </td>
+        <td class="muted">{{ book.updated_at }}</td>
+        <td class="actions-cell">
+          <a class="small-link" href="/admin/books/{{ book.id }}">Détails</a>
+          <form method="post" action="/admin/books/{{ book.id }}/access" onsubmit="return confirm('Confirmer ce changement ?');">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <input type="hidden" name="access" value="{{ 'paid' if book.is_free else 'free' }}">
+            <button type="submit" class="small{% if book.is_free %} danger{% endif %}">
+              {{ 'Rendre payant' if book.is_free else 'Rendre gratuit' }}
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">Aucun livre publié pour le moment.</p>
+  {% endif %}
+{% endblock %}

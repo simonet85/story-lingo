@@ -18,6 +18,7 @@ from .models import Book
 
 BOOK_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 PACK_VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
+LEVELS = ("a2", "b1", "b2")
 DOWNLOAD_SCHEMA_VERSION = 1
 _STAGING_MAX_AGE_SECONDS = 24 * 60 * 60
 
@@ -347,6 +348,16 @@ def _cleanup_temp_dirs(content_dir: Path) -> None:
                 continue
 
 
+def archive_pack(folder: Path, content_dir: Path) -> Path:
+    folder = Path(folder)
+    archive_root = Path(content_dir) / ".deleted"
+    archive_root.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    target = archive_root / f"{folder.name}-{stamp}-{uuid.uuid4().hex[:8]}"
+    _replace_path(folder, target)
+    return target
+
+
 def publish_pack(
     source_dir: Path,
     content_dir: Path,
@@ -363,6 +374,11 @@ def publish_pack(
     pack_version = _require_str(manifest.get("packVersion"), "manifest.packVersion")
     if not PACK_VERSION_RE.fullmatch(pack_version):
         raise PackError(f"Invalid packVersion: {pack_version!r}")
+    level = _require_str(manifest.get("level"), "manifest.level")
+    if level not in LEVELS:
+        raise PackError(
+            f"Invalid level {level!r}; expected one of {', '.join(LEVELS)}."
+        )
 
     existing_book = session.get(Book, book_id)
     # New books are paid unless publication explicitly marks them free. When
@@ -478,7 +494,7 @@ def publish_pack(
     book.title = _require_str(manifest.get("title"), "manifest.title")
     book.title_fr = _require_str(manifest.get("titleFr"), "manifest.titleFr")
     book.author = _require_str(manifest.get("author"), "manifest.author")
-    book.level = _require_str(manifest.get("level"), "manifest.level")
+    book.level = level
     book.description_fr = _require_str(
         manifest.get("descriptionFr"), "manifest.descriptionFr"
     )

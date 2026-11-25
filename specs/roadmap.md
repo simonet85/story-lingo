@@ -89,4 +89,11 @@ Les phases sont volontairement petites : chacune est une tranche livrable, testa
 
 ---
 
+## Hors roadmap — Back-office contenu (phase 14 livrée)
+- Interface `/admin` servie par l'API : liste, détail, import ZIP, bascule gratuit/payant, édition des métadonnées et suppression réversible (archivage dans `.deleted/`)
+- Authentification par token unique, session signée et CSRF ; scénario visuel Chrome/CDP rejouant tout le CRUD
+- Voir `specs/2026-11-23-backoffice-contenu/` et `specs/2026-11-23-backoffice-crud/`
+
+---
+
 Non planifié pour l'instant : partage social des progrès, statistiques avancées, autres niveaux et langues sources, mode traduction de phrase entière, application web.

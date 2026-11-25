@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import sys
 from dataclasses import replace
 from pathlib import Path
@@ -14,7 +15,12 @@ if str(ROOT) not in sys.path:
 from server.app.config import Settings  # noqa: E402
 from server.app.main import create_app  # noqa: E402
 from server.app.packs import publish_pack  # noqa: E402
-from server.tests.support import DEV_SECRET, build_pack  # noqa: E402
+from server.tests.support import (  # noqa: E402
+    ADMIN_SESSION_SECRET,
+    ADMIN_TOKEN,
+    DEV_SECRET,
+    build_pack,
+)
 
 
 @pytest.fixture
@@ -53,7 +59,6 @@ def make_pack(tmp_path: Path):
 def dev_settings(settings: Settings) -> Settings:
     return replace(settings, dev_auth=True, dev_auth_secret=DEV_SECRET)
 
-
 @pytest.fixture
 def dev_app(dev_settings: Settings):
     app = create_app(dev_settings)
@@ -87,3 +92,49 @@ def auth_headers(dev_login):
         return {"Authorization": f"Bearer {dev_login(email)}"}
 
     return headers
+
+
+@pytest.fixture
+def admin_settings(settings: Settings) -> Settings:
+    return replace(
+        settings,
+        admin_token=ADMIN_TOKEN,
+        admin_session_secret=ADMIN_SESSION_SECRET,
+    )
+
+
+@pytest.fixture
+def admin_app(admin_settings: Settings):
+    app = create_app(admin_settings)
+    source = build_pack(Path(admin_settings.content_dir).parent / "admin-source")
+    with app.state.session_factory() as session:
+        publish_pack(source, admin_settings.content_dir, session, is_free=True)
+    return app
+
+
+@pytest.fixture
+def admin_client(admin_app):
+    with TestClient(admin_app) as test_client:
+        yield test_client
+
+
+@pytest.fixture
+def admin_login(admin_client):
+    def login(password: str = ADMIN_TOKEN):
+        return admin_client.post(
+            "/admin/login",
+            data={"password": password},
+            follow_redirects=False,
+        )
+
+    return login
+
+
+@pytest.fixture
+def admin_csrf(admin_client, admin_login):
+    response = admin_login()
+    assert response.status_code == 303, response.text
+    page = admin_client.get("/admin/books")
+    match = re.search(r'name="csrf" value="([0-9a-f]{32})"', page.text)
+    assert match is not None, page.text
+    return match.group(1)
