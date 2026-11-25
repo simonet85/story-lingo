@@ -2,7 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/account/presentation/account_screen.dart';
+import '../../features/billing/domain/mobile_money_product.dart';
 import '../../features/billing/presentation/book_access_gate.dart';
+import '../../features/billing/presentation/mobile_money_screen.dart';
 import '../../features/billing/presentation/paywall_screen.dart';
 import '../../features/library/presentation/library_screen.dart';
 import '../../features/onboarding/presentation/onboarding_flow_screen.dart';
@@ -54,9 +56,17 @@ final routerProvider = Provider<GoRouter>((ref) {
       ),
       GoRoute(
         path: '/paywall',
-        builder: (context, state) => PaywallScreen(
-          bookId: state.uri.queryParameters['bookId'],
-        ),
+        builder: (context, state) =>
+            PaywallScreen(bookId: state.uri.queryParameters['bookId']),
+      ),
+      GoRoute(
+        path: '/paywall/mobile-money',
+        builder: (context, state) {
+          final productId =
+              state.uri.queryParameters['productId'] ??
+              MobileMoneyProduct.monthlyProductId;
+          return MobileMoneyScreen(productId: productId);
+        },
       ),
       GoRoute(
         path: '/read/:bookId',

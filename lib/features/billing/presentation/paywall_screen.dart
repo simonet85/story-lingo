@@ -7,8 +7,10 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/theme/app_tokens.dart';
 import '../application/billing_providers.dart';
 import '../application/entitlement_provider.dart';
+import '../application/mobile_money_providers.dart';
 import '../domain/billing_entitlement.dart';
 import '../domain/billing_offer.dart';
+import '../domain/mobile_money_product.dart';
 
 class PaywallScreen extends ConsumerStatefulWidget {
   const PaywallScreen({this.bookId, super.key});
@@ -78,7 +80,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 const SizedBox(height: AppSpacing.lg),
                 const _Benefit(
                   icon: Icons.menu_book_outlined,
-                  text: 'La bibliothèque complète, y compris les livres '
+                  text:
+                      'La bibliothèque complète, y compris les livres '
                       'rares et les grands classiques.',
                 ),
                 const _Benefit(
@@ -87,7 +90,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 ),
                 const _Benefit(
                   icon: Icons.sync_outlined,
-                  text: 'Votre progression, vos mots et vos révisions '
+                  text:
+                      'Votre progression, vos mots et vos révisions '
                       'synchronisés.',
                 ),
                 const _Benefit(
@@ -129,9 +133,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState != ConnectionState.done) {
                       return const Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: AppSpacing.xl,
-                        ),
+                        padding: EdgeInsets.symmetric(vertical: AppSpacing.xl),
                         child: Center(child: CircularProgressIndicator()),
                       );
                     }
@@ -173,9 +175,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                           width: double.infinity,
                           height: AppSizes.primaryActionHeight,
                           child: FilledButton.icon(
-                            onPressed: _busy
-                                ? null
-                                : () => _purchase(selected),
+                            onPressed: _busy ? null : () => _purchase(selected),
                             icon: _busy
                                 ? const SizedBox.square(
                                     dimension: 18,
@@ -195,6 +195,37 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                     );
                   },
                 ),
+                if (ref.watch(mobileMoneyAvailableProvider)) ...[
+                  const SizedBox(height: AppSpacing.lg),
+                  const Divider(),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    'Mobile money (FCFA)',
+                    style: theme.textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    'Payez en FCFA depuis votre téléphone. L’abonnement '
+                    's’active dès confirmation du paiement.',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpacing.md),
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      onPressed: _busy
+                          ? null
+                          : () => context.push(
+                              '/paywall/mobile-money?productId='
+                              '${_mobileMoneyProductId(_selectedKind)}',
+                            ),
+                      icon: const Icon(Icons.phone_android_outlined),
+                      label: const Text('Payer par mobile money'),
+                    ),
+                  ),
+                ],
                 if (error != null) ...[
                   const SizedBox(height: AppSpacing.md),
                   Text(
@@ -248,6 +279,12 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
     return offers.first;
   }
 
+  String _mobileMoneyProductId(BillingOfferKind kind) {
+    return kind == BillingOfferKind.yearly
+        ? MobileMoneyProduct.yearlyProductId
+        : MobileMoneyProduct.monthlyProductId;
+  }
+
   void _reloadOffers() {
     setState(() {
       _error = null;
@@ -270,7 +307,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       if (!entitlement.isActiveAt(now)) {
         setState(() {
           _busy = false;
-          _error = 'L’abonnement n’est pas encore actif. Réessayez dans un '
+          _error =
+              'L’abonnement n’est pas encore actif. Réessayez dans un '
               'instant.';
         });
         return;
@@ -384,9 +422,7 @@ class _OfferCard extends StatelessWidget {
           child: Row(
             children: [
               Icon(
-                selected
-                    ? Icons.check_circle
-                    : Icons.radio_button_unchecked,
+                selected ? Icons.check_circle : Icons.radio_button_unchecked,
                 color: selected
                     ? theme.colorScheme.primary
                     : theme.colorScheme.onSurfaceVariant,
@@ -455,9 +491,7 @@ class _Benefit extends StatelessWidget {
         children: [
           Icon(icon, size: 20, color: theme.colorScheme.primary),
           const SizedBox(width: AppSpacing.sm),
-          Expanded(
-            child: Text(text, style: theme.textTheme.bodyMedium),
-          ),
+          Expanded(child: Text(text, style: theme.textTheme.bodyMedium)),
         ],
       ),
     );

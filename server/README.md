@@ -55,6 +55,12 @@ callback never extends the expiry.
 `GET /v1/payments/moneyfusion/return` is the minimal return page used as
 `return_url`; it never mutates payment state.
 
+`GET /v1/payments/moneyfusion/products` is public and read-only. It returns
+`{products: [{productId, amount, days, currency}]}` for the monthly and yearly
+offers, with amounts read from `STORYLINGO_MONEYFUSION_PRICE_*`. It answers
+`503` when a configured price is zero and never exposes the MoneyFusion API
+link.
+
 The Flutter app reads its configuration from `--dart-define`:
 
 ```bash

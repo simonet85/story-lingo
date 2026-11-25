@@ -410,3 +410,60 @@ def test_amount_as_string_is_accepted(api, fake) -> None:
 
     response = _webhook(client, body["token"])
     assert response.json()["applied"] is True
+
+
+def test_products_are_public(api) -> None:
+    client, _ = api
+
+    response = client.get("/v1/payments/moneyfusion/products")
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "products": [
+            {
+                "productId": MONTHLY,
+                "amount": 3500,
+                "days": 30,
+                "currency": "XAF",
+            },
+            {
+                "productId": YEARLY,
+                "amount": 30000,
+                "days": 365,
+                "currency": "XAF",
+            },
+        ]
+    }
+
+
+def test_products_reflect_configured_prices(tmp_path: Path, fake) -> None:
+    settings = _settings(
+        tmp_path,
+        moneyfusion_price_monthly_xaf=5000,
+        moneyfusion_price_yearly_xaf=48000,
+    )
+    with TestClient(create_app(settings)) as client:
+        response = client.get("/v1/payments/moneyfusion/products")
+
+    amounts = {
+        product["productId"]: product["amount"]
+        for product in response.json()["products"]
+    }
+    assert amounts == {MONTHLY: 5000, YEARLY: 48000}
+
+
+def test_products_unavailable_when_price_is_zero(tmp_path: Path, fake) -> None:
+    settings = _settings(tmp_path, moneyfusion_price_monthly_xaf=0)
+    with TestClient(create_app(settings)) as client:
+        response = client.get("/v1/payments/moneyfusion/products")
+
+    assert response.status_code == 503
+
+
+def test_products_do_not_expose_moneyfusion_urls(api) -> None:
+    client, _ = api
+
+    body = client.get("/v1/payments/moneyfusion/products").text
+
+    assert "moneyfusion" not in body
+    assert MF_API not in body

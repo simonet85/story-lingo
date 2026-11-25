@@ -123,6 +123,26 @@ def _amount_matches(raw: Any, expected: int) -> bool:
     return False
 
 
+@router.get("/payments/moneyfusion/products")
+def list_products(
+    settings: Settings = Depends(get_settings),
+) -> dict[str, Any]:
+    products = _products(settings)
+    if any(product.price <= 0 for product in products.values()):
+        raise HTTPException(status_code=503, detail="Paiement indisponible.")
+    return {
+        "products": [
+            {
+                "productId": product_id,
+                "amount": product.price,
+                "days": product.days,
+                "currency": "XAF",
+            }
+            for product_id, product in products.items()
+        ]
+    }
+
+
 @router.post("/payments/moneyfusion")
 def create_payment(
     body: CreatePaymentRequest,

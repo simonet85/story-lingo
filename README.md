@@ -39,6 +39,42 @@ Application mobile (iOS + Android) d'apprentissage de l'anglais par lecture et �
 - Feature spec — Paiement mobile money backend (phase 14) : [plan](specs/2026-11-25-paiement-mobile-money/plan.md) · [requirements](specs/2026-11-25-paiement-mobile-money/requirements.md) · [validation](specs/2026-11-25-paiement-mobile-money/validation.md)
 - Feature spec — Paiement mobile money dans l'app (phase 15) : [plan](specs/2026-11-25-paiement-mobile-money-app/plan.md) · [requirements](specs/2026-11-25-paiement-mobile-money-app/requirements.md) · [validation](specs/2026-11-25-paiement-mobile-money-app/validation.md)
 
+## Paiement mobile money (démo Android)
+
+Le paiement mobile money est désactivé par défaut (`MOBILE_MONEY_ENABLED`). Il
+cible Android uniquement : vendre un abonnement numérique hors des stores ne
+peut pas être publié sur les stores, et iOS n’est pas vérifié. Le package
+`money_fusion` est consommé depuis Git, épinglé au tag `v0.3.0`.
+
+Prérequis : serveur local, faux MoneyFusion et émulateur Android. L’alias
+`10.0.2.2` désigne la machine hôte vue depuis l’émulateur ; le cleartext HTTP
+n’est autorisé qu’en debug (`android/app/src/debug/AndroidManifest.xml`).
+
+```bash
+# 1. Serveur (écoute sur toutes les interfaces pour l’émulateur)
+export STORYLINGO_DEV_AUTH=1
+export STORYLINGO_PUBLIC_BASE_URL=http://10.0.2.2:8000
+export STORYLINGO_MONEYFUSION_API_URL=http://127.0.0.1:8091/payments
+export STORYLINGO_MONEYFUSION_STATUS_BASE_URL=http://127.0.0.1:8091
+python -m uvicorn server.app.main:create_app --factory --host 0.0.0.0 --port 8000
+
+# 2. Faux MoneyFusion (page de paiement, statut, webhook)
+dart run tool/fake_moneyfusion/server.dart
+
+# 3. App
+flutter run \
+  --dart-define=API_BASE_URL=http://10.0.2.2:8000 \
+  --dart-define=MOBILE_MONEY_ENABLED=true \
+  --dart-define=MONEYFUSION_STATUS_BASE_URL=http://10.0.2.2:8091
+```
+
+Se connecter, ouvrir l’abonnement puis « Payer par mobile money ». La page
+factice propose « Payer » et « Annuler ». L’activation vient du webhook serveur
+(`source = "moneyfusion"`), pas du statut affiché par le checkout. Le faux
+serveur n’appelle jamais MoneyFusion et ne journalise ni téléphone ni nom.
+
+iOS, le web et les builds release restent hors périmètre de cette démo.
+
 ## Développement
 
 Flutter 3.50.1 (stable). Les dépendances directes sont épinglées dans `pubspec.yaml` et `pubspec.lock` est commité.

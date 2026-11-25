@@ -14,11 +14,15 @@ Tout ce qui suit doit être vrai avant de fusionner la branche dans `main`.
 
 ```
 flutter analyze
-dart format --output=none --set-exit-if-changed .
+dart format --output=none --set-exit-if-changed lib/features/billing/domain/mobile_money_product.dart lib/features/billing/data/mobile_money_api.dart lib/features/billing/data/checkout_launcher.dart lib/features/billing/data/checkout_launcher_stub.dart lib/features/billing/data/checkout_launcher_io.dart lib/features/billing/application/mobile_money_flow.dart lib/features/billing/application/mobile_money_providers.dart lib/features/billing/presentation/mobile_money_screen.dart lib/features/billing/presentation/paywall_screen.dart lib/core/config/api_config.dart lib/core/router/app_router.dart tool/fake_moneyfusion test/mobile_money_api_test.dart test/mobile_money_flow_test.dart test/mobile_money_screen_test.dart
 cd server && python -m pytest
 ```
 
 Code 0 partout ; `tool/fake_moneyfusion/` est couvert par l'analyse et le formatage.
+
+> Note : le formatage porte sur les fichiers de la phase. Le dépôt contient
+> 46 fichiers antérieurs non formatés selon Dart 3.14 ; les reformater dans
+> cette phase brouillerait la revue.
 
 ### 3. Les tests passent
 
@@ -86,4 +90,61 @@ Aucun secret, aucun paiement réel ; l'app ne contacte le statut MoneyFusion que
 
 ## Résultat de validation
 
-À compléter après exécution sur l'émulateur : environnement (Flutter, Android Studio, AVD), tableau des vérifications, notes d'environnement éventuelles, et conclusion « La phase est validée » le cas échéant.
+### Environnement
+
+- Flutter 3.50.1 (stable, révision `ae9b586f34`), Dart 3.14.0
+- Android SDK `C:/dev/android-sdk`, émulateur `demo36` (Android 16, API 36)
+- Serveur : FastAPI local sur `0.0.0.0:8000`, base SQLite temporaire de démo
+- Faux MoneyFusion : `dart run tool/fake_moneyfusion/server.dart` sur `0.0.0.0:8091`
+
+### Vérifications automatisées
+
+| Commande | Résultat |
+| --- | --- |
+| `flutter pub get` + `pubspec.lock` | `money_fusion` résolu depuis Git, `ref: v0.3.0`, commit `66c5eebbbbe9b386133542ade9d4a8c044c34b3e` |
+| `flutter analyze` | 0 problème |
+| `dart format --set-exit-if-changed` (fichiers de la phase) | 0 fichier modifié |
+| `flutter test` | 308 tests verts (286 existants + 22 mobile money) |
+| `pytest` (serveur) | 113 tests verts (109 existants + 4 produits) |
+
+### Contrat HTTP vérifié à la main (curl)
+
+- `GET /v1/payments/moneyfusion/products` → `200`, deux produits, montants et
+  durées issus de la configuration, aucune URL MoneyFusion ;
+- `POST /v1/payments/moneyfusion` → `200`, `token`, `url` sur
+  `http://10.0.2.2:8091/pay/<token>` ;
+- `finish?result=paid` → webhook `HTTP 200`, entitlement `source:
+  "moneyfusion"`, expiration +30 jours (mensuel) ;
+- `finish?result=failure` → webhook `HTTP 200`, entitlement `active: false` ;
+- `GET /paiementNotif/<token>` → `statut`, `Montant`, `frais`, `moyen`,
+  `numeroTransaction` conformes.
+
+Note d'implémentation : le faux serveur sert les requêtes en concurrence
+(sinon le webhook attend `finish`, qui attend le webhook → blocage), et ses
+tokens incluent un horodatage pour rester uniques entre deux redémarrages.
+
+### Vérifications sur émulateur Android
+
+APK debug construit avec `--dart-define=API_BASE_URL=http://10.0.2.2:8000`,
+`MOBILE_MONEY_ENABLED=true`, `MONEYFUSION_STATUS_BASE_URL=http://10.0.2.2:8091`,
+installé sur `demo36` et parcouru par taps (`adb`).
+
+| Scénario | Attendu | Constaté |
+| --- | --- | --- |
+| Flag actif, paywall ouvert | section « Mobile money (FCFA) » visible | conforme |
+| Achat annuel, « Payer » | retour JS détecté, polling, abonnement actif | « Storylingo Pro — Actif jusqu’au 25/11/2027 » (365 j), webhook `HTTP 200` |
+| « Annuler » sur la page de paiement | message d’échec, formulaire réactivé | « Paiement refusé ou annulé. », champs conservés |
+| Croix de fermeture du checkout | `PaymentCancelled`, formulaire réactivé | « Paiement annulé. » |
+| Serveur arrêté avant « Payer » | erreur réseau à la création | « Le serveur ne répond pas. Réessayez. » |
+| Utilisateur déconnecté | formulaire désactivé + lien de connexion | carte « Connectez-vous pour payer par mobile money. » + bouton, champs grisés |
+| Journaux | aucun téléphone, nom ou token | `logcat` : 0 occurrence ; journaux du backend : ni téléphone ni nom (le faux serveur local trace son propre token de démo) |
+
+Note : le premier build a échoué faute de `platforms;android-35` dans le SDK ;
+installation via `sdkmanager`, puis build nominal.
+
+### Conclusion
+
+La phase est validée sur les 10 points du DoD, dans la limite du « Not
+Required » ci-dessus.
+
+

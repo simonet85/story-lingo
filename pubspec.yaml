@@ -20,6 +20,10 @@ dependencies:
   http: 1.6.0
   just_audio: ^0.10.6
   material_ui: 1.11.1
+  money_fusion:
+    git:
+      url: https://github.com/simonet85/flutter-fusion-money.git
+      ref: v0.3.0
   path: 1.9.1
   path_provider: 2.1.6
   shared_preferences: 2.5.6
