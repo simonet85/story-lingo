@@ -29,7 +29,7 @@ python -m venv .venv-server
 | `STORYLINGO_DEV_AUTH_SECRET` | random per process | HS256 secret for dev tokens (32+ bytes). |
 | `STORYLINGO_REVENUECAT_WEBHOOK_SECRET` | empty | Shared secret expected in the webhook `Authorization` header. |
 | `STORYLINGO_MONEYFUSION_API_URL` | empty | MoneyFusion API link used by the server to create payments. **Secret** (the link embeds the account token). |
-| `STORYLINGO_MONEYFUSION_STATUS_BASE_URL` | `https://pay.moneyfusion.net` | Base URL for `paiementNotif/{token}` status checks. |
+| `STORYLINGO_MONEYFUSION_STATUS_BASE_URL` | `https://pay.moneyfusion.net` | Base URL for `paiementNotif/{token}` status checks. Use the host without `www`. |
 | `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XOF` | `3500` | Monthly product price in XOF (FCFA). Development default, confirm before production. |
 | `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XOF` | `30000` | Yearly product price in XOF (FCFA). Development default, confirm before production. |
 | `STORYLINGO_ADMIN_TOKEN` | empty | Enables the `/admin` back-office; empty means every admin route returns 404. |
@@ -54,6 +54,18 @@ The webhook is only a trigger: the server re-checks
 (`source = "moneyfusion"`) only when the remote status is `paid` and the amount
 matches the stored payment. Applying is idempotent per token, so a replayed
 callback never extends the expiry.
+
+MoneyFusion reports `data.Montant` **net of its fee**, with `data.frais`
+alongside: for a 250 XOF payment it returns `Montant: 242.5` and `frais: 7.5`.
+The server therefore accepts the paid status when `Montant` equals the stored
+price or when `Montant + frais` equals it. A lower `Montant` is only accepted
+when a valid non-negative `frais` makes the total match; otherwise the webhook
+returns `400` and the payment stays `pending`.
+
+Use `https://pay.moneyfusion.net` for the status base, without the `www`
+prefix. `www.pay.moneyfusion.net` fails the TLS handshake from some hosts,
+while the non-`www` host works. Apply the same rule to the host embedded in
+`STORYLINGO_MONEYFUSION_API_URL`.
 
 `GET /v1/payments/moneyfusion/return` is the minimal return page used as
 `return_url`; it never mutates payment state.

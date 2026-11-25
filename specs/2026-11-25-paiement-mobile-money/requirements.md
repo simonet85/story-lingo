@@ -34,7 +34,8 @@ reportée, volontairement séparée du socle serveur.
 - **FR-14.3** — Le lien API MoneyFusion vient de
   `STORYLINGO_MONEYFUSION_API_URL`, la base de statut de
   `STORYLINGO_MONEYFUSION_STATUS_BASE_URL` (défaut
-  `https://pay.moneyfusion.net`). Création indisponible (503) si le lien API,
+  `https://pay.moneyfusion.net`, **sans `www`** : le préfixe `www` échoue en
+  TLS sur certains hôtes). Création indisponible (503) si le lien API,
   `STORYLINGO_PUBLIC_BASE_URL` ou un prix valide manque.
 
 ### Création de paiement
@@ -61,11 +62,14 @@ reportée, volontairement séparée du socle serveur.
   illisible → 400.
 - **FR-14.10** — Le webhook ne fait pas foi : le serveur appelle
   `GET {status_base}/paiementNotif/{token}` et n'utilise que la réponse
-  `data` (`statut`, `Montant`, `numeroTransaction`).
-- **FR-14.11** — `data.statut == "paid"` **et** `Montant` égal au montant stocké
-  → entitlement accordé : `status = "active"`, `source = "moneyfusion"`,
-  `product_id = storylingo_pro_*`, échéance `maintenant + 30/365 jours`,
-  `last_event_type = "MONEYFUSION_PAID"`. Réponse 200 `{ok: true,
+  `data` (`statut`, `Montant`, `frais`, `numeroTransaction`).
+- **FR-14.11** — `data.statut == "paid"` **et** montant brut cohérent avec le
+  montant stocké → entitlement accordé : `status = "active"`,
+  `source = "moneyfusion"`, `product_id = storylingo_pro_*`, échéance
+  `maintenant + 30/365 jours`, `last_event_type = "MONEYFUSION_PAID"`.
+  MoneyFusion renvoie `Montant` **net de ses frais** : le montant brut est
+  `Montant + frais`. Le contrôle accepte `Montant` seul ou `Montant + frais`
+  égal au prix stocké (ex. 242,5 + 7,5 = 250 XOF). Réponse 200 `{ok: true,
   applied: true}` ; la ligne passe à `paid` avec le numéro de transaction.
 - **FR-14.12** — Idempotence : un token déjà appliqué ou un nouveau webhook sur
   un paiement payé ne prolonge jamais l'échéance → 200 `{ok: true,
@@ -74,8 +78,10 @@ reportée, volontairement séparée du socle serveur.
   `failed`, aucun entitlement, 200 `{ok: true, applied: false,
   status: "failed"}`. `pending` → 200 `{ok: true, applied: false,
   status: "pending"}` sans mutation.
-- **FR-14.14** — `Montant` différent du montant stocké → 400, aucun
-  entitlement, paiement laissé `pending` pour investigation.
+- **FR-14.14** — Montant brut incohérent avec le montant stocké (ni
+  `Montant`, ni `Montant + frais` ne correspondent ; un `Montant` inférieur
+  n'est accepté que si un `frais` valide et non négatif complète le prix)
+  → 400, aucun entitlement, paiement laissé `pending` pour investigation.
 - **FR-14.15** — `GET /v1/entitlements` expose l'abonnement mobile money via le
   contrat inchangé (`source = "moneyfusion"`, `productId`, `expiresAt`) ;
   l'expiration est déjà gérée par le serveur.
@@ -113,6 +119,24 @@ MoneyFusion ne documente pas de secret de webhook signé. Le webhook est donc un
 simple signal : le serveur recontrôle le statut auprès de MoneyFusion, avec le
 token et le montant qu'il a lui-même enregistrés. Un appel forgé ne peut pas
 accorder d'abonnement sans paiement réel correspondant.
+
+### Montant net et frais
+
+Le statut MoneyFusion distingue le montant net reversé (`Montant`) des frais
+prélevés (`frais`). Pour un paiement de 250 XOF, la réponse observée est
+`Montant: 242.5` et `frais: 7.5` ; la somme correspond au prix brut payé. Le
+contrôle d'activation compare donc le prix stocké au montant brut reconstitué,
+avec des nombres décimaux (pas de comparaison flottante). Un `Montant` seul
+égal au prix reste accepté (frais nuls). Un total inférieur ou des frais
+invalides sont rejetés en 400 pour éviter d'activer un abonnement sous-payé.
+
+### Domaine de statut sans `www`
+
+Le statut doit être interrogé sur `https://pay.moneyfusion.net`. Le domaine
+`www.pay.moneyfusion.net` échoue en négociation TLS sur certains hôtes
+(`SSLV3_ALERT_HANDSHAKE_FAILURE` / erreur schannel sous Windows), alors que
+l'hôte sans préfixe fonctionne. La même règle s'applique à l'hôte de l'API de
+création extrait de `STORYLINGO_MONEYFUSION_API_URL`.
 
 ### Produits en dur, prix par environnement
 
