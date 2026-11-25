@@ -61,6 +61,29 @@ si exécuté localement.
 - Signature des webhooks : la revérification serveur en tient lieu.
 - Limitation de débit sur la création de paiements.
 
-## Résultat de validation
+## Résultat de validation — 2026-11-25
 
-À remplir après l'implémentation.
+Exécuté avec Python 3.12.10 dans `.venv-server` (dépendances serveur épinglées)
+et Flutter 3.50.1 / Dart 3.14.0.
+
+| Vérification | Résultat |
+|---|---|
+| `python -m pytest server/tests tools/content/tests` | 109 tests, tous verts, dont 21 nouveaux pour les paiements |
+| `flutter analyze` | `No issues found!`, code 0 |
+| `flutter test` | 286 tests, `All tests passed!`, code 0 |
+| Création | 401 sans jeton ; 400 produit inconnu ou téléphone vide ; 503 service non configuré ou prix nul ; 200 avec `token`/`url`/`amount` et ligne `pending` ; 502 sur refus MoneyFusion, HTTP 500 et erreur réseau |
+| Prix serveur | `totalPrice` envoyé à MoneyFusion = 3 500 (mensuel) et 30 000 (annuel), jamais une valeur cliente |
+| URLs | `return_url` et `webhook_url` absolus sur `public_base_url`, statut sur `https://pay.moneyfusion.net/paiementNotif/{token}` |
+| Webhook payé | `paid` → entitlement `source = "moneyfusion"`, échéance à 30 / 365 jours, numéro de transaction enregistré |
+| Rejeu | Deuxième webhook → `applied: false`, échéance identique, aucune nouvelle requête de statut |
+| Statuts non payés | `failure` → paiement `failed` sans grant ; `pending` sans mutation ; JSON et formulaire acceptés ; JSON illisible et token manquant → 400 ; token inconnu → 404 |
+| Montant divergent | `Montant` ≠ montant stocké → 400, paiement laissé `pending`, aucun grant ; `Montant` en chaîne accepté quand il correspond |
+| Page de retour | 200 HTML « Paiement terminé », aucune ligne de paiement créée |
+| Non-régression | Webhook RevenueCat et entitlements existants inchangés (`_apply` avec `source` par défaut `revenuecat`) |
+
+Notes d'environnement : le corps du webhook est parsé manuellement (JSON ou
+URL-encodé), donc `python-multipart` n'est pas requis ; `.venv-server/` est
+désormais ignoré par git. Aucun appel réel à MoneyFusion : les tests injectent
+un faux client `httpx` (`MockTransport`).
+
+La phase est validée : tous les points du DoD sont satisfaits.
