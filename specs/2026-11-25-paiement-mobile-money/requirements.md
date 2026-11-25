@@ -25,11 +25,11 @@ reportée, volontairement séparée du socle serveur.
 
 ### Produits et configuration
 
-- **FR-14.1** — Deux produits : `storylingo_pro_monthly_xaf` (30 jours) et
-  `storylingo_pro_yearly_xaf` (365 jours), exposés par la création.
+- **FR-14.1** — Deux produits : `storylingo_pro_monthly_xof` (30 jours) et
+  `storylingo_pro_yearly_xof` (365 jours), exposés par la création.
 - **FR-14.2** — Montants en FCFA entiers positifs, lus dans
-  `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XAF` /
-  `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF` (défauts de développement :
+  `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XOF` /
+  `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XOF` (défauts de développement :
   3 500 et 30 000, à confirmer par le produit avant production).
 - **FR-14.3** — Le lien API MoneyFusion vient de
   `STORYLINGO_MONEYFUSION_API_URL`, la base de statut de

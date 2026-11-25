@@ -46,7 +46,7 @@ def list_products(settings: Settings = Depends(get_settings)) -> dict[str, Any]:
     return {
         "products": [
             {"productId": product_id, "amount": product.price,
-             "days": product.days, "currency": "XAF"}
+             "days": product.days, "currency": "XOF"}
             for product_id, product in products.items()
         ]
     }
@@ -58,7 +58,7 @@ Pas de `_require_config` : l'API link et `public_base_url` ne sont pas nécessai
 
 Dans `server/tests/test_payments.py` :
 
-- sans authentification → `200`, deux produits, `amount` = prix configurés (défauts 3500 / 30000), `days` 30 / 365, `currency` `"XAF"` ;
+- sans authentification → `200`, deux produits, `amount` = prix configurés (défauts 3500 / 30000), `days` 30 / 365, `currency` `"XOF"` ;
 - prix surchargés par l'environnement → valeurs renvoyées ;
 - prix `0` → `503` ;
 - la réponse ne contient ni `STORYLINGO_MONEYFUSION_API_URL` ni d'URL MoneyFusion.
@@ -94,7 +94,7 @@ final moneyFusionStatusBaseUrlProvider = Provider<String>((ref) {
 `lib/features/billing/domain/mobile_money_product.dart` :
 
 - `MobileMoneyProduct {productId, amount, days, currency}` ;
-- constantes `storylingo_pro_monthly_xaf` / `storylingo_pro_yearly_xaf` ;
+- constantes `storylingo_pro_monthly_xof` / `storylingo_pro_yearly_xof` ;
 - libellés `titleFr` (« Mensuel » / « Annuel »), `priceLabel` (« 3 500 FCFA »), `periodLabel` (« / mois », « / an ») ;
 - ignore les produits inconnus côté API.
 
@@ -192,7 +192,7 @@ Future<PaymentResult?> launchMoneyFusionCheckout(
 
 ### 9. Paywall et route
 
-- `lib/features/billing/presentation/paywall_screen.dart` : si `mobileMoneyAvailableProvider`, après les offres, encart « Payer par mobile money (FCFA) » + bouton qui pousse `/paywall/mobile-money?productId=<mapping de l'offre sélectionnée>` (mensuel → `storylingo_pro_monthly_xaf`, annuel → `storylingo_pro_yearly_xaf`) ; désactivé pendant `_busy`.
+- `lib/features/billing/presentation/paywall_screen.dart` : si `mobileMoneyAvailableProvider`, après les offres, encart « Payer par mobile money (FCFA) » + bouton qui pousse `/paywall/mobile-money?productId=<mapping de l'offre sélectionnée>` (mensuel → `storylingo_pro_monthly_xof`, annuel → `storylingo_pro_yearly_xof`) ; désactivé pendant `_busy`.
 - `lib/core/router/app_router.dart` : `GoRoute(path: '/paywall/mobile-money', builder: ... MobileMoneyScreen(productId))`.
 
 ## Tâches faux serveur et outillage

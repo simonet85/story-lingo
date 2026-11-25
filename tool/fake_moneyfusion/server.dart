@@ -7,6 +7,9 @@
 //   FAKE_MONEYFUSION_PORT              default 8091
 //   FAKE_MONEYFUSION_PUBLIC_BASE_URL   default http://10.0.2.2:8091
 //   FAKE_MONEYFUSION_WEBHOOK_URL       default http://127.0.0.1:8000/v1/webhooks/moneyfusion
+//   FAKE_MONEYFUSION_SITE_NAME         merchant display name (default Storylingo)
+//   FAKE_MONEYFUSION_SITE_URL          optional merchant site URL shown on checkout
+//   FAKE_MONEYFUSION_REDIRECT_URL      optional return page, overrides the API return_url
 
 import 'dart:async';
 import 'dart:convert';
@@ -15,6 +18,18 @@ import 'dart:io';
 const _defaultPort = 8091;
 const _defaultPublicBaseUrl = 'http://10.0.2.2:8091';
 const _defaultWebhookUrl = 'http://127.0.0.1:8000/v1/webhooks/moneyfusion';
+
+class _Merchant {
+  const _Merchant({
+    required this.name,
+    required this.siteUrl,
+    required this.redirectUrl,
+  });
+
+  final String name;
+  final String siteUrl;
+  final String redirectUrl;
+}
 
 class _DemoPayment {
   _DemoPayment({
@@ -44,6 +59,11 @@ Future<void> main() async {
     _defaultPublicBaseUrl,
   ).replaceAll(RegExp(r'/+$'), '');
   final webhookUrl = _env('FAKE_MONEYFUSION_WEBHOOK_URL', _defaultWebhookUrl);
+  final merchant = _Merchant(
+    name: _env('FAKE_MONEYFUSION_SITE_NAME', 'Storylingo'),
+    siteUrl: _env('FAKE_MONEYFUSION_SITE_URL', ''),
+    redirectUrl: _env('FAKE_MONEYFUSION_REDIRECT_URL', ''),
+  );
 
   final server = await HttpServer.bind(
     InternetAddress.anyIPv4,
@@ -51,11 +71,12 @@ Future<void> main() async {
   );
   stdout.writeln(
     'Faux MoneyFusion sur 0.0.0.0:${server.port} '
-    '(page publique : $publicBaseUrl, webhook : $webhookUrl)',
+    '(page publique : $publicBaseUrl, webhook : $webhookUrl, '
+    'marchand : ${merchant.name})',
   );
 
   await for (final request in server) {
-    unawaited(_serve(request, publicBaseUrl, webhookUrl));
+    unawaited(_serve(request, publicBaseUrl, webhookUrl, merchant));
   }
 }
 
@@ -63,9 +84,10 @@ Future<void> _serve(
   HttpRequest request,
   String publicBaseUrl,
   String webhookUrl,
+  _Merchant merchant,
 ) async {
   try {
-    await _handle(request, publicBaseUrl, webhookUrl);
+    await _handle(request, publicBaseUrl, webhookUrl, merchant);
   } on Exception catch (error) {
     stdout.writeln('Erreur : $error');
     request.response.statusCode = HttpStatus.internalServerError;
@@ -77,6 +99,7 @@ Future<void> _handle(
   HttpRequest request,
   String publicBaseUrl,
   String webhookUrl,
+  _Merchant merchant,
 ) async {
   final segments = request.uri.pathSegments;
   final method = request.method;
@@ -85,13 +108,13 @@ Future<void> _handle(
     return _create(request, publicBaseUrl, webhookUrl);
   }
   if (method == 'GET' && segments.length == 2 && segments[0] == 'pay') {
-    return _page(request, segments[1]);
+    return _page(request, segments[1], merchant);
   }
   if (method == 'GET' &&
       segments.length == 3 &&
       segments[0] == 'pay' &&
       segments[2] == 'finish') {
-    return _finish(request, segments[1]);
+    return _finish(request, segments[1], merchant);
   }
   if (method == 'GET' &&
       segments.length == 2 &&
@@ -101,7 +124,9 @@ Future<void> _handle(
   if (method == 'GET' && segments.length == 1 && segments[0] == 'callback') {
     request.response
       ..headers.contentType = ContentType.html
-      ..write(_htmlPage('Retour à Storylingo', 'Revenez dans l’application.'));
+      ..write(
+        _htmlPage('Retour à ${merchant.name}', 'Revenez dans l’application.'),
+      );
     return request.response.close();
   }
 
@@ -171,7 +196,11 @@ Future<void> _create(
   await request.response.close();
 }
 
-Future<void> _page(HttpRequest request, String token) async {
+Future<void> _page(
+  HttpRequest request,
+  String token,
+  _Merchant merchant,
+) async {
   final payment = _payments[token];
   if (payment == null) {
     request.response.statusCode = HttpStatus.notFound;
@@ -184,12 +213,17 @@ Future<void> _page(HttpRequest request, String token) async {
         token: token,
         amount: payment.amount,
         status: payment.status,
+        merchant: merchant,
       ),
     );
   await request.response.close();
 }
 
-Future<void> _finish(HttpRequest request, String token) async {
+Future<void> _finish(
+  HttpRequest request,
+  String token,
+  _Merchant merchant,
+) async {
   final payment = _payments[token];
   if (payment == null) {
     request.response.statusCode = HttpStatus.notFound;
@@ -205,14 +239,17 @@ Future<void> _finish(HttpRequest request, String token) async {
 
   await _notify(payment.webhookUrl, token);
 
+  final target = merchant.redirectUrl.isEmpty
+      ? payment.returnUrl
+      : merchant.redirectUrl;
   request.response
     ..headers.contentType = ContentType.html
     ..write(
       _htmlPage(
-        'Retour à Storylingo',
-        'Paiement enregistré. Retour à l’application…',
-        script: 'location.replace(${jsonEncode(payment.returnUrl)});',
-        fallbackHref: payment.returnUrl,
+        'Retour à ${merchant.name}',
+        'Paiement enregistré. Redirection…',
+        script: 'location.replace(${jsonEncode(target)});',
+        fallbackHref: target,
       ),
     );
   await request.response.close();
@@ -265,19 +302,24 @@ String _checkoutPage({
   required String token,
   required int amount,
   required String status,
+  required _Merchant merchant,
 }) {
+  final site = merchant.siteUrl.isEmpty
+      ? ''
+      : '<p class="note">Site : ${_escape(merchant.siteUrl)}</p>';
   final body =
       '''
-<h1>Paiement Storylingo</h1>
+<h1>Paiement ${_escape(merchant.name)}</h1>
 <p>Montant : <strong>$amount FCFA</strong></p>
 <p>Statut actuel : $status</p>
 <p>
   <a class="button" href="/pay/$token/finish?result=paid">Payer</a>
   <a class="button secondary" href="/pay/$token/finish?result=failure">Annuler</a>
 </p>
+$site
 <p class="note">Faux backend de démonstration. Aucun paiement réel.</p>
 ''';
-  return _htmlPage('Paiement Storylingo', body, raw: true);
+  return _htmlPage('Paiement ${merchant.name}', body, raw: true);
 }
 
 String _htmlPage(

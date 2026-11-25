@@ -12,7 +12,7 @@ annuel 365 jours), sans toucher à l'app Flutter ni au package `money_fusion`.
 - `moneyfusion_payments` : `token` PK, `user_id`, `product_id`, `amount`,
   `status` (`pending` | `paid` | `failed`), `transaction_number`,
   `created_at_ms`, `applied_at_ms`.
-- Produits constants `storylingo_pro_monthly_xaf` / `storylingo_pro_yearly_xaf`
+- Produits constants `storylingo_pro_monthly_xof` / `storylingo_pro_yearly_xof`
   (30 / 365 jours) ; prix par variables d'environnement (défauts de dev
   3 500 / 30 000 FCFA).
 - Webhook = déclencheur : revérification `GET paiementNotif/{token}` côté
@@ -24,7 +24,7 @@ annuel 365 jours), sans toucher à l'app Flutter ni au package `money_fusion`.
 ## Serveur
 
 1. `Settings` : `moneyfusion_api_url`, `moneyfusion_status_base_url`,
-   `moneyfusion_price_monthly_xaf`, `moneyfusion_price_yearly_xaf`, lus depuis
+   `moneyfusion_price_monthly_xof`, `moneyfusion_price_yearly_xof`, lus depuis
    l'environnement (statut par défaut `https://pay.moneyfusion.net`).
 2. `server/app/models.py` : modèle `MoneyFusionPayment` (table
    `moneyfusion_payments`) ; `Base.metadata.create_all` suffit, comme le reste.

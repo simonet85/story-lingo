@@ -77,16 +77,16 @@ Future<http.Response> _apiHandler(http.Request request) async {
       jsonEncode({
         'products': [
           {
-            'productId': 'storylingo_pro_monthly_xaf',
+            'productId': 'storylingo_pro_monthly_xof',
             'amount': 3500,
             'days': 30,
-            'currency': 'XAF',
+            'currency': 'XOF',
           },
           {
-            'productId': 'storylingo_pro_yearly_xaf',
+            'productId': 'storylingo_pro_yearly_xof',
             'amount': 30000,
             'days': 365,
-            'currency': 'XAF',
+            'currency': 'XOF',
           },
         ],
       }),
@@ -97,7 +97,7 @@ Future<http.Response> _apiHandler(http.Request request) async {
     jsonEncode({
       'token': 'demo-1',
       'url': 'http://10.0.2.2:8091/pay/demo-1',
-      'productId': 'storylingo_pro_yearly_xaf',
+      'productId': 'storylingo_pro_yearly_xof',
       'amount': 30000,
     }),
     200,

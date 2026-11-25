@@ -17,8 +17,8 @@ from server.tests.support import DEV_SECRET
 
 PUBLIC_BASE = "https://api.storylingo.test"
 MF_API = "https://moneyfusion.test/api/pay"
-MONTHLY = "storylingo_pro_monthly_xaf"
-YEARLY = "storylingo_pro_yearly_xaf"
+MONTHLY = "storylingo_pro_monthly_xof"
+YEARLY = "storylingo_pro_yearly_xof"
 
 
 class FakeMoneyFusion:
@@ -181,7 +181,7 @@ def test_unconfigured_service_returns_503(tmp_path: Path, fake) -> None:
 
 
 def test_invalid_price_returns_503(tmp_path: Path, fake) -> None:
-    app = create_app(_settings(tmp_path, moneyfusion_price_monthly_xaf=0))
+    app = create_app(_settings(tmp_path, moneyfusion_price_monthly_xof=0))
     with TestClient(app) as client:
         token, _ = _login(client)
         response = client.post(
@@ -412,6 +412,35 @@ def test_amount_as_string_is_accepted(api, fake) -> None:
     assert response.json()["applied"] is True
 
 
+def test_net_amount_plus_fee_matches_gross_price(api, fake) -> None:
+    client, app = api
+    token, _ = _login(client)
+    body = _start(client, token)
+    fake.status["data"]["Montant"] = 3395
+    fake.status["data"]["frais"] = 105
+
+    response = _webhook(client, body["token"])
+    assert response.json() == {"ok": True, "applied": True, "status": "paid"}
+    assert _entitlement(client, token)["active"] is True
+    with app.state.session_factory() as session:
+        row = session.get(MoneyFusionPayment, "demo-1")
+        assert row is not None
+        assert row.status == "paid"
+        assert row.applied_at_ms is not None
+
+
+def test_net_amount_without_matching_fee_is_rejected(api, fake) -> None:
+    client, _ = api
+    token, _ = _login(client)
+    body = _start(client, token)
+    fake.status["data"]["Montant"] = 3395
+    fake.status["data"]["frais"] = 5
+
+    response = _webhook(client, body["token"])
+    assert response.status_code == 400
+    assert _entitlement(client, token)["active"] is False
+
+
 def test_products_are_public(api) -> None:
     client, _ = api
 
@@ -424,13 +453,13 @@ def test_products_are_public(api) -> None:
                 "productId": MONTHLY,
                 "amount": 3500,
                 "days": 30,
-                "currency": "XAF",
+                "currency": "XOF",
             },
             {
                 "productId": YEARLY,
                 "amount": 30000,
                 "days": 365,
-                "currency": "XAF",
+                "currency": "XOF",
             },
         ]
     }
@@ -439,8 +468,8 @@ def test_products_are_public(api) -> None:
 def test_products_reflect_configured_prices(tmp_path: Path, fake) -> None:
     settings = _settings(
         tmp_path,
-        moneyfusion_price_monthly_xaf=5000,
-        moneyfusion_price_yearly_xaf=48000,
+        moneyfusion_price_monthly_xof=5000,
+        moneyfusion_price_yearly_xof=48000,
     )
     with TestClient(create_app(settings)) as client:
         response = client.get("/v1/payments/moneyfusion/products")
@@ -453,7 +482,7 @@ def test_products_reflect_configured_prices(tmp_path: Path, fake) -> None:
 
 
 def test_products_unavailable_when_price_is_zero(tmp_path: Path, fake) -> None:
-    settings = _settings(tmp_path, moneyfusion_price_monthly_xaf=0)
+    settings = _settings(tmp_path, moneyfusion_price_monthly_xof=0)
     with TestClient(create_app(settings)) as client:
         response = client.get("/v1/payments/moneyfusion/products")
 

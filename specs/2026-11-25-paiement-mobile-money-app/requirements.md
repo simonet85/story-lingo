@@ -48,8 +48,8 @@ Aucun secret : le lien API MoneyFusion et les prix restent côté serveur.
 
 ```json
 {"products": [
-  {"productId": "storylingo_pro_monthly_xaf", "amount": 3500,  "days": 30,  "currency": "XAF"},
-  {"productId": "storylingo_pro_yearly_xaf",  "amount": 30000, "days": 365, "currency": "XAF"}
+  {"productId": "storylingo_pro_monthly_xof", "amount": 3500,  "days": 30,  "currency": "XOF"},
+  {"productId": "storylingo_pro_yearly_xof",  "amount": 30000, "days": 365, "currency": "XOF"}
 ]}
 ```
 

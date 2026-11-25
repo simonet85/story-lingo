@@ -6,8 +6,8 @@ class MobileMoneyProduct {
     required this.currency,
   });
 
-  static const String monthlyProductId = 'storylingo_pro_monthly_xaf';
-  static const String yearlyProductId = 'storylingo_pro_yearly_xaf';
+  static const String monthlyProductId = 'storylingo_pro_monthly_xof';
+  static const String yearlyProductId = 'storylingo_pro_yearly_xof';
 
   /// Known product, or null when the payload is incomplete.
   static MobileMoneyProduct? tryParse(Map<String, Object?> json) {
@@ -27,7 +27,7 @@ class MobileMoneyProduct {
       days: days,
       currency: rawCurrency is String && rawCurrency.isNotEmpty
           ? rawCurrency
-          : 'XAF',
+          : 'XOF',
     );
   }
 
@@ -41,7 +41,7 @@ class MobileMoneyProduct {
   String get titleFr => isYearly ? 'Annuel' : 'Mensuel';
 
   String get priceLabel {
-    final label = currency == 'XAF' ? 'FCFA' : currency;
+    final label = currency == 'XOF' ? 'FCFA' : currency;
     return '${_groupDigits(amount)} $label';
   }
 

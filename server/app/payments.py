@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import time
+from decimal import Decimal, InvalidOperation
 from typing import Any
 from urllib.parse import parse_qs, quote
 
@@ -20,8 +21,8 @@ from .routes import get_session, get_settings
 router = APIRouter(tags=["payments"])
 
 DAY_MS = 24 * 60 * 60 * 1000
-MONTHLY_PRODUCT = "storylingo_pro_monthly_xaf"
-YEARLY_PRODUCT = "storylingo_pro_yearly_xaf"
+MONTHLY_PRODUCT = "storylingo_pro_monthly_xof"
+YEARLY_PRODUCT = "storylingo_pro_yearly_xof"
 _TIMEOUT_SECONDS = 30.0
 
 
@@ -35,8 +36,8 @@ class _Product:
 
 def _products(settings: Settings) -> dict[str, _Product]:
     return {
-        MONTHLY_PRODUCT: _Product(30, settings.moneyfusion_price_monthly_xaf),
-        YEARLY_PRODUCT: _Product(365, settings.moneyfusion_price_yearly_xaf),
+        MONTHLY_PRODUCT: _Product(30, settings.moneyfusion_price_monthly_xof),
+        YEARLY_PRODUCT: _Product(365, settings.moneyfusion_price_yearly_xof),
     }
 
 
@@ -110,17 +111,31 @@ def _fetch_status(settings: Settings, token: str) -> dict[str, Any]:
     return inner if isinstance(inner, dict) else {}
 
 
-def _amount_matches(raw: Any, expected: int) -> bool:
+def _as_decimal(raw: Any) -> Decimal | None:
     if isinstance(raw, bool):
-        return False
-    if isinstance(raw, (int, float)):
-        return float(raw) == float(expected)
-    if isinstance(raw, str):
+        return None
+    if isinstance(raw, (int, float, str)):
         try:
-            return float(raw) == float(expected)
-        except ValueError:
-            return False
-    return False
+            value = Decimal(str(raw).strip())
+        except (InvalidOperation, ValueError):
+            return None
+        return value if value.is_finite() else None
+    return None
+
+
+def _paid_amount_matches(status: dict[str, Any], expected: int) -> bool:
+    """MoneyFusion reports `Montant` net of its fee, with `frais` alongside."""
+    amount = _as_decimal(status.get("Montant"))
+    if amount is None:
+        return False
+    target = Decimal(expected)
+    if amount == target:
+        return True
+    raw_fee = status.get("frais")
+    fee = Decimal(0) if raw_fee in (None, "") else _as_decimal(raw_fee)
+    if fee is None or fee < 0:
+        return False
+    return amount + fee == target
 
 
 @router.get("/payments/moneyfusion/products")
@@ -136,7 +151,7 @@ def list_products(
                 "productId": product_id,
                 "amount": product.price,
                 "days": product.days,
-                "currency": "XAF",
+                "currency": "XOF",
             }
             for product_id, product in products.items()
         ]
@@ -236,7 +251,7 @@ async def moneyfusion_webhook(
     status = _fetch_status(settings, token)
     remote_status = status.get("statut")
     if remote_status == "paid":
-        if not _amount_matches(status.get("Montant"), payment.amount):
+        if not _paid_amount_matches(status, payment.amount):
             raise HTTPException(status_code=400, detail="Montant incohérent.")
         now_ms = _now_ms()
         product = _products(settings).get(payment.product_id)

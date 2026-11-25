@@ -32,7 +32,7 @@ Code 0 partout ; `tool/fake_moneyfusion/` est couvert par l'analyse et le format
 ### 4. L'endpoint produits respecte le contrat
 
 - `GET /v1/payments/moneyfusion/products` sans jeton → `200` ;
-- deux produits `storylingo_pro_monthly_xaf` (3500, 30 j) et `storylingo_pro_yearly_xaf` (30000, 365 j), `currency: "XAF"` ;
+- deux produits `storylingo_pro_monthly_xof` (3500, 30 j) et `storylingo_pro_yearly_xof` (30000, 365 j), `currency: "XOF"` ;
 - montants issus de `STORYLINGO_MONEYFUSION_PRICE_*` ;
 - prix `0` → `503` ;
 - aucune URL MoneyFusion ni secret dans la réponse.

@@ -30,8 +30,8 @@ python -m venv .venv-server
 | `STORYLINGO_REVENUECAT_WEBHOOK_SECRET` | empty | Shared secret expected in the webhook `Authorization` header. |
 | `STORYLINGO_MONEYFUSION_API_URL` | empty | MoneyFusion API link used by the server to create payments. **Secret** (the link embeds the account token). |
 | `STORYLINGO_MONEYFUSION_STATUS_BASE_URL` | `https://pay.moneyfusion.net` | Base URL for `paiementNotif/{token}` status checks. |
-| `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XAF` | `3500` | Monthly product price in FCFA. Development default, confirm before production. |
-| `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF` | `30000` | Yearly product price in FCFA. Development default, confirm before production. |
+| `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XOF` | `3500` | Monthly product price in XOF (FCFA). Development default, confirm before production. |
+| `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XOF` | `30000` | Yearly product price in XOF (FCFA). Development default, confirm before production. |
 | `STORYLINGO_ADMIN_TOKEN` | empty | Enables the `/admin` back-office; empty means every admin route returns 404. |
 | `STORYLINGO_ADMIN_SESSION_SECRET` | random per process | HS256 key for admin session cookies (32+ bytes recommended). |
 | `STORYLINGO_ADMIN_MAX_UPLOAD_MB` | `200` | Maximum size of a pack ZIP uploaded from the back-office. |

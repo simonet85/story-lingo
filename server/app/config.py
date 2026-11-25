@@ -35,8 +35,8 @@ class Settings:
     revenuecat_webhook_secret: str | None = None
     moneyfusion_api_url: str | None = None
     moneyfusion_status_base_url: str = "https://pay.moneyfusion.net"
-    moneyfusion_price_monthly_xaf: int = 3500
-    moneyfusion_price_yearly_xaf: int = 30000
+    moneyfusion_price_monthly_xof: int = 3500
+    moneyfusion_price_yearly_xof: int = 30000
     admin_token: str | None = None
     admin_session_secret: str | None = None
     admin_max_upload_bytes: int = 200 * 1024 * 1024
@@ -76,11 +76,11 @@ class Settings:
                 os.getenv("STORYLINGO_MONEYFUSION_STATUS_BASE_URL")
                 or "https://pay.moneyfusion.net"
             ).rstrip("/"),
-            moneyfusion_price_monthly_xaf=_env_int(
-                "STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XAF", 3500
+            moneyfusion_price_monthly_xof=_env_int(
+                "STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XOF", 3500
             ),
-            moneyfusion_price_yearly_xaf=_env_int(
-                "STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF", 30000
+            moneyfusion_price_yearly_xof=_env_int(
+                "STORYLINGO_MONEYFUSION_PRICE_YEARLY_XOF", 30000
             ),
             admin_token=os.getenv("STORYLINGO_ADMIN_TOKEN") or None,
             admin_session_secret=(
