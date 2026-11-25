@@ -77,6 +77,7 @@ def _apply(
     event_ms: int,
     event_type: str,
     preserve_expiry: bool = False,
+    source: str = "revenuecat",
 ) -> bool:
     row = session.get(Subscription, user_id)
     if row is not None and event_ms <= row.last_event_ms:
@@ -84,7 +85,7 @@ def _apply(
     if row is None:
         row = Subscription(user_id=user_id, last_event_ms=0)
     row.status = status
-    row.source = "revenuecat"
+    row.source = source
     if product_id is not None:
         row.product_id = product_id
     if not preserve_expiry:

@@ -7,7 +7,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from . import auth, billing
+from . import auth, billing, payments
 from .config import Settings
 from .db import Base, make_engine, make_session_factory
 from .routes import router
@@ -46,6 +46,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(auth.router, prefix="/v1")
     app.include_router(sync_router, prefix="/v1")
     app.include_router(billing.router, prefix="/v1")
+    app.include_router(payments.router, prefix="/v1")
 
     @app.exception_handler(Exception)
     async def unhandled_error(request: Request, error: Exception) -> JSONResponse:

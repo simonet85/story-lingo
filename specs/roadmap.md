@@ -71,7 +71,12 @@ Les phases sont volontairement petites : chacune est une tranche livrable, testa
 - Abonnements mensuel/annuel via RevenueCat, restauration d'achats, gestion d'état
 - Écrans de conversion alignés avec les principes produit (pas de culpabilisation)
 
-## Phase 14 — Analytics, notifications & release
+## Phase 14 — Paiement mobile money (backend)
+- Création de paiement MoneyFusion côté serveur (JWT), produits mensuel et annuel en FCFA
+- Webhook vérifié par revérification du statut, entitlement `source = "moneyfusion"`, idempotent
+- Interface d'achat dans l'app hors périmètre (décision produit sur les politiques stores)
+
+## Phase 15 — Analytics, notifications & release
 - Événements Mixpanel : funnel onboarding → J1 → J7 → J28, sessions, conversion
 - Rappel quotidien doux (heure locale, désactivable)
 - Audit accessibilité et performance du lecteur

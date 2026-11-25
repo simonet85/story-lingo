@@ -57,3 +57,18 @@ class Subscription(Base):
     last_event_ms: Mapped[int] = mapped_column(BigInteger, default=0)
     last_event_type: Mapped[str | None] = mapped_column(String(40), nullable=True)
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+
+
+class MoneyFusionPayment(Base):
+    __tablename__ = "moneyfusion_payments"
+
+    token: Mapped[str] = mapped_column(String(120), primary_key=True)
+    user_id: Mapped[str] = mapped_column(String(120), index=True)
+    product_id: Mapped[str] = mapped_column(String(64))
+    amount: Mapped[int] = mapped_column(Integer)
+    status: Mapped[str] = mapped_column(String(16), default="pending")
+    transaction_number: Mapped[str | None] = mapped_column(
+        String(120), nullable=True
+    )
+    created_at_ms: Mapped[int] = mapped_column(BigInteger)
+    applied_at_ms: Mapped[int | None] = mapped_column(BigInteger, nullable=True)

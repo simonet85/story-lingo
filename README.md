@@ -36,6 +36,7 @@ Application mobile (iOS + Android) d'apprentissage de l'anglais par lecture et �
 - Feature spec — Comptes & synchronisation (phase 11) : [plan](specs/2026-11-22-comptes-synchronisation/plan.md) · [requirements](specs/2026-11-22-comptes-synchronisation/requirements.md) · [validation](specs/2026-11-22-comptes-synchronisation/validation.md)
 - Feature spec — Hors-ligne complet (phase 12) : [plan](specs/2026-11-22-hors-ligne-complet/plan.md) · [requirements](specs/2026-11-22-hors-ligne-complet/requirements.md) · [validation](specs/2026-11-22-hors-ligne-complet/validation.md)
 - Feature spec — Freemium & paywall (phase 13) : [plan](specs/2026-11-22-freemium-paywall/plan.md) · [requirements](specs/2026-11-22-freemium-paywall/requirements.md) · [validation](specs/2026-11-22-freemium-paywall/validation.md)
+- Feature spec — Paiement mobile money backend (phase 14) : [plan](specs/2026-11-25-paiement-mobile-money/plan.md) · [requirements](specs/2026-11-25-paiement-mobile-money/requirements.md) · [validation](specs/2026-11-25-paiement-mobile-money/validation.md)
 
 ## Développement
 

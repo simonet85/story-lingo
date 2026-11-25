@@ -11,6 +11,16 @@ def _env_flag(name: str) -> bool:
     return os.getenv(name, "").strip().lower() in {"1", "true", "yes", "on"}
 
 
+def _env_int(name: str, default: int) -> int:
+    raw = os.getenv(name, "").strip()
+    if not raw:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        return default
+
+
 @dataclass(frozen=True)
 class Settings:
     database_url: str
@@ -23,6 +33,10 @@ class Settings:
     dev_auth: bool = False
     dev_auth_secret: str | None = None
     revenuecat_webhook_secret: str | None = None
+    moneyfusion_api_url: str | None = None
+    moneyfusion_status_base_url: str = "https://pay.moneyfusion.net"
+    moneyfusion_price_monthly_xaf: int = 3500
+    moneyfusion_price_yearly_xaf: int = 30000
 
     @classmethod
     def from_env(cls, root: Path | None = None) -> Settings:
@@ -51,5 +65,18 @@ class Settings:
             dev_auth_secret=os.getenv("STORYLINGO_DEV_AUTH_SECRET") or None,
             revenuecat_webhook_secret=(
                 os.getenv("STORYLINGO_REVENUECAT_WEBHOOK_SECRET") or None
+            ),
+            moneyfusion_api_url=(
+                os.getenv("STORYLINGO_MONEYFUSION_API_URL") or None
+            ),
+            moneyfusion_status_base_url=(
+                os.getenv("STORYLINGO_MONEYFUSION_STATUS_BASE_URL")
+                or "https://pay.moneyfusion.net"
+            ).rstrip("/"),
+            moneyfusion_price_monthly_xaf=_env_int(
+                "STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XAF", 3500
+            ),
+            moneyfusion_price_yearly_xaf=_env_int(
+                "STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF", 30000
             ),
         )

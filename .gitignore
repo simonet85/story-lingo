@@ -53,6 +53,7 @@ app.*.map.json
 # Python caches
 .pytest_cache/
 __pycache__/
+.venv-server/
 
 # Generated content API state
 /server/data/

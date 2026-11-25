@@ -28,11 +28,32 @@ python -m venv .venv-server
 | `STORYLINGO_DEV_AUTH` | off | Enables `POST /v1/auth/dev/login` for local development. |
 | `STORYLINGO_DEV_AUTH_SECRET` | random per process | HS256 secret for dev tokens (32+ bytes). |
 | `STORYLINGO_REVENUECAT_WEBHOOK_SECRET` | empty | Shared secret expected in the webhook `Authorization` header. |
+| `STORYLINGO_MONEYFUSION_API_URL` | empty | MoneyFusion API link used by the server to create payments. **Secret** (the link embeds the account token). |
+| `STORYLINGO_MONEYFUSION_STATUS_BASE_URL` | `https://pay.moneyfusion.net` | Base URL for `paiementNotif/{token}` status checks. |
+| `STORYLINGO_MONEYFUSION_PRICE_MONTHLY_XAF` | `3500` | Monthly product price in FCFA. Development default, confirm before production. |
+| `STORYLINGO_MONEYFUSION_PRICE_YEARLY_XAF` | `30000` | Yearly product price in FCFA. Development default, confirm before production. |
 
 Never enable `STORYLINGO_DEV_AUTH` in production. Without
 `STORYLINGO_DEV_AUTH_SECRET` a random secret is generated at startup, so dev
 tokens stop working after a restart. CORS only allows `localhost` and
 `127.0.0.1` origins.
+
+## MoneyFusion payments
+
+`POST /v1/payments/moneyfusion` (Bearer token) accepts
+`{productId, numeroSend, nomclient}` and returns `{token, url, productId,
+amount}`. The server keeps the API link and the prices; amounts sent to
+MoneyFusion always come from the server configuration.
+
+`POST /v1/webhooks/moneyfusion` accepts a JSON or form body carrying `token`.
+The webhook is only a trigger: the server re-checks
+`GET {STATUS_BASE}/paiementNotif/{token}` and grants the subscription
+(`source = "moneyfusion"`) only when the remote status is `paid` and the amount
+matches the stored payment. Applying is idempotent per token, so a replayed
+callback never extends the expiry.
+
+`GET /v1/payments/moneyfusion/return` is the minimal return page used as
+`return_url`; it never mutates payment state.
 
 The Flutter app reads its configuration from `--dart-define`:
 
