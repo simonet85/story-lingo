@@ -114,12 +114,30 @@ def _check_csrf(session: AdminSession, csrf: str) -> None:
         raise HTTPException(status_code=403, detail="Jeton CSRF invalide.")
 
 
+_MONTHS_FR = (
+    "janv.",
+    "févr.",
+    "mars",
+    "avr.",
+    "mai",
+    "juin",
+    "juil.",
+    "août",
+    "sept.",
+    "oct.",
+    "nov.",
+    "déc.",
+)
+
+
 def _format_updated(value: datetime | None) -> str:
     if value is None:
         return "—"
     if value.tzinfo is None:
         value = value.replace(tzinfo=timezone.utc)
-    return value.astimezone(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    moment = value.astimezone(timezone.utc)
+    month = _MONTHS_FR[moment.month - 1]
+    return f"{moment.day} {month} {moment.year} · {moment:%H:%M} UTC"
 
 
 def _notice_text(notice: str | None, book_id: str | None) -> str | None:
@@ -219,12 +237,20 @@ def books_page(
         }
         for record in records
     ]
+    stats = {
+        "total": len(books),
+        "chapters": sum(book["chapter_count"] for book in books),
+        "minutes": sum(record.total_minutes for record in records),
+        "free": sum(1 for book in books if book["is_free"]),
+        "paid": sum(1 for book in books if not book["is_free"]),
+    }
     return _render(
         request,
         "books.html",
         {
             "csrf": session.csrf,
             "books": books,
+            "stats": stats,
             "notice": _notice_text(notice, book),
         },
     )

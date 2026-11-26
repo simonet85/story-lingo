@@ -1,59 +1,167 @@
 {% extends "base.html" %}
-{% block title %}Livres{% endblock %}
+{% from "_icons.html" import icon %}
+{% block title %}Bibliothèque{% endblock %}
 {% block content %}
-  <div class="head">
-    <h1>Livres</h1>
-    <a class="button" href="/admin/import">Importer un pack</a>
-  </div>
-  {% if notice %}<p class="notice" role="status">{{ notice }}</p>{% endif %}
+  <header class="page-head">
+    <div>
+      <h1>Bibliothèque</h1>
+      <p class="page-sub">
+        Les packs publiés dans le catalogue, leur niveau et leur accès.
+        Importez une archive ZIP pour ajouter un livre.
+      </p>
+    </div>
+    <div class="page-actions">
+      <a class="btn btn-primary" href="/admin/import">
+        {{ icon('upload', 17) }} Importer un pack
+      </a>
+    </div>
+  </header>
+
+  {% if notice %}
+  <p class="notice" role="status">{{ icon('check', 18) }}<span>{{ notice }}</span></p>
+  {% endif %}
+
+  <section class="stats" aria-label="Indicateurs du catalogue">
+    <article class="stat">
+      <span class="stat-icon">{{ icon('book', 18) }}</span>
+      <p class="stat-value">{{ stats.total }}</p>
+      <p class="stat-label">Livres publiés</p>
+      <p class="stat-meta">Dans le catalogue actuel</p>
+    </article>
+    <article class="stat">
+      <span class="stat-icon">{{ icon('layers', 18) }}</span>
+      <p class="stat-value">{{ stats.chapters }}</p>
+      <p class="stat-label">Chapitres cumulés</p>
+      <p class="stat-meta">Tous niveaux confondus</p>
+    </article>
+    <article class="stat">
+      <span class="stat-icon">{{ icon('clock', 18) }}</span>
+      <p class="stat-value">{{ stats.minutes }}</p>
+      <p class="stat-label">Minutes de lecture</p>
+      <p class="stat-meta">Durée estimée par les packs</p>
+    </article>
+    <article class="stat">
+      <span class="stat-icon">{{ icon('key', 18) }}</span>
+      <p class="stat-value">{{ stats.free }}</p>
+      <p class="stat-label">Livres gratuits</p>
+      <p class="stat-meta">Payants — {{ stats.paid }}</p>
+    </article>
+  </section>
+
+  <section class="panel" aria-labelledby="books-title">
+    <header class="panel-head">
+      <div>
+        <h2 id="books-title">Livres publiés</h2>
+        <p class="panel-sub">
+          {{ stats.total }} pack{{ 's' if stats.total != 1 }} ·
+          {{ stats.chapters }} chapitre{{ 's' if stats.chapters != 1 }}
+        </p>
+      </div>
+      {% if books %}
+      <div class="panel-tools">
+        <label class="search">
+          {{ icon('search', 16) }}
+          <span class="sr-only">Rechercher un livre</span>
+          <input type="search" data-search autocomplete="off"
+                 placeholder="Rechercher un titre, un identifiant…">
+        </label>
+        <p class="search-status" data-search-status aria-live="polite"></p>
+      </div>
+      {% endif %}
+    </header>
+
+    {% if books %}
+    <div class="table-wrap">
+      <table class="books">
+        <thead>
+          <tr>
+            <th scope="col">Livre</th>
+            <th scope="col">Niveau</th>
+            <th scope="col" class="num">Chapitres</th>
+            <th scope="col">Accès</th>
+            <th scope="col">Mise à jour</th>
+            <th scope="col" class="right">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for book in books %}
+          <tr data-book-row
+              data-search="{{ (book.title ~ ' ' ~ book.title_fr ~ ' ' ~ book.id ~ ' ' ~ book.level ~ ' ' ~ ('gratuit' if book.is_free else 'payant'))|lower }}">
+            <td class="cell-book">
+              <a class="book-title" href="/admin/books/{{ book.id }}">{{ book.title }}</a>
+              <span class="book-fr">{{ book.title_fr }}</span>
+              <code class="book-id">{{ book.id }}</code>
+            </td>
+            <td data-label="Niveau"><span class="level">{{ book.level|upper }}</span></td>
+            <td class="num" data-label="Chapitres">{{ book.chapter_count }}</td>
+            <td data-label="Accès">
+              {% if book.is_free %}
+              <span class="badge badge-free">Gratuit</span>
+              {% else %}
+              <span class="badge badge-paid">Payant</span>
+              {% endif %}
+            </td>
+            <td class="cell-date" data-label="Mise à jour">{{ book.updated_at }}</td>
+            <td class="cell-actions" data-label="Actions">
+              <a class="btn btn-secondary btn-small" href="/admin/books/{{ book.id }}">Détails</a>
+              <form method="post" action="/admin/books/{{ book.id }}/access" class="inline-form"
+                    onsubmit="return confirm('Confirmer ce changement ?');">
+                <input type="hidden" name="csrf" value="{{ csrf }}">
+                <input type="hidden" name="access" value="{{ 'paid' if book.is_free else 'free' }}">
+                <button type="submit"
+                        class="btn btn-small {{ 'btn-toggle-paid' if book.is_free else 'btn-toggle-free' }}">
+                  {{ 'Rendre payant' if book.is_free else 'Rendre gratuit' }}
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="filter-empty" data-search-empty hidden>
+      Aucun livre ne correspond à cette recherche.
+    </p>
+    {% else %}
+    <div class="empty">
+      <span class="empty-icon">{{ icon('book', 24) }}</span>
+      <h3>Aucun livre publié</h3>
+      <p>
+        Importez une archive ZIP contenant <code>manifest.json</code> à la racine
+        ou dans un unique dossier pour publier votre premier livre.
+      </p>
+      <a class="btn btn-primary" href="/admin/import">
+        {{ icon('upload', 17) }} Importer un pack
+      </a>
+    </div>
+    {% endif %}
+  </section>
+{% endblock %}
+{% block scripts %}
   {% if books %}
-  <table>
-    <thead>
-      <tr>
-        <th>Identifiant</th>
-        <th>Titre</th>
-        <th>Niveau</th>
-        <th>Version</th>
-        <th>Chapitres</th>
-        <th>Accès</th>
-        <th>Mise à jour</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for book in books %}
-      <tr>
-        <td><code>{{ book.id }}</code></td>
-        <td>
-          <strong>{{ book.title }}</strong><br>
-          <span class="muted">{{ book.title_fr }}</span>
-        </td>
-        <td>{{ book.level }}</td>
-        <td>{{ book.pack_version }}</td>
-        <td>{{ book.chapter_count }}</td>
-        <td>
-          {% if book.is_free %}
-          <span class="badge free">Gratuit</span>
-          {% else %}
-          <span class="badge paid">Payant</span>
-          {% endif %}
-        </td>
-        <td class="muted">{{ book.updated_at }}</td>
-        <td class="actions-cell">
-          <a class="small-link" href="/admin/books/{{ book.id }}">Détails</a>
-          <form method="post" action="/admin/books/{{ book.id }}/access" onsubmit="return confirm('Confirmer ce changement ?');">
-            <input type="hidden" name="csrf" value="{{ csrf }}">
-            <input type="hidden" name="access" value="{{ 'paid' if book.is_free else 'free' }}">
-            <button type="submit" class="small{% if book.is_free %} danger{% endif %}">
-              {{ 'Rendre payant' if book.is_free else 'Rendre gratuit' }}
-            </button>
-          </form>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  {% else %}
-  <p class="muted">Aucun livre publié pour le moment.</p>
+  <script>
+    (() => {
+      const input = document.querySelector('[data-search]');
+      if (!input) return;
+      const rows = Array.from(document.querySelectorAll('[data-book-row]'));
+      const status = document.querySelector('[data-search-status]');
+      const empty = document.querySelector('[data-search-empty]');
+      const apply = () => {
+        const query = input.value.trim().toLowerCase();
+        let shown = 0;
+        for (const row of rows) {
+          const match = !query ||
+            (row.getAttribute('data-search') || '').includes(query);
+          row.hidden = !match;
+          if (match) shown += 1;
+        }
+        status.textContent = query
+          ? `${shown} sur ${rows.length} livre${rows.length > 1 ? 's' : ''}`
+          : '';
+        empty.hidden = shown > 0;
+      };
+      input.addEventListener('input', apply);
+    })();
+  </script>
   {% endif %}
 {% endblock %}

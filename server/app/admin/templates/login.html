@@ -1,15 +1,90 @@
 {% extends "base.html" %}
+{% from "_icons.html" import icon %}
 {% block title %}Connexion{% endblock %}
-{% block content %}
-  <section class="card narrow">
-    <h1>Connexion administrateur</h1>
-    {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
-    <form method="post" action="/admin/login" class="stack">
-      <div>
-        <label for="password">Mot de passe</label>
-        <input id="password" name="password" type="password" required autofocus autocomplete="current-password">
-      </div>
-      <button type="submit">Se connecter</button>
-    </form>
+{% block auth_content %}
+  <section class="auth-brand" aria-label="Storylingo back-office">
+    <div class="auth-lockup">
+      <span class="brand-mark">{{ icon('book', 21) }}</span>
+      <span class="name">Storylingo<span>Back-office</span></span>
+    </div>
+    <div>
+      <p class="auth-headline">Publier un livre, régler son accès.</p>
+      <p class="auth-lede">
+        Un atelier pour importer les packs, vérifier les chapitres et décider
+        ce qui reste gratuit dans le catalogue.
+      </p>
+    </div>
+    <ul class="auth-points">
+      <li>{{ icon('file', 18) }}<span><strong>Archive ZIP validée</strong> avant chaque publication.</span></li>
+      <li>{{ icon('book', 18) }}<span><strong>Chapitres et métadonnées</strong> relus depuis le pack.</span></li>
+      <li>{{ icon('key', 18) }}<span><strong>Gratuit ou payant</strong>, modifiable à tout moment.</span></li>
+    </ul>
+    <p class="auth-foot">Accès réservé à l'équipe éditoriale.</p>
   </section>
+
+  <div class="auth-panel">
+    <div class="auth-panel-inner">
+      <div class="auth-mobile-brand">
+        <span class="brand-mark">{{ icon('book', 21) }}</span>
+        <span class="brand-name">Storylingo<span>Back-office</span></span>
+      </div>
+      <section class="auth-card" aria-labelledby="login-title">
+        <h1 id="login-title">Connexion administrateur</h1>
+        <p class="lead">
+          Entrez le jeton défini par <code>STORYLINGO_ADMIN_TOKEN</code> pour
+          ouvrir la session.
+        </p>
+        {% if error %}
+        <p class="error" role="alert">{{ icon('alert', 18) }}<span>{{ error }}</span></p>
+        {% endif %}
+        <form method="post" action="/admin/login" class="stack">
+          <div class="field">
+            <label for="password">Jeton d'accès</label>
+            <div class="input-affix">
+              <input id="password" name="password" type="password" required
+                     autofocus autocomplete="current-password"
+                     aria-describedby="token-hint">
+              <button class="affix-btn" type="button" data-toggle-password
+                      aria-label="Afficher le jeton" aria-pressed="false">
+                <span data-eye>{{ icon('eye', 18) }}</span>
+                <span data-eye-off hidden>{{ icon('eye-off', 18) }}</span>
+              </button>
+            </div>
+            <p class="hint" id="token-hint">
+              Le jeton reste en variable d'environnement, jamais dans le dépôt.
+            </p>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">
+            {{ icon('key', 17) }} Ouvrir la session
+          </button>
+        </form>
+        <p class="auth-footnote">
+          Session de 12 h · Cookie HttpOnly · CSRF sur les modifications
+        </p>
+      </section>
+    </div>
+  </div>
+{% endblock %}
+{% block scripts %}
+  <script>
+    (() => {
+      const toggle = document.querySelector('[data-toggle-password]');
+      if (!toggle) return;
+      const input = document.getElementById('password');
+      const eye = toggle.querySelector('[data-eye]');
+      const eyeOff = toggle.querySelector('[data-eye-off]');
+      toggle.addEventListener('click', () => {
+        const reveal = input.type === 'password';
+        input.type = reveal ? 'text' : 'password';
+        eye.hidden = reveal;
+        eyeOff.hidden = !reveal;
+        toggle.setAttribute('aria-pressed', String(reveal));
+        toggle.setAttribute(
+          'aria-label',
+          reveal ? 'Masquer le jeton' : 'Afficher le jeton'
+        );
+        input.focus();
+      });
+    })();
+  </script>
 {% endblock %}

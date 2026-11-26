@@ -1,47 +1,98 @@
 {% extends "base.html" %}
+{% from "_icons.html" import icon %}
 {% block title %}Modifier {{ book.title }}{% endblock %}
 {% block content %}
-  <div class="head">
-    <h1>Modifier {{ book.title }}</h1>
-    <a class="button" href="/admin/books/{{ book.id }}">Annuler</a>
-  </div>
-  {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
-  <form method="post" action="/admin/books/{{ book.id }}/edit" class="card stack edit">
+  <nav class="crumbs" aria-label="Fil d'Ariane">
+    <a href="/admin/books">Bibliothèque</a>
+    <span aria-hidden="true">/</span>
+    <a href="/admin/books/{{ book.id }}">{{ book.title }}</a>
+    <span aria-hidden="true">/</span>
+    <span>Modifier</span>
+  </nav>
+
+  <header class="page-head">
+    <div>
+      <h1>Modifier {{ book.title }}</h1>
+      <p class="page-sub">
+        Les modifications sont réécrites dans le manifeste puis republiées
+        après validation du pack.
+      </p>
+    </div>
+    <div class="page-actions">
+      <a class="btn btn-secondary" href="/admin/books/{{ book.id }}">Annuler</a>
+    </div>
+  </header>
+
+  {% if error %}
+  <p class="error" role="alert">{{ icon('alert', 18) }}<span>{{ error }}</span></p>
+  {% endif %}
+
+  <form method="post" action="/admin/books/{{ book.id }}/edit" class="panel form stack edit">
     <input type="hidden" name="csrf" value="{{ csrf }}">
-    <div>
-      <label for="title">Titre</label>
-      <input id="title" name="title" type="text" maxlength="300" value="{{ form.title }}" required>
-    </div>
-    <div>
-      <label for="title_fr">Titre français</label>
-      <input id="title_fr" name="title_fr" type="text" maxlength="300" value="{{ form.title_fr }}" required>
-    </div>
-    <div>
-      <label for="author">Auteur</label>
-      <input id="author" name="author" type="text" maxlength="200" value="{{ form.author }}" required>
-    </div>
-    <div>
-      <label for="level">Niveau</label>
-      <input id="level" name="level" type="text" maxlength="8" value="{{ form.level }}" placeholder="a2, b1 ou b2" required>
-      <p class="muted">Identifiant CEFR en minuscules : a2, b1 ou b2.</p>
-    </div>
-    <div>
-      <label for="description_fr">Description</label>
-      <textarea id="description_fr" name="description_fr" rows="4" maxlength="1000" required>{{ form.description_fr }}</textarea>
-    </div>
+
+    <fieldset class="stack">
+      <legend>Identité du livre</legend>
+      <div class="field-row">
+        <div class="field">
+          <label for="title">Titre</label>
+          <input id="title" name="title" type="text" maxlength="300"
+                 value="{{ form.title }}" required>
+        </div>
+        <div class="field">
+          <label for="title_fr">Titre français</label>
+          <input id="title_fr" name="title_fr" type="text" maxlength="300"
+                 value="{{ form.title_fr }}" required>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="author">Auteur</label>
+          <input id="author" name="author" type="text" maxlength="200"
+                 value="{{ form.author }}" required>
+        </div>
+        <div class="field">
+          <label for="level">Niveau</label>
+          <input id="level" name="level" type="text" maxlength="8"
+                 value="{{ form.level }}" placeholder="a2, b1 ou b2" required>
+          <p class="hint">Identifiant CEFR en minuscules : a2, b1 ou b2.</p>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="stack">
+      <legend>Description</legend>
+      <div class="field">
+        <label for="description_fr">Texte affiché dans la fiche du livre</label>
+        <textarea id="description_fr" name="description_fr" rows="4"
+                  maxlength="1000" required>{{ form.description_fr }}</textarea>
+      </div>
+    </fieldset>
+
     <fieldset>
       <legend>Accès</legend>
-      <label>
-        <input type="radio" name="access" value="free" {% if form.access == 'free' %}checked{% endif %}>
-        Gratuit
-      </label>
-      <label>
-        <input type="radio" name="access" value="paid" {% if form.access == 'paid' %}checked{% endif %}>
-        Payant
-      </label>
+      <div class="choice-set">
+        <label class="choice">
+          <input type="radio" name="access" value="free"{% if form.access == 'free' %} checked{% endif %}>
+          <span class="choice-text">
+            <strong>Gratuit</strong>
+            <small>Lisible par tous les comptes, sans abonnement.</small>
+          </span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="access" value="paid"{% if form.access == 'paid' %} checked{% endif %}>
+          <span class="choice-text">
+            <strong>Payant</strong>
+            <small>Réservé aux abonnements actifs.</small>
+          </span>
+        </label>
+      </div>
     </fieldset>
-    <div>
-      <button type="submit">Enregistrer</button>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        {{ icon('check', 17) }} Enregistrer
+      </button>
+      <a class="btn btn-ghost" href="/admin/books/{{ book.id }}">Annuler</a>
     </div>
   </form>
 {% endblock %}

@@ -1,38 +1,112 @@
 {% extends "base.html" %}
+{% from "_icons.html" import icon %}
 {% block title %}Importer un pack{% endblock %}
 {% block content %}
-  <section class="card">
-    <h1>Importer un pack</h1>
-    <p class="muted">
-      Archive ZIP contenant <code>manifest.json</code> à la racine ou dans un
-      unique dossier. Publier un identifiant existant remplace intégralement son
-      pack après une sauvegarde temporaire.
-    </p>
-    {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
-    <form method="post" action="/admin/import" enctype="multipart/form-data" class="stack">
-      <input type="hidden" name="csrf" value="{{ csrf }}">
-      <div>
-        <label for="file">Fichier ZIP</label>
-        <input id="file" name="file" type="file" accept=".zip,application/zip" required>
+  <nav class="crumbs" aria-label="Fil d'Ariane">
+    <a href="/admin/books">Bibliothèque</a>
+    <span aria-hidden="true">/</span>
+    <span>Importer</span>
+  </nav>
+
+  <header class="page-head">
+    <div>
+      <h1>Importer un pack</h1>
+      <p class="page-sub">
+        Archive ZIP contenant <code>manifest.json</code> à la racine ou dans un
+        unique dossier. Un identifiant existant remplace intégralement son pack
+        après une sauvegarde temporaire.
+      </p>
+    </div>
+  </header>
+
+  {% if error %}
+  <p class="error" role="alert">{{ icon('alert', 18) }}<span>{{ error }}</span></p>
+  {% endif %}
+
+  <form method="post" action="/admin/import" enctype="multipart/form-data"
+        class="panel form stack">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <div class="field">
+      <span class="field-label" id="file-label">Fichier du pack</span>
+      <label class="dropzone" for="file">
+        {{ icon('upload', 24) }}
+        <strong>Choisir une archive ZIP</strong>
+        <span>Identifiants, chapitres et fichiers audio sont validés avant publication.</span>
+        <input id="file" name="file" type="file" accept=".zip,application/zip"
+               required aria-labelledby="file-label">
+      </label>
+      <p class="file-name" data-file-name aria-live="polite"></p>
+    </div>
+
+    <fieldset>
+      <legend>Accès à la publication</legend>
+      <div class="choice-set">
+        <label class="choice">
+          <input type="radio" name="access" value="keep"{% if selected == 'keep' %} checked{% endif %}>
+          <span class="choice-text">
+            <strong>Conserver le statut existant</strong>
+            <small>Un nouveau livre est payant par défaut.</small>
+          </span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="access" value="free"{% if selected == 'free' %} checked{% endif %}>
+          <span class="choice-text">
+            <strong>Gratuit</strong>
+            <small>Lisible par tous les comptes, sans abonnement.</small>
+          </span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="access" value="paid"{% if selected == 'paid' %} checked{% endif %}>
+          <span class="choice-text">
+            <strong>Payant</strong>
+            <small>Réservé aux abonnements actifs.</small>
+          </span>
+        </label>
       </div>
-      <fieldset>
-        <legend>Accès</legend>
-        <label>
-          <input type="radio" name="access" value="keep" {% if selected == 'keep' %}checked{% endif %}>
-          Conserver le statut existant (payant pour un nouveau livre)
-        </label>
-        <label>
-          <input type="radio" name="access" value="free" {% if selected == 'free' %}checked{% endif %}>
-          Gratuit
-        </label>
-        <label>
-          <input type="radio" name="access" value="paid" {% if selected == 'paid' %}checked{% endif %}>
-          Payant
-        </label>
-      </fieldset>
-      <div>
-        <button type="submit">Importer et publier</button>
-      </div>
-    </form>
-  </section>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">
+        {{ icon('upload', 17) }} Importer et publier
+      </button>
+      <a class="btn btn-ghost" href="/admin/books">Retour aux livres</a>
+    </div>
+  </form>
+{% endblock %}
+{% block scripts %}
+  <script>
+    (() => {
+      const input = document.getElementById('file');
+      const label = document.querySelector('[data-file-name]');
+      const zone = input ? input.closest('.dropzone') : null;
+      if (!input || !label) return;
+      const show = () => {
+        const file = input.files && input.files[0];
+        if (!file) {
+          label.textContent = '';
+          return;
+        }
+        const size = file.size >= 1048576
+          ? `${(file.size / 1048576).toFixed(1)} Mo`
+          : `${Math.max(1, Math.round(file.size / 1024))} Ko`;
+        label.innerHTML = '';
+        const strong = document.createElement('strong');
+        strong.textContent = file.name;
+        label.append(strong, document.createTextNode(` · ${size}`));
+      };
+      input.addEventListener('change', show);
+      if (zone) {
+        for (const type of ['dragenter', 'dragover']) {
+          zone.addEventListener(type, (event) => {
+            event.preventDefault();
+            zone.classList.add('is-over');
+          });
+        }
+        for (const type of ['dragleave', 'drop']) {
+          zone.addEventListener(type, () => zone.classList.remove('is-over'));
+        }
+      }
+    })();
+  </script>
 {% endblock %}

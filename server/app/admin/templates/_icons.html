@@ -1,0 +1,60 @@
+{% macro icon(name, size=20) -%}
+<svg class="icon" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+{%- if name == 'book' -%}
+  <path d="M12 6.4C10 4.7 7.5 4.3 5 4.4v13.2c2.5-.1 5 .3 7 2 2-1.7 4.5-2.1 7-2V4.4c-2.5-.1-5 .3-7 2Z"/>
+  <path d="M12 6.4v13.2"/>
+{%- elif name == 'upload' -%}
+  <path d="M12 15.5V4.5"/>
+  <path d="m6.5 10 5.5-5.5L17.5 10"/>
+  <path d="M5 19.5h14"/>
+{%- elif name == 'logout' -%}
+  <path d="M14 4.5h3.5A2.5 2.5 0 0 1 20 7v10a2.5 2.5 0 0 1-2.5 2.5H14"/>
+  <path d="m9.5 8.5-3.5 3.5 3.5 3.5"/>
+  <path d="M6 12h9.5"/>
+{%- elif name == 'search' -%}
+  <circle cx="11" cy="11" r="6.5"/>
+  <path d="m16 16 4 4"/>
+{%- elif name == 'plus' -%}
+  <path d="M12 5v14"/>
+  <path d="M5 12h14"/>
+{%- elif name == 'arrow-left' -%}
+  <path d="M19 12H5"/>
+  <path d="m11 6-6 6 6 6"/>
+{%- elif name == 'arrow-right' -%}
+  <path d="M5 12h14"/>
+  <path d="m13 6 6 6-6 6"/>
+{%- elif name == 'layers' -%}
+  <path d="m12 3.8 8.5 4.6L12 13 3.5 8.4 12 3.8Z"/>
+  <path d="m3.5 12.9 8.5 4.6 8.5-4.6"/>
+{%- elif name == 'clock' -%}
+  <circle cx="12" cy="12" r="8.5"/>
+  <path d="M12 7.5V12l3 2"/>
+{%- elif name == 'lock' -%}
+  <rect x="4.5" y="10.5" width="15" height="9.5" rx="2.5"/>
+  <path d="M8 10.5V7a4 4 0 0 1 7.6-1.7"/>
+  <path d="M12 14.5v2"/>
+{%- elif name == 'file' -%}
+  <path d="M14 3.5H7.5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V8z"/>
+  <path d="M14 3.5V8h4.5"/>
+{%- elif name == 'check' -%}
+  <path d="m5.5 12.5 4 4 9-9"/>
+{%- elif name == 'alert' -%}
+  <path d="M12 4.5 3.5 19.5h17L12 4.5Z"/>
+  <path d="M12 10v4"/>
+  <path d="M12 17h.01"/>
+{%- elif name == 'eye' -%}
+  <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/>
+  <circle cx="12" cy="12" r="3"/>
+{%- elif name == 'eye-off' -%}
+  <path d="M4 4.5 20 20"/>
+  <path d="M9.9 5.9A10.6 10.6 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.8 3.6"/>
+  <path d="M6.3 7.6A17.7 17.7 0 0 0 2.5 12S6 18.5 12 18.5c1.5 0 2.9-.4 4.1-1"/>
+  <path d="M10.1 10.2a2.7 2.7 0 0 0 3.7 3.7"/>
+{%- elif name == 'key' -%}
+  <circle cx="8" cy="15" r="3.8"/>
+  <path d="m10.8 12.2 8.7-8.7"/>
+  <path d="m16.5 6.5 2 2"/>
+  <path d="m18.5 4.5 2 2"/>
+{%- endif -%}
+</svg>
+{%- endmacro %}
