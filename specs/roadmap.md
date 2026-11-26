@@ -81,6 +81,12 @@ Les phases sont volontairement petites : chacune est une tranche livrable, testa
 - Attente de l'entitlement serveur (webhook), succès, refus, annulation, erreur réseau
 - Flag `MOBILE_MONEY_ENABLED` désactivé par défaut (politiques stores), faux MoneyFusion local pour la démo Android
 
+## Phase 16a — Refonte visuelle mobile & web
+- Design system hybride : structure et composants des captures, primaire vert Storylingo, surfaces crème/encre, thèmes clair et sombre
+- Restyle de tous les écrans existants sans nouvelle fonctionnalité ni donnée factice
+- Web : tableau de bord calqué sur l'existant (barre latérale, indicateurs dérivés des providers, activité récente, lecture en deux volets)
+- À livrer avant la phase 16 : l'audit a11y/perf et la release portent sur ce design
+
 ## Phase 16 — Analytics, notifications & release
 - Événements Mixpanel : funnel onboarding → J1 → J7 → J28, sessions, conversion
 - Rappel quotidien doux (heure locale, désactivable)
@@ -96,4 +102,4 @@ Les phases sont volontairement petites : chacune est une tranche livrable, testa
 
 ---
 
-Non planifié pour l'instant : partage social des progrès, statistiques avancées, autres niveaux et langues sources, mode traduction de phrase entière, application web.
+Non planifié pour l'instant : partage social des progrès, statistiques avancées, autres niveaux et langues sources, mode traduction de phrase entière, site vitrine et SEO.

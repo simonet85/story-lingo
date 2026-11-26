@@ -40,6 +40,8 @@ Application mobile (iOS + Android) d'apprentissage de l'anglais par lecture et �
 - Feature spec — Paiement mobile money dans l'app (phase 15) : [plan](specs/2026-11-25-paiement-mobile-money-app/plan.md) · [requirements](specs/2026-11-25-paiement-mobile-money-app/requirements.md) · [validation](specs/2026-11-25-paiement-mobile-money-app/validation.md)
 - Feature spec — Back-office contenu (phase 14a) : [plan](specs/2026-11-23-backoffice-contenu/plan.md) · [requirements](specs/2026-11-23-backoffice-contenu/requirements.md) · [validation](specs/2026-11-23-backoffice-contenu/validation.md)
 - Feature spec — CRUD complet du back-office (phase 14b) : [plan](specs/2026-11-23-backoffice-crud/plan.md) · [requirements](specs/2026-11-23-backoffice-crud/requirements.md) · [validation](specs/2026-11-23-backoffice-crud/validation.md)
+- Feature spec — Refonte visuelle mobile & web (phase 16a) : [plan](specs/2026-11-26-refonte-visuelle-mobile-web/plan.md) · [requirements](specs/2026-11-26-refonte-visuelle-mobile-web/requirements.md) · [validation](specs/2026-11-26-refonte-visuelle-mobile-web/validation.md)
+- Feature spec — Analytics, notifications & release (phase 16) : [plan](specs/2026-11-26-analytics-notifications-release/plan.md) · [requirements](specs/2026-11-26-analytics-notifications-release/requirements.md) · [validation](specs/2026-11-26-analytics-notifications-release/validation.md)
 
 ## Paiement mobile money (démo Android)
 
