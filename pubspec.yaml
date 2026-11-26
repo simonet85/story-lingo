@@ -38,6 +38,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/onboarding/level_test_fr.json
+    - assets/onboarding/welcome_reading.jpg
+    - assets/onboarding/listening.jpg
     - assets/content/sleepy-hollow-a2/manifest.json
     - assets/content/sleepy-hollow-a2/chapters/
     - assets/content/sleepy-hollow-a2/audio/

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../application/onboarding_controller.dart';
 import '../domain/interest.dart';
 
@@ -48,7 +49,12 @@ class _InterestsScreenState extends ConsumerState<InterestsScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Étape 3 sur 3', style: theme.textTheme.labelMedium),
+        Text(
+          'Étape 3 sur 3',
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
         const SizedBox(height: AppSpacing.md),
         Expanded(
           child: SingleChildScrollView(
@@ -68,34 +74,50 @@ class _InterestsScreenState extends ConsumerState<InterestsScreen> {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.lg),
-                Wrap(
-                  spacing: AppSpacing.sm,
-                  runSpacing: AppSpacing.sm,
-                  children: [
-                    for (final interest in Interest.values)
-                      FilterChip(
-                        key: ValueKey('interest-${interest.id}'),
-                        label: Text(interest.label),
-                        selected: widget.selected.contains(interest.id),
-                        onSelected: (_) => ref
-                            .read(onboardingControllerProvider.notifier)
-                            .toggleInterest(interest.id),
-                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                      ),
-                  ],
+                AppCard(
+                  child: Wrap(
+                    spacing: AppSpacing.sm,
+                    runSpacing: AppSpacing.sm,
+                    children: [
+                      for (final interest in Interest.values)
+                        FilterChip(
+                          key: ValueKey('interest-${interest.id}'),
+                          label: Text(interest.label),
+                          selected: widget.selected.contains(interest.id),
+                          onSelected: (_) => ref
+                              .read(onboardingControllerProvider.notifier)
+                              .toggleInterest(interest.id),
+                          materialTapTargetSize: MaterialTapTargetSize.padded,
+                        ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        Text(
-          helper,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: canContinue
-                ? theme.colorScheme.primary
-                : theme.colorScheme.onSurfaceVariant,
-          ),
+        Row(
+          children: [
+            Icon(
+              canContinue ? Icons.check_circle : Icons.radio_button_unchecked,
+              size: 18,
+              color: canContinue
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.onSurfaceVariant,
+            ),
+            const SizedBox(width: AppSpacing.sm),
+            Expanded(
+              child: Text(
+                helper,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: canContinue
+                      ? theme.colorScheme.primary
+                      : theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: AppSpacing.sm),
         FilledButton(

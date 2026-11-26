@@ -5,10 +5,12 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/prefs/user_prefs_provider.dart';
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../../account/domain/auth_session.dart';
 import '../../account/presentation/auth_provider.dart';
 import '../../billing/presentation/subscription_section.dart';
 import '../../content/data/content_repository.dart';
+import '../../downloads/data/download_platform.dart';
 import '../../downloads/presentation/downloads_section.dart';
 import '../../onboarding/domain/user_level.dart';
 import '../../program/presentation/program_provider.dart';
@@ -29,93 +31,139 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Réglages')),
-      body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        children: [
-          const _AccountSection(),
-          const Divider(height: AppSpacing.xxl),
-          const SubscriptionSection(),
-          const Divider(height: AppSpacing.xxl),
-          Text('Votre niveau', style: theme.textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            'Cette estimation sert à choisir vos premiers livres. Elle reste '
-            'modifiable à tout moment.',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          SegmentedButton<UserLevel>(
-            segments: [
-              for (final level in UserLevel.values)
-                ButtonSegment(value: level, label: Text(level.shortLabel)),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 760),
+          child: ListView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            children: [
+              const AppCard(child: _AccountSection()),
+              const SizedBox(height: AppSpacing.md),
+              const AppCard(child: SubscriptionSection()),
+              const SizedBox(height: AppSpacing.md),
+              AppCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Votre niveau', style: theme.textTheme.titleLarge),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'Cette estimation sert à choisir vos premiers livres. '
+                      'Elle reste modifiable à tout moment.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    SegmentedButton<UserLevel>(
+                      segments: [
+                        for (final level in UserLevel.values)
+                          ButtonSegment(
+                            value: level,
+                            label: Text(level.shortLabel),
+                          ),
+                      ],
+                      selected: {prefs.level},
+                      showSelectedIcon: false,
+                      onSelectionChanged: (selection) =>
+                          prefsController.updateLevel(selection.first),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    Text(prefs.level.label, style: theme.textTheme.titleSmall),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      prefs.level.description,
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Apparence', style: theme.textTheme.titleLarge),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'Choisissez la luminosité de l’application.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    SegmentedButton<ThemeMode>(
+                      segments: const [
+                        ButtonSegment(
+                          value: ThemeMode.system,
+                          label: Text('Système'),
+                        ),
+                        ButtonSegment(
+                          value: ThemeMode.light,
+                          label: Text('Clair'),
+                        ),
+                        ButtonSegment(
+                          value: ThemeMode.dark,
+                          label: Text('Sombre'),
+                        ),
+                      ],
+                      selected: {prefs.themeMode},
+                      showSelectedIcon: false,
+                      onSelectionChanged: (selection) =>
+                          prefsController.updateThemeMode(selection.first),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              if (ref.watch(downloadPlatformProvider) !=
+                  DownloadPlatform.other) ...[
+                const AppCard(child: DownloadsSection()),
+                const SizedBox(height: AppSpacing.md),
+              ],
+              AppCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Données de test', style: theme.textTheme.titleLarge),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'Les événements de votre parcours restent sur cet '
+                      'appareil. Copiez l’export JSON pour le partager avec '
+                      'l’équipe du pilote.',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    Text(
+                      events.length == 1
+                          ? '1 événement enregistré'
+                          : '${events.length} événements enregistrés',
+                      style: theme.textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    SizedBox(
+                      width: double.infinity,
+                      child: FilledButton.tonalIcon(
+                        onPressed: () => _copyExport(context, ref),
+                        icon: const Icon(Icons.copy_all_outlined),
+                        label: const Text('Copier l’export JSON'),
+                      ),
+                    ),
+                    TextButton.icon(
+                      onPressed: events.isEmpty
+                          ? null
+                          : () => _confirmClear(context, ref),
+                      icon: const Icon(Icons.delete_outline),
+                      label: const Text('Effacer la télémétrie'),
+                    ),
+                  ],
+                ),
+              ),
             ],
-            selected: {prefs.level},
-            showSelectedIcon: false,
-            onSelectionChanged: (selection) =>
-                prefsController.updateLevel(selection.first),
           ),
-          const SizedBox(height: AppSpacing.md),
-          Text(prefs.level.label, style: theme.textTheme.titleSmall),
-          const SizedBox(height: AppSpacing.xs),
-          Text(prefs.level.description, style: theme.textTheme.bodyMedium),
-          const Divider(height: AppSpacing.xxl),
-          Text('Apparence', style: theme.textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            'Choisissez la luminosité de l’application.',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          SegmentedButton<ThemeMode>(
-            segments: const [
-              ButtonSegment(value: ThemeMode.system, label: Text('Système')),
-              ButtonSegment(value: ThemeMode.light, label: Text('Clair')),
-              ButtonSegment(value: ThemeMode.dark, label: Text('Sombre')),
-            ],
-            selected: {prefs.themeMode},
-            showSelectedIcon: false,
-            onSelectionChanged: (selection) =>
-                prefsController.updateThemeMode(selection.first),
-          ),
-          const DownloadsSection(),
-          const Divider(height: AppSpacing.xxl),
-          Text('Données de test', style: theme.textTheme.titleMedium),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            'Les événements de votre parcours restent sur cet appareil. '
-            'Copiez l’export JSON pour le partager avec l’équipe du pilote.',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          Text(
-            events.length == 1
-                ? '1 événement enregistré'
-                : '${events.length} événements enregistrés',
-            style: theme.textTheme.labelLarge,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.tonalIcon(
-              onPressed: () => _copyExport(context, ref),
-              icon: const Icon(Icons.copy_all_outlined),
-              label: const Text('Copier l’export JSON'),
-            ),
-          ),
-          TextButton.icon(
-            onPressed: events.isEmpty
-                ? null
-                : () => _confirmClear(context, ref),
-            icon: const Icon(Icons.delete_outline),
-            label: const Text('Effacer la télémétrie'),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -163,9 +211,8 @@ class SettingsScreen extends ConsumerWidget {
     if (confirmed != true || !context.mounted) return;
     await ref.read(telemetryProvider.notifier).clear();
     if (!context.mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Télémétrie effacée.')),
-    );
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Télémétrie effacée.')));
   }
 }
 
@@ -182,7 +229,7 @@ class _AccountSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Compte', style: theme.textTheme.titleMedium),
+        Text('Compte', style: theme.textTheme.titleLarge),
         const SizedBox(height: AppSpacing.sm),
         if (auth.status == AuthStatus.restoring) ...[
           Row(
@@ -230,9 +277,7 @@ class _AccountSection extends ConsumerWidget {
           SizedBox(
             width: double.infinity,
             child: FilledButton.tonalIcon(
-              onPressed: sync.isBusy
-                  ? null
-                  : () => _syncNow(context, ref),
+              onPressed: sync.isBusy ? null : () => _syncNow(context, ref),
               icon: sync.isBusy
                   ? const SizedBox.square(
                       dimension: 18,
@@ -240,9 +285,7 @@ class _AccountSection extends ConsumerWidget {
                     )
                   : const Icon(Icons.sync),
               label: Text(
-                sync.isBusy
-                    ? 'Synchronisation…'
-                    : 'Synchroniser maintenant',
+                sync.isBusy ? 'Synchronisation…' : 'Synchroniser maintenant',
               ),
             ),
           ),
@@ -284,9 +327,7 @@ class _AccountSection extends ConsumerWidget {
 
   Future<void> _syncNow(BuildContext context, WidgetRef ref) async {
     final messenger = ScaffoldMessenger.of(context);
-    final succeeded = await ref
-        .read(syncControllerProvider.notifier)
-        .syncNow();
+    final succeeded = await ref.read(syncControllerProvider.notifier).syncNow();
     if (!context.mounted || !succeeded) return;
     messenger.showSnackBar(
       const SnackBar(content: Text('Synchronisation terminée.')),

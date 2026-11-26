@@ -7,6 +7,8 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../../core/prefs/user_prefs_provider.dart';
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
+import '../../../core/ui/book_cover.dart';
 import '../../content/data/content_repository.dart';
 import '../../content/domain/book_manifest.dart';
 import '../../content/domain/chapter.dart';
@@ -304,7 +306,10 @@ class _ReadingScreenState extends ConsumerState<ReadingScreen>
               'chapterId': chapter.id,
               'chapterNumber': chapter.number,
               'elapsedSeconds': elapsedSeconds,
-              'minutes': math.max(1, math.min(240, (elapsedSeconds / 60).ceil())),
+              'minutes': math.max(
+                1,
+                math.min(240, (elapsedSeconds / 60).ceil()),
+              ),
               'newWords': added,
               'programDay': programDay,
             },
@@ -329,8 +334,7 @@ class _ReadingScreenState extends ConsumerState<ReadingScreen>
     final request = (bookId: widget.bookId, chapterId: widget.chapterId);
     final chapter = ref.watch(chapterProvider(request));
     final book = ref.watch(bookManifestProvider(widget.bookId));
-    final isPilotBook =
-        ref.watch(pilotBookProvider).value?.id == widget.bookId;
+    final isPilotBook = ref.watch(pilotBookProvider).value?.id == widget.bookId;
 
     final summary = switch (book) {
       AsyncValue(:final value?) => _findSummary(
@@ -401,8 +405,7 @@ class _ReadingScreenState extends ConsumerState<ReadingScreen>
           isPilotBook: isPilotBook,
           elapsedSeconds: _clock?.elapsedSeconds ?? 0,
           introducedCount: _introducedCount,
-          onReturnToPath: () =>
-              context.go(isPilotBook ? '/today' : '/library'),
+          onReturnToPath: () => context.go(isPilotBook ? '/today' : '/library'),
           onClose: () => context.pop(),
         ),
       );
@@ -414,6 +417,11 @@ class _ReadingScreenState extends ConsumerState<ReadingScreen>
 
     final theme = Theme.of(context);
     final minutes = summary?.estimatedMinutes;
+    final wide = MediaQuery.sizeOf(context).width >= AppSizes.wideBreakpoint;
+
+    final reader = mode == ReadingMode.listen
+        ? AudioListenPanel(controller: _audio!, chapterTitle: chapter.title)
+        : _textView(chapter, mode, theme, minutes);
 
     return Scaffold(
       appBar: AppBar(
@@ -429,20 +437,29 @@ class _ReadingScreenState extends ConsumerState<ReadingScreen>
             ),
         ],
       ),
-      body: Column(
-        children: [
-          if (hasAudio) _ReadingModeSelector(mode: mode, onChanged: _setMode),
-          Expanded(
-            child: mode == ReadingMode.listen
-                ? AudioListenPanel(
-                    controller: _audio!,
-                    chapterTitle: chapter.title,
-                  )
-                : _textView(chapter, mode, theme, minutes),
-          ),
-        ],
-      ),
-      bottomNavigationBar: mode == ReadingMode.readListen
+      body: wide && mode != ReadingMode.listen
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(child: reader),
+                _ReaderSidePanel(
+                  manifest: manifest,
+                  chapter: chapter,
+                  minutes: minutes,
+                  mode: mode,
+                  onModeChanged: _setMode,
+                  audio: mode == ReadingMode.readListen ? _audio : null,
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                if (hasAudio)
+                  _ReadingModeSelector(mode: mode, onChanged: _setMode),
+                Expanded(child: reader),
+              ],
+            ),
+      bottomNavigationBar: mode == ReadingMode.readListen && !wide
           ? AudioTransportBar(controller: _audio!)
           : null,
     );
@@ -475,7 +492,7 @@ class _ReadingScreenState extends ConsumerState<ReadingScreen>
             child: Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(
-                  maxWidth: AppSizes.contentMaxWidth,
+                  maxWidth: AppSizes.readingMaxWidth,
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(
@@ -608,6 +625,103 @@ class _ReadingModeSelector extends StatelessWidget {
             selected: {mode},
             onSelectionChanged: (selection) => onChanged(selection.first),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ReaderSidePanel extends StatelessWidget {
+  const _ReaderSidePanel({
+    required this.manifest,
+    required this.chapter,
+    required this.minutes,
+    required this.mode,
+    required this.onModeChanged,
+    this.audio,
+  });
+
+  final BookManifest manifest;
+  final Chapter chapter;
+  final int? minutes;
+  final ReadingMode mode;
+  final ValueChanged<ReadingMode> onModeChanged;
+  final AudioSessionController? audio;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+    return Container(
+      width: 360,
+      decoration: BoxDecoration(
+        color: scheme.surface,
+        border: Border(left: BorderSide(color: scheme.outlineVariant)),
+      ),
+      child: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          children: [
+            AppCard(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 56,
+                    height: 76,
+                    child: BookCover(
+                      title: manifest.title,
+                      seed: manifest.id,
+                      compact: true,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          chapter.title,
+                          style: theme.textTheme.titleMedium,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: AppSpacing.xs),
+                        Text(
+                          manifest.titleFr,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(height: AppSpacing.sm),
+                        Wrap(
+                          spacing: AppSpacing.sm,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            ContentLevelBadge(level: chapter.level.shortLabel),
+                            if (minutes != null)
+                              Text(
+                                '≈ $minutes min',
+                                style: theme.textTheme.labelSmall?.copyWith(
+                                  color: scheme.onSurfaceVariant,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            _ReadingModeSelector(mode: mode, onChanged: onModeChanged),
+            const SizedBox(height: AppSpacing.lg),
+            if (audio != null) AudioTransportBar(controller: audio!),
+          ],
         ),
       ),
     );
@@ -905,7 +1019,9 @@ class _ChapterRecap extends ConsumerWidget {
                 FilledButton(
                   onPressed: onReturnToPath,
                   child: Text(
-                    isPilotBook ? 'Retour au parcours' : 'Retour à la bibliothèque',
+                    isPilotBook
+                        ? 'Retour au parcours'
+                        : 'Retour à la bibliothèque',
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),

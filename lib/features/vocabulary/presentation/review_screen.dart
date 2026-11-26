@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../../program/domain/program_progress.dart';
 import '../../program/presentation/program_provider.dart';
 import '../../program/presentation/program_streak_chip.dart';
@@ -53,10 +54,7 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
       unawaited(
         ref
             .read(telemetryProvider.notifier)
-            .record(
-              'review_started',
-              properties: {'queueSize': queueSize},
-            ),
+            .record('review_started', properties: {'queueSize': queueSize}),
       );
     });
   }
@@ -154,7 +152,9 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: AppSizes.contentMaxWidth),
+            constraints: const BoxConstraints(
+              maxWidth: AppSizes.contentMaxWidth,
+            ),
             child: _finished
                 ? _Summary(
                     reviewed: _reviewedIds.length,
@@ -212,126 +212,116 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    child: Column(
-                      children: [
+                AppCard(
+                  child: Column(
+                    children: [
+                      Text(
+                        entry.word,
+                        style: theme.textTheme.headlineMedium,
+                        textAlign: TextAlign.center,
+                      ),
+                      if (entry.phonetic.isNotEmpty || pos.isNotEmpty) ...[
+                        const SizedBox(height: AppSpacing.xs),
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: AppSpacing.sm,
+                          runSpacing: AppSpacing.xs,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            if (entry.phonetic.isNotEmpty)
+                              Text(
+                                entry.phonetic,
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            if (pos.isNotEmpty)
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: AppSpacing.sm,
+                                  vertical: 2,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: theme.colorScheme.secondaryContainer,
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: Text(
+                                  pos,
+                                  style: theme.textTheme.labelMedium?.copyWith(
+                                    color:
+                                        theme.colorScheme.onSecondaryContainer,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ],
+                      const SizedBox(height: AppSpacing.md),
+                      OutlinedButton.icon(
+                        onPressed: () => _pronounce(entry),
+                        icon: const Icon(Icons.volume_up_outlined),
+                        label: const Text('Écouter'),
+                      ),
+                      if (_notice != null) ...[
+                        const SizedBox(height: AppSpacing.sm),
                         Text(
-                          entry.word,
-                          style: theme.textTheme.headlineMedium,
+                          _notice!,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: theme.colorScheme.error,
+                          ),
                           textAlign: TextAlign.center,
                         ),
-                        if (entry.phonetic.isNotEmpty || pos.isNotEmpty) ...[
-                          const SizedBox(height: AppSpacing.xs),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: AppSpacing.sm,
-                            runSpacing: AppSpacing.xs,
-                            crossAxisAlignment: WrapCrossAlignment.center,
-                            children: [
-                              if (entry.phonetic.isNotEmpty)
-                                Text(
-                                  entry.phonetic,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
-                              if (pos.isNotEmpty)
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: AppSpacing.sm,
-                                    vertical: 2,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color:
-                                        theme.colorScheme.secondaryContainer,
-                                    borderRadius: BorderRadius.circular(999),
-                                  ),
-                                  child: Text(
-                                    pos,
-                                    style: theme.textTheme.labelMedium
-                                        ?.copyWith(
-                                          color: theme
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ],
-                        const SizedBox(height: AppSpacing.md),
-                        OutlinedButton.icon(
-                          onPressed: () => _pronounce(entry),
-                          icon: const Icon(Icons.volume_up_outlined),
-                          label: const Text('Écouter'),
-                        ),
-                        if (_notice != null) ...[
-                          const SizedBox(height: AppSpacing.sm),
-                          Text(
-                            _notice!,
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.error,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                        if (!_revealed) ...[
-                          const SizedBox(height: AppSpacing.lg),
-                          SizedBox(
-                            width: double.infinity,
-                            child: FilledButton(
-                              onPressed: () =>
-                                  setState(() => _revealed = true),
-                              child: const Text('Afficher la réponse'),
-                            ),
-                          ),
-                        ],
                       ],
-                    ),
+                      if (!_revealed) ...[
+                        const SizedBox(height: AppSpacing.lg),
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton(
+                            onPressed: () => setState(() => _revealed = true),
+                            child: const Text('Afficher la réponse'),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                 ),
                 if (_revealed) ...[
                   const SizedBox(height: AppSpacing.md),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(AppSpacing.lg),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                  AppCard(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          entry.translationFr,
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                        if (entry.definitionEn.isNotEmpty) ...[
+                          const SizedBox(height: AppSpacing.md),
                           Text(
-                            entry.translationFr,
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              color: theme.colorScheme.primary,
+                            'Définition',
+                            style: theme.textTheme.labelLarge?.copyWith(
+                              color: theme.colorScheme.onSurfaceVariant,
                             ),
                           ),
-                          if (entry.definitionEn.isNotEmpty) ...[
-                            const SizedBox(height: AppSpacing.md),
-                            Text(
-                              'Définition',
-                              style: theme.textTheme.labelLarge?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                            const SizedBox(height: AppSpacing.xs),
-                            Text(
-                              entry.definitionEn,
-                              style: theme.textTheme.bodyLarge,
-                            ),
-                          ],
-                          if (entry.example.isNotEmpty) ...[
-                            const SizedBox(height: AppSpacing.md),
-                            Text(
-                              '“${entry.example}”',
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                fontStyle: FontStyle.italic,
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ],
+                          const SizedBox(height: AppSpacing.xs),
+                          Text(
+                            entry.definitionEn,
+                            style: theme.textTheme.bodyLarge,
+                          ),
                         ],
-                      ),
+                        if (entry.example.isNotEmpty) ...[
+                          const SizedBox(height: AppSpacing.md),
+                          Text(
+                            '“${entry.example}”',
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              fontStyle: FontStyle.italic,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
                   const SizedBox(height: AppSpacing.lg),
@@ -343,10 +333,14 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                   _RatingRow(
                     left: _RatingButton(
                       label: 'À revoir',
+                      background: theme.colorScheme.errorContainer,
+                      foreground: theme.colorScheme.onErrorContainer,
                       onPressed: _rating ? null : () => _rate(Rating.again),
                     ),
                     right: _RatingButton(
                       label: 'Difficile',
+                      background: theme.colorScheme.secondaryContainer,
+                      foreground: theme.colorScheme.onSecondaryContainer,
                       onPressed: _rating ? null : () => _rate(Rating.hard),
                     ),
                   ),
@@ -354,10 +348,14 @@ class _ReviewScreenState extends ConsumerState<ReviewScreen> {
                   _RatingRow(
                     left: _RatingButton(
                       label: 'Bien',
+                      background: theme.colorScheme.primaryContainer,
+                      foreground: theme.colorScheme.onPrimaryContainer,
                       onPressed: _rating ? null : () => _rate(Rating.good),
                     ),
                     right: _RatingButton(
                       label: 'Facile',
+                      background: theme.colorScheme.tertiaryContainer,
+                      foreground: theme.colorScheme.onTertiaryContainer,
                       onPressed: _rating ? null : () => _rate(Rating.easy),
                     ),
                   ),
@@ -391,17 +389,28 @@ class _RatingRow extends StatelessWidget {
 }
 
 class _RatingButton extends StatelessWidget {
-  const _RatingButton({required this.label, required this.onPressed});
+  const _RatingButton({
+    required this.label,
+    required this.background,
+    required this.foreground,
+    required this.onPressed,
+  });
 
   final String label;
+  final Color background;
+  final Color foreground;
   final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: AppSizes.minTouchTarget,
-      child: FilledButton.tonal(
+      child: FilledButton(
         onPressed: onPressed,
+        style: FilledButton.styleFrom(
+          backgroundColor: background,
+          foregroundColor: foreground,
+        ),
         child: Text(label),
       ),
     );
@@ -479,26 +488,24 @@ class _Summary extends StatelessWidget {
               ),
             ],
             const SizedBox(height: AppSpacing.lg),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.md),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.check_circle_outline,
-                      color: theme.colorScheme.primary,
+            AppCard(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.check_circle_outline,
+                    color: theme.colorScheme.primary,
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Text(
+                      _encouragement,
+                      style: theme.textTheme.bodyMedium,
                     ),
-                    const SizedBox(width: AppSpacing.sm),
-                    Expanded(
-                      child: Text(
-                        _encouragement,
-                        style: theme.textTheme.bodyMedium,
-                      ),
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    ProgramStreakChip(progress: progress),
-                  ],
-                ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  ProgramStreakChip(progress: progress),
+                ],
               ),
             ),
           ],

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-26T12:10:00Z",
+  "title": "Design System: Storylingo",
+  "extensions": {
+    "colorMeta": {
+      "primary-forest": { "role": "primary", "displayName": "Vert Storylingo", "canonical": "#2F5D50" },
+      "sage-mist": { "role": "primary", "displayName": "Sauge brumeuse", "canonical": "#D7E6DD" },
+      "cream-paper": { "role": "neutral", "displayName": "Papier crème", "canonical": "#F7F1E6" },
+      "card-cream": { "role": "neutral", "displayName": "Carte crème", "canonical": "#FFFCF5" },
+      "ink": { "role": "neutral", "displayName": "Encre", "canonical": "#1B1F1D" },
+      "ink-surface": { "role": "neutral", "displayName": "Encre de nuit", "canonical": "#101614" },
+      "card-ink": { "role": "neutral", "displayName": "Carte de nuit", "canonical": "#161D1A" },
+      "amber-accent": { "role": "secondary", "displayName": "Ambre chaud", "canonical": "#E4A23C" },
+      "amber-deep": { "role": "secondary", "displayName": "Ambre profond", "canonical": "#8A5A16" },
+      "error-clay": { "role": "tertiary", "displayName": "Corail d'erreur", "canonical": "#B3261E" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Niveau estimé, titres héros." },
+      "headline": { "displayName": "Headline", "purpose": "Titres d'écran et promesse d'accueil." },
+      "title": { "displayName": "Title", "purpose": "Titres de cartes et chapitres." },
+      "body": { "displayName": "Body", "purpose": "Texte courant, colonne de lecture 680 px max." },
+      "label": { "displayName": "Label", "purpose": "Métadonnées, puces, badges." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "fast", "value": "150ms", "purpose": "Réponses d'état courtes." },
+      { "name": "medium", "value": "220ms", "purpose": "Transitions d'étape d'onboarding (fondu)." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "720px", "purpose": "Barre de navigation basse en dessous." },
+      { "name": "wide", "value": "960px", "purpose": "Barre latérale et tableaux de bord au-delà." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Action principale pleine largeur d'une carte ou d'un formulaire.",
+      "html": "<button class=\"ds-btn-primary\">Commencer la session</button>",
+      "css": ".ds-btn-primary { background: #2F5D50; color: #fff; height: 52px; min-width: 64px; padding: 0 24px; border: none; border-radius: 14px; font: 600 15px Roboto, system-ui, sans-serif; letter-spacing: 0.1px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Conteneur plat cerné d'un filet, sans ombre.",
+      "html": "<section class=\"ds-card\"><h3>Jour 1 sur 28</h3><p>Chapitre 1 · révision de vos mots</p></section>",
+      "css": ".ds-card { background: #FFFCF5; color: #1B1F1D; border: 1px solid #D9CFBC; border-radius: 20px; padding: 16px; }"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip-selected",
+      "description": "Pilule de genre, sélection sauge avec coche.",
+      "html": "<span class=\"ds-chip ds-chip--selected\">Policier &amp; mystère</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid #D9CFBC; border-radius: 999px; background: transparent; color: #1B1F1D; font: 600 12px Roboto, system-ui, sans-serif; } .ds-chip--selected { background: #D7E6DD; color: #10251F; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Champ rempli, focus vert.",
+      "html": "<input class=\"ds-field\" placeholder=\"Adresse e-mail\" />",
+      "css": ".ds-field { background: #FBF6EC; color: #1B1F1D; border: 1px solid #D9CFBC; border-radius: 14px; padding: 14px 16px; font: 400 16px Roboto, system-ui, sans-serif; } .ds-field:focus { border: 1.5px solid #2F5D50; outline: none; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La salle de lecture",
+    "overview": "Une bibliothèque chaleureuse et éditoriale : papier crème, bois vert profond, lumière ambrée. L'histoire et le geste du jour passent avant les tableaux de bord décoratifs ; aucun chiffre n'est affiché s'il n'est pas réel. Le système est plat et typographique — grandes cartes crème cernées d'un filet fin, titres affirmés.",
+    "keyCharacteristics": [
+      "Palette papier crème + encre, vert forêt en primaire, ambre en accent.",
+      "Cartes plates à grand rayon, bordure 1 px, aucune ombre portée.",
+      "Hiérarchie typographique forte (700 titres, 400 corps).",
+      "Trois dispositions : barre basse, rail, barre latérale.",
+      "Aucune image de marque tierce ; couvertures typographiques originales."
+    ],
+    "rules": [
+      { "name": "La règle du vert unique", "body": "Le vert primaire ne sert qu'à l'action, la sélection et la progression.", "section": "colors" },
+      { "name": "La règle de la page plate", "body": "Pas d'ombre portée : la profondeur vient du ton et du filet.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do garder le vert primaire pour l'action et la sélection seulement.",
+      "Do vérifier chaque paire texte/fond au niveau AA.",
+      "Do réserver l'ambre aux récompenses et mises en avant douces.",
+      "Do n'afficher que des indicateurs réels, dérivés des providers."
+    ],
+    "donts": [
+      "Don't ajouter d'ombre portée ni d'élévation Material par défaut.",
+      "Don't introduire de données factices issues des captures.",
+      "Don't utiliser d'image ou de marque tierce.",
+      "Don't colorer un état uniquement par la teinte."
+    ]
+  }
+}

@@ -2,7 +2,7 @@
 
 > Améliore ton anglais en 28 jours avec des livres adaptés.
 
-Application mobile (iOS + Android) d'apprentissage de l'anglais par lecture et écoute de classiques adaptés, pour francophones A2–B2, en sessions de 7 à 10 minutes par jour.
+Application Flutter d'apprentissage de l'anglais par lecture et écoute de classiques adaptés, pour francophones A2–B2, en sessions de 7 à 10 minutes par jour. Cibles publiées : iOS + Android ; une build web sert de tableau de bord de consultation.
 
 ## Inputs stakeholders
 
@@ -42,6 +42,22 @@ Application mobile (iOS + Android) d'apprentissage de l'anglais par lecture et �
 - Feature spec — CRUD complet du back-office (phase 14b) : [plan](specs/2026-11-23-backoffice-crud/plan.md) · [requirements](specs/2026-11-23-backoffice-crud/requirements.md) · [validation](specs/2026-11-23-backoffice-crud/validation.md)
 - Feature spec — Refonte visuelle mobile & web (phase 16a) : [plan](specs/2026-11-26-refonte-visuelle-mobile-web/plan.md) · [requirements](specs/2026-11-26-refonte-visuelle-mobile-web/requirements.md) · [validation](specs/2026-11-26-refonte-visuelle-mobile-web/validation.md)
 - Feature spec — Analytics, notifications & release (phase 16) : [plan](specs/2026-11-26-analytics-notifications-release/plan.md) · [requirements](specs/2026-11-26-analytics-notifications-release/requirements.md) · [validation](specs/2026-11-26-analytics-notifications-release/validation.md)
+
+## Interface
+
+Le monde visuel est « papier crème et encre » : primary vert Storylingo
+(`#2F5D50`), surfaces crème `#F7F1E6` (sombre `#101614`), accent ambre,
+cartes `#FFFCF5` / `#161D1A`, rayons 20–24 px. Typographie Material 3, titres
+en gras, lecteur plafonné à 680 px de largeur de ligne. Tokens dans
+`lib/core/theme/app_tokens.dart`, `ColorScheme` clair/sombre explicites dans
+`lib/core/theme/app_theme.dart`. Les contrastes AA des paires clés sont
+vérifiés par `test/theme_contrast_test.dart`.
+
+La coquille s'adapte en trois temps : barre de navigation basse (< 720 px),
+rail avec libellés (720–960 px), barre latérale (≥ 960 px). En large, les
+onglets passent en tableau de bord (Aujourd'hui : indicateurs, session,
+mots du jour et activité récente ; Bibliothèque en grille ; lecteur à deux
+volets). `DESIGN.md` décrit le système.
 
 ## Paiement mobile money (démo Android)
 
@@ -91,6 +107,8 @@ flutter run              # Android / iOS
 flutter run -d chrome    # aperçu rapide de l'UI via la plateforme web
 ```
 
-La plateforme web est présente uniquement pour l'aperçu local ; les cibles produit restent iOS et Android.
+La build web (`flutter build web --release`) reprend les mêmes écrans en
+tableau de bord large, sans fonctionnalité propre : ni paiement mobile money
+(masqué via `kIsWeb`), ni téléchargements, ni analytics web, ni SEO.
 
 La CI (`.github/workflows/ci.yml`) exécute `flutter analyze` et `flutter test` sur chaque push et pull request.

@@ -19,8 +19,7 @@ class DownloadsSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(height: AppSpacing.xxl),
-        Text('Téléchargements', style: theme.textTheme.titleMedium),
+        Text('Téléchargements', style: theme.textTheme.titleLarge),
         const SizedBox(height: AppSpacing.sm),
         if (platform == DownloadPlatform.web)
           Text(

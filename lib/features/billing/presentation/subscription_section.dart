@@ -23,7 +23,7 @@ class SubscriptionSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Abonnement', style: theme.textTheme.titleMedium),
+        Text('Abonnement', style: theme.textTheme.titleLarge),
         const SizedBox(height: AppSpacing.sm),
         if (active) ...[
           Row(

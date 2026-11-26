@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/section_header.dart';
 import '../../content/data/content_repository.dart';
 import '../../content/domain/catalogue.dart';
 import '../../shell/presentation/storylingo_app_bar.dart';
@@ -15,6 +16,7 @@ class LibraryScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final catalogue = ref.watch(catalogueProvider);
+    final wide = MediaQuery.sizeOf(context).width >= AppSizes.wideBreakpoint;
 
     return Scaffold(
       appBar: const StorylingoAppBar(title: 'Bibliothèque'),
@@ -27,20 +29,17 @@ class LibraryScreen extends ConsumerWidget {
           },
         ),
         AsyncValue(:final value?) => ListView(
-          padding: const EdgeInsets.all(AppSpacing.lg),
+          padding: EdgeInsets.all(wide ? AppSpacing.xl : AppSpacing.lg),
           children: [
             Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(
-                  maxWidth: AppSizes.contentMaxWidth,
+                constraints: BoxConstraints(
+                  maxWidth: wide ? 1120 : AppSizes.tabContentMaxWidth,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Choisissez une histoire',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
+                    const SectionHeader(title: 'Choisissez une histoire'),
                     if (value.isOffline) ...[
                       const SizedBox(height: AppSpacing.md),
                       _CatalogueNotice(
@@ -48,18 +47,21 @@ class LibraryScreen extends ConsumerWidget {
                         onRetry: () => ref.invalidate(catalogueProvider),
                       ),
                     ],
-                    for (final book in value.books)
+                    _BookGrid(
+                      books: value.books
+                          .where((book) => !book.isEmbedded)
+                          .toList(growable: false),
+                    ),
+                    for (final _ in value.books.where((b) => b.isEmbedded))
                       Padding(
                         padding: const EdgeInsets.only(top: AppSpacing.md),
-                        child: book.isEmbedded
-                            ? PilotBookCard(
-                                manifest: value.pilot,
-                                onRead: () => context.push(
-                                  '/read/${value.pilot.id}/'
-                                  '${value.pilot.chapters.first.id}',
-                                ),
-                              )
-                            : CatalogueBookCard(book: book),
+                        child: PilotBookCard(
+                          manifest: value.pilot,
+                          onRead: () => context.push(
+                            '/read/${value.pilot.id}/'
+                            '${value.pilot.chapters.first.id}',
+                          ),
+                        ),
                       ),
                   ],
                 ),
@@ -67,6 +69,43 @@ class LibraryScreen extends ConsumerWidget {
             ),
           ],
         ),
+      },
+    );
+  }
+}
+
+class _BookGrid extends StatelessWidget {
+  const _BookGrid({required this.books});
+
+  final List<CatalogueBook> books;
+
+  @override
+  Widget build(BuildContext context) {
+    if (books.isEmpty) return const SizedBox.shrink();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = switch (constraints.maxWidth) {
+          < 620 => 1,
+          < 960 => 2,
+          < 1280 => 3,
+          _ => 4,
+        };
+        const gap = AppSpacing.md;
+        final width = (constraints.maxWidth - gap * (columns - 1)) / columns;
+        return Padding(
+          padding: const EdgeInsets.only(top: AppSpacing.md),
+          child: Wrap(
+            spacing: gap,
+            runSpacing: gap,
+            children: [
+              for (final book in books)
+                SizedBox(
+                  width: width,
+                  child: CatalogueBookCard(book: book),
+                ),
+            ],
+          ),
+        );
       },
     );
   }

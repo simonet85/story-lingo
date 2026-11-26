@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:money_fusion/money_fusion.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../../account/presentation/auth_provider.dart';
 import '../application/mobile_money_flow.dart';
 import '../application/mobile_money_providers.dart';
@@ -149,10 +150,18 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen>
         children: [
           Row(
             children: [
-              Icon(
-                Icons.phone_android_outlined,
-                size: 32,
-                color: theme.colorScheme.primary,
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.phone_android_outlined,
+                  size: 28,
+                  color: theme.colorScheme.onPrimaryContainer,
+                ),
               ),
               const SizedBox(width: AppSpacing.md),
               Expanded(
@@ -166,7 +175,7 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen>
                     const SizedBox(height: 2),
                     Text(
                       '${product.priceLabel} ${product.periodLabel}',
-                      style: theme.textTheme.titleLarge,
+                      style: theme.textTheme.headlineSmall,
                     ),
                   ],
                 ),
@@ -207,49 +216,53 @@ class _MobileMoneyScreenState extends ConsumerState<MobileMoneyScreen>
             ),
           ],
           const SizedBox(height: AppSpacing.lg),
-          TextFormField(
-            controller: _phone,
-            enabled: signedIn && !_busy,
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.next,
-            decoration: const InputDecoration(
-              labelText: 'Téléphone',
-              hintText: '01010101',
-              prefixIcon: Icon(Icons.phone_outlined),
-              border: OutlineInputBorder(),
-            ),
-            validator: _validatePhone,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          TextFormField(
-            controller: _name,
-            enabled: signedIn && !_busy,
-            textInputAction: TextInputAction.done,
-            decoration: const InputDecoration(
-              labelText: 'Nom du titulaire',
-              hintText: 'John Doe',
-              prefixIcon: Icon(Icons.person_outline),
-              border: OutlineInputBorder(),
-            ),
-            validator: _validateName,
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          SizedBox(
-            width: double.infinity,
-            height: AppSizes.primaryActionHeight,
-            child: FilledButton.icon(
-              onPressed: signedIn && !_busy ? _submit : null,
-              icon: _busy
-                  ? const SizedBox.square(
-                      dimension: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  : const Icon(Icons.phone_iphone),
-              label: Text(
-                _confirming
-                    ? 'Confirmation du paiement…'
-                    : 'Payer ${product.priceLabel}',
-              ),
+          AppCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextFormField(
+                  controller: _phone,
+                  enabled: signedIn && !_busy,
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.next,
+                  decoration: const InputDecoration(
+                    labelText: 'Téléphone',
+                    hintText: '01010101',
+                    prefixIcon: Icon(Icons.phone_outlined),
+                  ),
+                  validator: _validatePhone,
+                ),
+                const SizedBox(height: AppSpacing.md),
+                TextFormField(
+                  controller: _name,
+                  enabled: signedIn && !_busy,
+                  textInputAction: TextInputAction.done,
+                  decoration: const InputDecoration(
+                    labelText: 'Nom du titulaire',
+                    hintText: 'John Doe',
+                    prefixIcon: Icon(Icons.person_outline),
+                  ),
+                  validator: _validateName,
+                ),
+                const SizedBox(height: AppSpacing.lg),
+                SizedBox(
+                  height: AppSizes.primaryActionHeight,
+                  child: FilledButton.icon(
+                    onPressed: signedIn && !_busy ? _submit : null,
+                    icon: _busy
+                        ? const SizedBox.square(
+                            dimension: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.phone_iphone),
+                    label: Text(
+                      _confirming
+                          ? 'Confirmation du paiement…'
+                          : 'Payer ${product.priceLabel}',
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           if (_error != null) ...[

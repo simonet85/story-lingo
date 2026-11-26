@@ -166,7 +166,11 @@ Future<List<Map<String, dynamic>>> _telemetryEvents(
 
 Future<void> _scrollSettingsTo(WidgetTester tester, String label) async {
   final scrollable = find.byType(Scrollable).first;
-  await tester.scrollUntilVisible(find.text(label), 250, scrollable: scrollable);
+  await tester.scrollUntilVisible(
+    find.text(label),
+    250,
+    scrollable: scrollable,
+  );
   await tester.ensureVisible(find.text(label));
   await tester.pumpAndSettle();
 }
@@ -402,24 +406,15 @@ void main() {
     await tester.tap(find.text('Copier l’export JSON'));
     await tester.pumpAndSettle();
 
-    expect(
-      find.text('Export copié dans le presse-papiers.'),
-      findsOneWidget,
-    );
+    expect(find.text('Export copié dans le presse-papiers.'), findsOneWidget);
     expect(copied, isNotNull);
     final export = jsonDecode(copied!) as Map<String, dynamic>;
     expect(export['schemaVersion'], 1);
-    expect(
-      (export['participant'] as Map<String, dynamic>)['level'],
-      'b1',
-    );
+    expect((export['participant'] as Map<String, dynamic>)['level'], 'b1');
     final content = export['content'] as Map<String, dynamic>;
     expect(content['packVersion'], '1.3.0');
     expect(content['chapters'], 3);
-    expect(
-      (export['program'] as Map<String, dynamic>)['currentDay'],
-      1,
-    );
+    expect((export['program'] as Map<String, dynamic>)['currentDay'], 1);
     final exportedEvents = (export['events'] as List<dynamic>)
         .cast<Map<String, dynamic>>();
     expect(
@@ -437,10 +432,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('0 événements enregistrés'), findsOneWidget);
-    expect(
-      find.text('Télémétrie effacée.'),
-      findsOneWidget,
-    );
+    expect(find.text('Télémétrie effacée.'), findsOneWidget);
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getStringList(PrefsKeys.telemetryEvents), isEmpty);
   });
@@ -518,5 +510,37 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('la coquille bascule barre, rail puis barre latérale', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    tester.view.physicalSize = const Size(360, 800);
+    await tester.pumpWidget(
+      await _buildApp(sessions: [_session(22)], cards: [_card('mist')]),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(NavigationBar), findsOneWidget);
+    expect(find.byType(NavigationRail), findsNothing);
+    expect(tester.takeException(), isNull);
+
+    tester.view.physicalSize = const Size(768, 1024);
+    await tester.pumpAndSettle();
+    expect(find.byType(NavigationRail), findsOneWidget);
+    expect(find.byType(NavigationBar), findsNothing);
+    expect(find.byTooltip('Réglages'), findsOneWidget);
+    expect(tester.takeException(), isNull, reason: 'largeur 768');
+
+    tester.view.physicalSize = const Size(1280, 900);
+    await tester.pumpAndSettle();
+    expect(find.byType(NavigationRail), findsNothing);
+    expect(find.text('Storylingo'), findsOneWidget);
+    expect(find.text('Minutes sur 7 jours'), findsOneWidget);
+    expect(find.text('Activité récente'), findsOneWidget);
+    expect(tester.takeException(), isNull, reason: 'largeur 1280');
   });
 }

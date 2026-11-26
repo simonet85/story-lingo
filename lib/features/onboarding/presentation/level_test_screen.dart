@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../domain/level_test_question.dart';
 
 class LevelTestScreen extends StatelessWidget {
@@ -29,11 +30,20 @@ class LevelTestScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text('Étape 2 sur 3', style: theme.textTheme.labelMedium),
+        Text(
+          'Étape 2 sur 3',
+          style: theme.textTheme.labelMedium?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
         const SizedBox(height: AppSpacing.sm),
-        LinearProgressIndicator(
-          value: (index + 1) / questions.length,
-          semanticsLabel: 'Question ${index + 1} sur ${questions.length}',
+        ClipRRect(
+          borderRadius: AppRadii.pillBorder,
+          child: LinearProgressIndicator(
+            value: (index + 1) / questions.length,
+            minHeight: 6,
+            semanticsLabel: 'Question ${index + 1} sur ${questions.length}',
+          ),
         ),
         const SizedBox(height: AppSpacing.lg),
         Expanded(
@@ -43,10 +53,12 @@ class LevelTestScreen extends StatelessWidget {
               children: [
                 Text(
                   'Question ${index + 1} sur ${questions.length}',
-                  style: theme.textTheme.labelLarge,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                Text(question.prompt, style: theme.textTheme.titleLarge),
+                Text(question.prompt, style: theme.textTheme.headlineSmall),
                 const SizedBox(height: AppSpacing.lg),
                 for (
                   var optionIndex = 0;
@@ -89,39 +101,50 @@ class _AnswerOption extends StatelessWidget {
   final bool selected;
   final VoidCallback onTap;
 
+  static const _letters = ['A', 'B', 'C', 'D'];
+
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
 
     return Semantics(
+      key: ValueKey('answer-$index'),
       selected: selected,
       button: true,
-      child: OutlinedButton(
-        key: ValueKey('answer-$index'),
-        onPressed: onTap,
-        style: OutlinedButton.styleFrom(
-          alignment: Alignment.centerLeft,
-          minimumSize: const Size.fromHeight(56),
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-          backgroundColor: selected ? scheme.secondaryContainer : null,
-          side: BorderSide(
-            color: selected ? scheme.secondary : scheme.outlineVariant,
-            width: selected ? 2 : 1,
-          ),
+      child: AppCard(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
         ),
+        color: selected ? scheme.primaryContainer : null,
+        onTap: onTap,
         child: Row(
           children: [
-            Icon(
-              selected
-                  ? Icons.radio_button_checked
-                  : Icons.radio_button_unchecked,
-              size: 20,
-              color: selected ? scheme.onSecondaryContainer : scheme.outline,
+            Container(
+              width: 32,
+              height: 32,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: selected ? scheme.primary : scheme.surfaceContainerHigh,
+                shape: BoxShape.circle,
+              ),
+              child: Text(
+                _letters[index % _letters.length],
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: selected ? scheme.onPrimary : scheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
-            const SizedBox(width: AppSpacing.sm),
+            const SizedBox(width: AppSpacing.md),
             Expanded(
-              child: Text(label, style: Theme.of(context).textTheme.bodyLarge),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(label, style: theme.textTheme.bodyLarge),
+              ),
             ),
+            if (selected) Icon(Icons.check, size: 20, color: scheme.primary),
           ],
         ),
       ),

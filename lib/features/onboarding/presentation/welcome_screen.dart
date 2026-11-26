@@ -16,47 +16,61 @@ class WelcomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: AppSpacing.xl),
-                Icon(
-                  Icons.auto_stories_outlined,
-                  size: 72,
-                  color: theme.colorScheme.primary,
-                ),
-                const SizedBox(height: AppSpacing.lg),
-                Text(
-                  'Storylingo',
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Text(
-                  'Améliore ton anglais en 28 jours avec des livres adaptés.',
-                  style: theme.textTheme.headlineSmall,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Text(
-                  '7 à 10 minutes par jour. Des classiques simplifiés, '
-                  'l’audio synchronisé et le vocabulaire appris en contexte.',
-                  style: theme.textTheme.bodyLarge,
-                  textAlign: TextAlign.center,
-                ),
-                if (error != null) ...[
-                  const SizedBox(height: AppSpacing.md),
-                  Text(
-                    error!,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.colorScheme.error,
+          child: LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: AppSpacing.sm),
+                    ClipRRect(
+                      borderRadius: AppRadii.cardLargeBorder,
+                      child: AspectRatio(
+                        aspectRatio: 3 / 2,
+                        child: Image.asset(
+                          'assets/onboarding/welcome_reading.jpg',
+                          fit: BoxFit.cover,
+                          semanticLabel:
+                              'Lecture sous un arbre, un livre géant ouvert',
+                        ),
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ],
+                    const SizedBox(height: AppSpacing.lg),
+                    Text(
+                      'Storylingo',
+                      style: theme.textTheme.displaySmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      'Améliore ton anglais en 28 jours avec des livres '
+                      'adaptés.',
+                      style: theme.textTheme.headlineSmall,
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    Text(
+                      '7 à 10 minutes par jour. Des classiques simplifiés, '
+                      'l’audio synchronisé et le vocabulaire appris en '
+                      'contexte.',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    if (error != null) ...[
+                      const SizedBox(height: AppSpacing.md),
+                      Text(
+                        error!,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.error,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
             ),
           ),
         ),

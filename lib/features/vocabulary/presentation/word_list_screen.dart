@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../domain/word_entry.dart';
 import 'saved_words_provider.dart';
 import 'word_sheet.dart';
@@ -82,54 +83,67 @@ class _SavedWordCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final entry = word.entry;
-    return Card(
-      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-      child: ListTile(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+      child: AppCard(
+        padding: EdgeInsets.zero,
         onTap: onOpen,
-        contentPadding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.xs,
-        ),
-        leading: CircleAvatar(
-          backgroundColor: theme.colorScheme.primaryContainer,
-          foregroundColor: theme.colorScheme.onPrimaryContainer,
-          child: Text(entry.word.substring(0, 1).toUpperCase()),
-        ),
-        title: Row(
-          children: [
-            Flexible(
-              child: Text(
-                entry.word,
-                style: theme.textTheme.titleMedium,
-                overflow: TextOverflow.ellipsis,
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.xs,
+          ),
+          leading: Container(
+            width: 40,
+            height: 40,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(AppRadii.button),
+            ),
+            child: Text(
+              entry.word.substring(0, 1).toUpperCase(),
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: theme.colorScheme.onSecondaryContainer,
               ),
             ),
-            if (entry.phonetic.isNotEmpty) ...[
-              const SizedBox(width: AppSpacing.sm),
+          ),
+          title: Row(
+            children: [
               Flexible(
                 child: Text(
-                  entry.phonetic,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
+                  entry.word,
+                  style: theme.textTheme.titleMedium,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
+              if (entry.phonetic.isNotEmpty) ...[
+                const SizedBox(width: AppSpacing.sm),
+                Flexible(
+                  child: Text(
+                    entry.phonetic,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ],
-          ],
-        ),
-        subtitle: Text(
-          entry.translationFr,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
           ),
-        ),
-        trailing: IconButton(
-          tooltip: 'Retirer de la liste',
-          onPressed: onRemove,
-          icon: const Icon(Icons.delete_outline),
+          subtitle: Text(
+            entry.translationFr,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.colorScheme.onSurfaceVariant,
+            ),
+          ),
+          trailing: IconButton(
+            tooltip: 'Retirer de la liste',
+            onPressed: onRemove,
+            icon: const Icon(Icons.delete_outline),
+          ),
         ),
       ),
     );

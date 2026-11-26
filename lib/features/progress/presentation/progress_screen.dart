@@ -1,9 +1,13 @@
 import 'dart:math' as math;
 
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
+import '../../../core/ui/progress_bar.dart';
+import '../../../core/ui/section_header.dart';
+import '../../../core/ui/stat_card.dart';
 import '../../program/domain/program_badges.dart';
 import '../../program/domain/program_progress.dart';
 import '../../program/presentation/program_provider.dart';
@@ -16,7 +20,6 @@ class ProgressScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final progress = ref.watch(programProgressProvider);
     final cards = ref.watch(srsProvider);
     final totalReviews = cards.fold(0, (sum, card) => sum + card.reviews);
@@ -24,36 +27,53 @@ class ProgressScreen extends ConsumerWidget {
       progress: progress,
       vocabularyCards: cards.length,
     );
+    final wide = MediaQuery.sizeOf(context).width >= AppSizes.wideBreakpoint;
 
     return Scaffold(
       appBar: const StorylingoAppBar(title: 'Progrès'),
       body: ListView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
+        padding: EdgeInsets.all(wide ? AppSpacing.xl : AppSpacing.lg),
         children: [
           Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxWidth: AppSizes.contentMaxWidth,
+              constraints: BoxConstraints(
+                maxWidth: wide ? 880 : AppSizes.tabContentMaxWidth,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _ProgramSummaryCard(progress: progress),
-                  const SizedBox(height: AppSpacing.lg),
-                  Text('Vos statistiques', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: AppSpacing.sm),
-                  _StatsCard(
+                  const SizedBox(height: AppSpacing.xl),
+                  const SectionHeader(title: 'Vos statistiques'),
+                  const SizedBox(height: AppSpacing.md),
+                  _StatsRow(
                     minutes: formatProgramMinutes(progress.totalMinutes),
                     words: cards.length,
                     reviews: totalReviews,
                   ),
-                  const SizedBox(height: AppSpacing.lg),
-                  Text('Badges', style: theme.textTheme.titleMedium),
-                  const SizedBox(height: AppSpacing.sm),
-                  for (final status in badges) ...[
-                    _BadgeTile(status: status),
-                    const SizedBox(height: AppSpacing.sm),
-                  ],
+                  const SizedBox(height: AppSpacing.xl),
+                  const SectionHeader(title: 'Badges'),
+                  const SizedBox(height: AppSpacing.md),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final columns = constraints.maxWidth >= 560 ? 2 : 1;
+                      const gap = AppSpacing.md;
+                      final width =
+                          (constraints.maxWidth - gap * (columns - 1)) /
+                          columns;
+                      return Wrap(
+                        spacing: gap,
+                        runSpacing: gap,
+                        children: [
+                          for (final status in badges)
+                            SizedBox(
+                              width: width,
+                              child: _BadgeTile(status: status),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -72,74 +92,62 @@ class _ProgramSummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.route_outlined,
-                  size: 20,
-                  color: theme.colorScheme.primary,
+    return AppCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  progress.programComplete
+                      ? 'Parcours terminé'
+                      : 'Jour ${progress.currentDay} sur $programLength',
+                  style: theme.textTheme.titleLarge,
                 ),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Text(
-                    progress.programComplete
-                        ? 'Parcours terminé'
-                        : 'Jour ${progress.currentDay} sur $programLength',
-                    style: theme.textTheme.titleMedium,
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.sm),
-                ProgramStreakChip(progress: progress),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(999),
-              child: LinearProgressIndicator(
-                value: progress.daysCompleted / programLength,
-                minHeight: 8,
               ),
-            ),
-            const SizedBox(height: AppSpacing.xs),
-            Text(
-              '${progress.daysCompleted} '
-              '${progress.daysCompleted == 1 ? 'jour' : 'jours'} sur '
-              '$programLength',
-              style: theme.textTheme.labelLarge,
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Wrap(
-              spacing: AppSpacing.md,
-              runSpacing: AppSpacing.sm,
-              children: [
-                _Fact(
-                  icon: Icons.local_fire_department_outlined,
-                  label: 'Série : ${progress.streak} j',
-                ),
-                _Fact(
-                  icon: progress.shieldAvailable
-                      ? Icons.shield_outlined
-                      : Icons.gpp_bad_outlined,
-                  label: progress.shieldAvailable
-                      ? 'Bouclier disponible'
-                      : 'Bouclier utilisé',
-                ),
-                _Fact(
-                  icon: Icons.emoji_events_outlined,
-                  label: 'Record : ${progress.bestStreak} j',
-                ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            _DayGrid(progress: progress),
-          ],
-        ),
+              const SizedBox(width: AppSpacing.sm),
+              ProgramStreakChip(progress: progress),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          AppProgressBar(
+            value: progress.daysCompleted / programLength,
+            height: 8,
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            '${progress.daysCompleted} '
+            '${progress.daysCompleted == 1 ? 'jour' : 'jours'} sur '
+            '$programLength',
+            style: theme.textTheme.labelLarge,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Wrap(
+            spacing: AppSpacing.md,
+            runSpacing: AppSpacing.sm,
+            children: [
+              _Fact(
+                icon: Icons.local_fire_department_outlined,
+                label: 'Série : ${progress.streak} j',
+              ),
+              _Fact(
+                icon: progress.shieldAvailable
+                    ? Icons.shield_outlined
+                    : Icons.gpp_bad_outlined,
+                label: progress.shieldAvailable
+                    ? 'Bouclier disponible'
+                    : 'Bouclier utilisé',
+              ),
+              _Fact(
+                icon: Icons.emoji_events_outlined,
+                label: 'Record : ${progress.bestStreak} j',
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          _DayGrid(progress: progress),
+        ],
       ),
     );
   }
@@ -231,7 +239,7 @@ class _DayCell extends StatelessWidget {
           border: current
               ? Border.all(color: scheme.primary, width: 1.5)
               : null,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
         ),
         alignment: Alignment.center,
         child: Text(
@@ -248,8 +256,8 @@ class _DayCell extends StatelessWidget {
   }
 }
 
-class _StatsCard extends StatelessWidget {
-  const _StatsCard({
+class _StatsRow extends StatelessWidget {
+  const _StatsRow({
     required this.minutes,
     required this.words,
     required this.reviews,
@@ -261,57 +269,42 @@ class _StatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        child: Column(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final columns = constraints.maxWidth >= 560 ? 3 : 1;
+        const gap = AppSpacing.md;
+        final width = (constraints.maxWidth - gap * (columns - 1)) / columns;
+        return Wrap(
+          spacing: gap,
+          runSpacing: gap,
           children: [
-            _StatRow(
-              icon: Icons.timer_outlined,
-              label: 'Minutes lues',
-              value: minutes,
+            SizedBox(
+              width: width,
+              child: StatCard(
+                icon: Icons.timer_outlined,
+                label: 'Minutes lues',
+                value: minutes,
+              ),
             ),
-            const Divider(height: AppSpacing.lg),
-            _StatRow(
-              icon: Icons.style_outlined,
-              label: 'Mots en révision',
-              value: '$words',
+            SizedBox(
+              width: width,
+              child: StatCard(
+                icon: Icons.style_outlined,
+                label: 'Mots en révision',
+                value: '$words',
+              ),
             ),
-            const Divider(height: AppSpacing.lg),
-            _StatRow(
-              icon: Icons.school_outlined,
-              label: 'Révisions',
-              value: '$reviews',
+            SizedBox(
+              width: width,
+              child: StatCard(
+                icon: Icons.school_outlined,
+                label: 'Révisions',
+                value: '$reviews',
+              ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _StatRow extends StatelessWidget {
-  const _StatRow({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
-
-  final IconData icon;
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Row(
-      children: [
-        Icon(icon, size: 20, color: theme.colorScheme.primary),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(child: Text(label, style: theme.textTheme.bodyMedium)),
-        const SizedBox(width: AppSpacing.sm),
-        Text(value, style: theme.textTheme.titleMedium),
-      ],
+        );
+      },
     );
   }
 }
@@ -326,52 +319,48 @@ class _BadgeTile extends StatelessWidget {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
     final earned = status.earned;
-    return Card(
+    return AppCard(
+      padding: const EdgeInsets.all(AppSpacing.md),
       color: earned
           ? null
           : scheme.surfaceContainerHighest.withValues(alpha: 0.45),
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(
-              _iconFor(status.badge),
-              size: 24,
-              color: earned ? scheme.primary : scheme.onSurfaceVariant,
-            ),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    status.badge.title,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: earned
-                          ? scheme.onSurface
-                          : scheme.onSurfaceVariant,
-                    ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            _iconFor(status.badge),
+            size: 24,
+            color: earned ? scheme.primary : scheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  status.badge.title,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: earned ? scheme.onSurface : scheme.onSurfaceVariant,
                   ),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(
-                    status.badge.description,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: scheme.onSurfaceVariant,
-                    ),
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  status.badge.description,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: scheme.onSurfaceVariant,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(width: AppSpacing.sm),
-            Icon(
-              earned ? Icons.check_circle : Icons.lock_outline,
-              size: 20,
-              color: earned ? scheme.primary : scheme.onSurfaceVariant,
-              semanticLabel: earned ? 'Débloqué' : 'Verrouillé',
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Icon(
+            earned ? Icons.check_circle : Icons.lock_outline,
+            size: 20,
+            color: earned ? scheme.primary : scheme.onSurfaceVariant,
+            semanticLabel: earned ? 'Débloqué' : 'Verrouillé',
+          ),
+        ],
       ),
     );
   }

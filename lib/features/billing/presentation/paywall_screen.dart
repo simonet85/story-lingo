@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
 import '../application/billing_providers.dart';
 import '../application/entitlement_provider.dart';
 import '../application/mobile_money_providers.dart';
@@ -51,16 +52,24 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: AppSizes.contentMaxWidth,
-            ),
+            constraints: const BoxConstraints(maxWidth: 720),
             child: ListView(
               padding: const EdgeInsets.all(AppSpacing.lg),
               children: [
-                Icon(
-                  Icons.auto_stories_outlined,
-                  size: 48,
-                  color: theme.colorScheme.primary,
+                Center(
+                  child: Container(
+                    width: 72,
+                    height: 72,
+                    decoration: BoxDecoration(
+                      color: theme.colorScheme.primaryContainer,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.auto_stories_outlined,
+                      size: 36,
+                      color: theme.colorScheme.onPrimaryContainer,
+                    ),
+                  ),
                 ),
                 const SizedBox(height: AppSpacing.md),
                 Text(
@@ -78,25 +87,31 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppSpacing.lg),
-                const _Benefit(
-                  icon: Icons.menu_book_outlined,
-                  text:
-                      'La bibliothèque complète, y compris les livres '
-                      'rares et les grands classiques.',
-                ),
-                const _Benefit(
-                  icon: Icons.new_releases_outlined,
-                  text: 'Les nouveaux livres dès leur publication.',
-                ),
-                const _Benefit(
-                  icon: Icons.sync_outlined,
-                  text:
-                      'Votre progression, vos mots et vos révisions '
-                      'synchronisés.',
-                ),
-                const _Benefit(
-                  icon: Icons.download_for_offline_outlined,
-                  text: 'La lecture hors ligne, où que vous soyez.',
+                const AppCard(
+                  child: Column(
+                    children: [
+                      _Benefit(
+                        icon: Icons.menu_book_outlined,
+                        text:
+                            'La bibliothèque complète, y compris les livres '
+                            'rares et les grands classiques.',
+                      ),
+                      _Benefit(
+                        icon: Icons.new_releases_outlined,
+                        text: 'Les nouveaux livres dès leur publication.',
+                      ),
+                      _Benefit(
+                        icon: Icons.sync_outlined,
+                        text:
+                            'Votre progression, vos mots et vos révisions '
+                            'synchronisés.',
+                      ),
+                      _Benefit(
+                        icon: Icons.download_for_offline_outlined,
+                        text: 'La lecture hors ligne, où que vous soyez.',
+                      ),
+                    ],
+                  ),
                 ),
                 if (gateway.isDemo) ...[
                   const SizedBox(height: AppSpacing.md),

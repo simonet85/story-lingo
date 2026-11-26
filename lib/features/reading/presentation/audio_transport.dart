@@ -110,12 +110,23 @@ class AudioListenPanel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: AppSpacing.xl),
-                  Icon(
-                    Icons.headphones,
-                    size: 72,
-                    color: theme.colorScheme.primary,
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: AppRadii.cardLargeBorder,
+                      child: SizedBox(
+                        width: 280,
+                        height: 280,
+                        child: Image.asset(
+                          'assets/onboarding/listening.jpg',
+                          fit: BoxFit.cover,
+                          semanticLabel:
+                              'Personne installée dans un fauteuil, casque sur '
+                              'les oreilles, livre sur les genoux',
+                        ),
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: AppSpacing.md),
+                  const SizedBox(height: AppSpacing.lg),
                   Text(
                     'Écouter le chapitre',
                     style: theme.textTheme.headlineSmall,

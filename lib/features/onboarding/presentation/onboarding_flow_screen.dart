@@ -53,8 +53,12 @@ class OnboardingFlowScreen extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.lg),
               child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 200),
-                child: step,
+                duration: AppDurations.medium,
+                switchInCurve: Curves.easeOut,
+                switchOutCurve: Curves.easeIn,
+                transitionBuilder: (child, animation) =>
+                    FadeTransition(opacity: animation, child: child),
+                child: KeyedSubtree(key: ValueKey(state.step), child: step),
               ),
             ),
           ),

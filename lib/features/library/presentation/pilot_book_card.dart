@@ -2,6 +2,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_tokens.dart';
+import '../../../core/ui/app_card.dart';
+import '../../../core/ui/book_cover.dart';
 import '../../content/data/content_repository.dart';
 import '../../content/domain/book_manifest.dart';
 import '../../content/presentation/content_level_badge.dart';
@@ -21,6 +23,7 @@ class PilotBookCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     final chapter = manifest.chapters.first;
     final chapterCount = manifest.chapters.length;
     final chapterLabel = chapterCount == 1
@@ -41,60 +44,79 @@ class PilotBookCard extends ConsumerWidget {
     final availableVersion =
         ref.watch(pilotBookProvider).value?.packVersion ?? manifest.packVersion;
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                ContentLevelBadge(level: manifest.level.shortLabel),
-                const SizedBox(width: AppSpacing.sm),
-                Expanded(
-                  child: Text(
-                    manifest.author,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+    return AppCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 96,
+                height: 128,
+                child: BookCover(
+                  title: manifest.title,
+                  seed: manifest.id,
+                  compact: true,
                 ),
-              ],
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Text(manifest.title, style: theme.textTheme.titleLarge),
-            const SizedBox(height: AppSpacing.xs),
-            Text(
-              manifest.titleFr,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
               ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Text(manifest.descriptionFr, style: theme.textTheme.bodyMedium),
-            const SizedBox(height: AppSpacing.md),
-            Text(
-              metadata,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+              const SizedBox(width: AppSpacing.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        ContentLevelBadge(level: manifest.level.shortLabel),
+                        const SizedBox(width: AppSpacing.sm),
+                        Expanded(
+                          child: Text(
+                            manifest.author,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: scheme.onSurfaceVariant,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(manifest.title, style: theme.textTheme.titleLarge),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      manifest.titleFr,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      metadata,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
               ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Text(manifest.descriptionFr, style: theme.textTheme.bodyMedium),
+          const SizedBox(height: AppSpacing.md),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton.icon(
+              onPressed: onRead,
+              icon: const Icon(Icons.play_arrow),
+              label: Text(readLabel),
             ),
-            const SizedBox(height: AppSpacing.lg),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.icon(
-                onPressed: onRead,
-                icon: const Icon(Icons.play_arrow),
-                label: Text(readLabel),
-              ),
-            ),
-            BookDownloadControl(
-              bookId: manifest.id,
-              availableVersion: availableVersion,
-            ),
-          ],
-        ),
+          ),
+          BookDownloadControl(
+            bookId: manifest.id,
+            availableVersion: availableVersion,
+          ),
+        ],
       ),
     );
   }

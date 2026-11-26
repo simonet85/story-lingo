@@ -60,5 +60,5 @@ Les timings mot → offset audio sont calculés **hors ligne par le pipeline de 
 - **Pas de microservices** : un seul service FastAPI ; le pipeline de contenu est un job, pas un service.
 - **Pas de SRS maison** : FSRS plutôt qu'une heuristique improvisée.
 - **Pas de ML lourd sur l'appareil** : la détection de mots nouveaux est un rapprochement lexical contre des listes CEFR annotées, pas un modèle embarqué.
-- **Pas de web app au MVP** : priorité iOS + Android ; l'administration du contenu se fait par CLI.
+- **Pas de site web produit** : pas de vitrine, SEO ni PWA. La build web sert de tableau de bord de consultation (mêmes écrans, disposition large) ; les cibles publiées restent iOS + Android et le paiement mobile money y est masqué.
 - **Pas d'analytics maison** : Mixpanel couvre les besoins du MVP.
